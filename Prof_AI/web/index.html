@@ -313,7 +313,7 @@
         const isSecure = window.location.protocol === 'https:';
 
         const API_BASE_URL = isFileProtocol ? "http://127.0.0.1:5001" : (isSecure ? `https://${window.location.host}` : `http://${window.location.host}`);
-        const WS_URL = isFileProtocol ? "ws://127.0.0.1:8765" : (isSecure ? `wss://${window.location.host}/ws` : `ws://${window.location.host}:8765`);
+        const WS_URL = isFileProtocol ? "ws://127.0.0.1:8765" : (isSecure ? `wss://${window.location.hostname}/ws` : `ws://${window.location.hostname}:8765`);
 
         // DOM Elements
         const textInput = document.getElementById('textInput');
