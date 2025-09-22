@@ -1,0 +1,530 @@
+{
+  "quiz_id": "course_ea7f494d",
+  "title": "Final Course Quiz: Comprehensive Study of Nutrition and Changes in Matter",
+  "description": "40-question comprehensive MCQ quiz covering the entire course content",
+  "questions": [
+    {
+      "question_id": "course_ea7f494d_q1",
+      "question_text": "What is the primary role of food for living organisms?",
+      "options": [
+        "To provide shelter",
+        "To serve as a source of energy and nutrients",
+        "To facilitate reproduction",
+        "To regulate body temperature"
+      ],
+      "correct_answer": "B",
+      "explanation": "Food provides essential energy and nutrients necessary for growth, repair, and maintenance of bodily functions in living organisms.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q2",
+      "question_text": "Which of the following is a macronutrient?",
+      "options": [
+        "Vitamin C",
+        "Iron",
+        "Protein",
+        "Calcium"
+      ],
+      "correct_answer": "C",
+      "explanation": "Macronutrients include carbohydrates, proteins, and fats, which are needed in larger amounts compared to micronutrients like vitamins and minerals.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q3",
+      "question_text": "What process do plants use to synthesize food?",
+      "options": [
+        "Respiration",
+        "Digestion",
+        "Photosynthesis",
+        "Fermentation"
+      ],
+      "correct_answer": "C",
+      "explanation": "Plants synthesize their own food through photosynthesis, utilizing carbon dioxide, water, and sunlight.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q4",
+      "question_text": "Which nutrient is primarily responsible for providing energy to living organisms?",
+      "options": [
+        "Proteins",
+        "Fats",
+        "Carbohydrates",
+        "Vitamins"
+      ],
+      "correct_answer": "C",
+      "explanation": "Carbohydrates serve as the main source of energy for most living organisms.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q5",
+      "question_text": "How do herbivores obtain their food?",
+      "options": [
+        "By consuming other animals",
+        "By synthesizing their own food",
+        "By eating plants",
+        "By absorbing nutrients from their environment"
+      ],
+      "correct_answer": "C",
+      "explanation": "Herbivores obtain their food by consuming plants.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q6",
+      "question_text": "Which of the following is an example of heterotrophic nutrition?",
+      "options": [
+        "A sunflower making its own food",
+        "A cow eating grass",
+        "An algae producing energy from sunlight",
+        "A tree absorbing carbon dioxide"
+      ],
+      "correct_answer": "B",
+      "explanation": "Heterotrophic nutrition refers to organisms that cannot synthesize their own food and rely on other organisms for sustenance, such as cows eating grass.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q7",
+      "question_text": "What is the primary role of chlorophyll in plants?",
+      "options": [
+        "To absorb water",
+        "To capture sunlight",
+        "To store nutrients",
+        "To release oxygen"
+      ],
+      "correct_answer": "B",
+      "explanation": "Chlorophyll captures sunlight, which is essential for the process of photosynthesis in plants.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q8",
+      "question_text": "What type of nutrition involves a plant deriving nutrients from a host plant?",
+      "options": [
+        "Autotrophic",
+        "Heterotrophic",
+        "Parasitic",
+        "Symbiotic"
+      ],
+      "correct_answer": "C",
+      "explanation": "Parasitic nutrition involves one organism deriving nutrients at the expense of another, as seen in plants like Cuscuta.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q9",
+      "question_text": "Which type of relationship involves two different organisms benefiting from each other?",
+      "options": [
+        "Parasitism",
+        "Competition",
+        "Symbiosis",
+        "Predation"
+      ],
+      "correct_answer": "C",
+      "explanation": "Symbiosis is a relationship where two different organisms mutually benefit from each other, such as fungi and plant roots.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q10",
+      "question_text": "Which nutrient is essential for the growth and repair of tissues?",
+      "options": [
+        "Carbohydrates",
+        "Proteins",
+        "Fats",
+        "Vitamins"
+      ],
+      "correct_answer": "B",
+      "explanation": "Proteins are crucial for the growth and repair of tissues in living organisms.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q11",
+      "question_text": "What is the significance of nitrogen for plants?",
+      "options": [
+        "It is a primary energy source",
+        "It is essential for photosynthesis",
+        "It is necessary for protein synthesis",
+        "It aids in water absorption"
+      ],
+      "correct_answer": "C",
+      "explanation": "Nitrogen is vital for plants as it is a key component of amino acids, which are the building blocks of proteins.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q12",
+      "question_text": "In what form do plants typically absorb minerals from the soil?",
+      "options": [
+        "Gases",
+        "Soluble form",
+        "Solid form",
+        "Liquid form"
+      ],
+      "correct_answer": "B",
+      "explanation": "Plants absorb minerals from the soil in a soluble form, which can be utilized for various physiological functions.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q13",
+      "question_text": "What role do vitamins play in living organisms?",
+      "options": [
+        "They provide energy",
+        "They assist in metabolic processes",
+        "They form structural components",
+        "They are sources of calories"
+      ],
+      "correct_answer": "B",
+      "explanation": "Vitamins are organic compounds required in small quantities for various biochemical functions, including metabolism.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q14",
+      "question_text": "How do animals obtain their energy compared to plants?",
+      "options": [
+        "Animals synthesize food through photosynthesis",
+        "Animals rely on other organisms for food",
+        "Animals absorb nutrients from the soil",
+        "Animals produce energy by fermentation"
+      ],
+      "correct_answer": "B",
+      "explanation": "Animals are heterotrophic and depend on plants or other animals for their nutritional needs, unlike plants that synthesize their own food.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q15",
+      "question_text": "Which nutrient is crucial for the absorption of fat-soluble vitamins?",
+      "options": [
+        "Carbohydrates",
+        "Proteins",
+        "Fats",
+        "Water"
+      ],
+      "correct_answer": "C",
+      "explanation": "Fats play an important role in the absorption of fat-soluble vitamins, aiding in their utilization in the body.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q16",
+      "question_text": "What is the end product of photosynthesis that plants produce?",
+      "options": [
+        "Oxygen",
+        "Nitrogen",
+        "Carbon dioxide",
+        "Protein"
+      ],
+      "correct_answer": "A",
+      "explanation": "The end products of photosynthesis are glucose (a simple sugar) and oxygen, which are crucial for both plants and aerobic organisms.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q17",
+      "question_text": "Which of the following is an example of omnivory?",
+      "options": [
+        "A lion eating a zebra",
+        "A deer grazing on grass",
+        "A human consuming both vegetables and meat",
+        "A rabbit eating only carrots"
+      ],
+      "correct_answer": "C",
+      "explanation": "Omnivores, like humans, have a diverse diet that includes both plant and animal sources.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q18",
+      "question_text": "What is the primary component of plant cell structure?",
+      "options": [
+        "DNA",
+        "Carbohydrates",
+        "Fats",
+        "Cellulose"
+      ],
+      "correct_answer": "D",
+      "explanation": "Cellulose, a complex carbohydrate, forms a crucial part of the structure of plant cells, providing support and rigidity.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q19",
+      "question_text": "Which of the following micronutrients is crucial for vision?",
+      "options": [
+        "Vitamin C",
+        "Vitamin A",
+        "Vitamin D",
+        "Vitamin K"
+      ],
+      "correct_answer": "B",
+      "explanation": "Vitamin A is essential for vision, particularly in the synthesis of pigments in the retina.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q20",
+      "question_text": "In the context of ecosystems, why are plants considered primary producers?",
+      "options": [
+        "They consume other organisms for energy",
+        "They convert sunlight into chemical energy",
+        "They are at the top of the food chain",
+        "They provide shelter for animals"
+      ],
+      "correct_answer": "B",
+      "explanation": "Plants are primary producers because they convert solar energy into chemical energy through photosynthesis, forming the base of the food web.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q21",
+      "question_text": "What is the primary role of food for living organisms?",
+      "options": [
+        "To provide shelter",
+        "To serve as a primary source of energy and nutrients",
+        "To assist in reproduction",
+        "To maintain temperature regulation"
+      ],
+      "correct_answer": "B",
+      "explanation": "Food serves as the primary source of energy and nutrients, essential for survival and various life processes.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q22",
+      "question_text": "Which of the following is NOT a macronutrient?",
+      "options": [
+        "Carbohydrates",
+        "Vitamins",
+        "Proteins",
+        "Fats"
+      ],
+      "correct_answer": "B",
+      "explanation": "Vitamins are classified as micronutrients, while carbohydrates, proteins, and fats are macronutrients.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q23",
+      "question_text": "During photosynthesis, plants convert carbon dioxide and water into which of the following?",
+      "options": [
+        "Oxygen and heat",
+        "Glucose and oxygen",
+        "Starch and carbon dioxide",
+        "Fats and proteins"
+      ],
+      "correct_answer": "B",
+      "explanation": "Photosynthesis transforms carbon dioxide and water into glucose and oxygen, providing energy for plants.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q24",
+      "question_text": "Which nutrient is primarily responsible for tissue growth and repair?",
+      "options": [
+        "Carbohydrates",
+        "Fats",
+        "Proteins",
+        "Minerals"
+      ],
+      "correct_answer": "C",
+      "explanation": "Proteins are essential for the growth and repair of tissues, playing a vital role in various bodily functions.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q25",
+      "question_text": "What is the mode of nutrition in plants called?",
+      "options": [
+        "Heterotrophic",
+        "Autotrophic",
+        "Omnivorous",
+        "Parasitic"
+      ],
+      "correct_answer": "B",
+      "explanation": "Plants utilize autotrophic nutrition, meaning they synthesize their own food through photosynthesis.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q26",
+      "question_text": "Which of the following describes heterotrophic nutrition?",
+      "options": [
+        "Synthesis of food from sunlight",
+        "Absorption of nutrients from the soil",
+        "Dependence on other organisms for food",
+        "Production of energy from carbon dioxide"
+      ],
+      "correct_answer": "C",
+      "explanation": "Heterotrophic nutrition refers to organisms that rely on other organisms for their nutritional needs.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q27",
+      "question_text": "What essential role do fats play in the body?",
+      "options": [
+        "They are the main source of vitamins",
+        "They are crucial for energy storage and hormone production",
+        "They enhance photosynthesis in plants",
+        "They are primarily responsible for muscle contractions"
+      ],
+      "correct_answer": "B",
+      "explanation": "Fats provide a concentrated source of energy and are important for hormone production and the absorption of fat-soluble vitamins.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q28",
+      "question_text": "In what way do plants and fungi demonstrate a symbiotic relationship?",
+      "options": [
+        "Fungi consume plants for energy",
+        "Plants produce oxygen for fungi",
+        "Fungi help plants absorb water and minerals",
+        "Fungi and plants compete for resources"
+      ],
+      "correct_answer": "C",
+      "explanation": "Fungi and plant roots often engage in a symbiotic relationship where fungi assist in nutrient absorption, benefiting the plants.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q29",
+      "question_text": "Which statement about minerals is true?",
+      "options": [
+        "They can be synthesized by the body",
+        "They are organic compounds",
+        "They are required in large quantities for energy",
+        "They play essential roles in physiological functions"
+      ],
+      "correct_answer": "D",
+      "explanation": "Minerals are inorganic elements that are essential for various physiological functions in living organisms.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q30",
+      "question_text": "Which nutrient is essential for the synthesis of collagen in the body?",
+      "options": [
+        "Vitamin A",
+        "Vitamin C",
+        "Protein",
+        "Calcium"
+      ],
+      "correct_answer": "B",
+      "explanation": "Vitamin C is crucial for collagen synthesis, which is important for skin, blood vessels, and bone health.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q31",
+      "question_text": "How do animals obtain nutrients compared to plants?",
+      "options": [
+        "Animals produce their own nutrients through photosynthesis",
+        "Animals absorb nutrients from the soil, like plants",
+        "Animals depend on other organisms for nutrients",
+        "Animals synthesize nutrients from carbon dioxide"
+      ],
+      "correct_answer": "C",
+      "explanation": "Animals are heterotrophic and obtain nutrients by consuming plants or other animals.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q32",
+      "question_text": "What is a key difference between simple and complex carbohydrates?",
+      "options": [
+        "Simple carbohydrates are more difficult to digest",
+        "Complex carbohydrates provide more immediate energy",
+        "Simple carbohydrates consist of single sugar molecules",
+        "Complex carbohydrates cannot be utilized by plants"
+      ],
+      "correct_answer": "C",
+      "explanation": "Simple carbohydrates are made up of single sugar molecules, while complex carbohydrates are made of longer chains of sugars.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q33",
+      "question_text": "Which of the following is an example of a parasitic plant?",
+      "options": [
+        "Oak tree",
+        "Cuscuta",
+        "Sunflower",
+        "Fern"
+      ],
+      "correct_answer": "B",
+      "explanation": "Cuscuta, also known as dodder, derives its nutrients from a host plant, illustrating parasitic behavior.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q34",
+      "question_text": "Why are chlorophyll and sunlight essential for plant nutrition?",
+      "options": [
+        "They enhance soil nutrient absorption",
+        "They facilitate photosynthesis to produce food",
+        "They prevent nutrient depletion in soil",
+        "They enable plants to absorb water"
+      ],
+      "correct_answer": "B",
+      "explanation": "Chlorophyll captures sunlight, enabling plants to perform photosynthesis and synthesize food from carbon dioxide and water.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q35",
+      "question_text": "What type of relationship exists when two organisms benefit from each other?",
+      "options": [
+        "Parasitism",
+        "Competition",
+        "Symbiosis",
+        "Predation"
+      ],
+      "correct_answer": "C",
+      "explanation": "Symbiosis refers to a mutually beneficial relationship between two different organisms.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q36",
+      "question_text": "Which nutrient is primarily absorbed from the soil by plants and is critical for their growth?",
+      "options": [
+        "Glucose",
+        "Nitrogen",
+        "Oxygen",
+        "Carbon dioxide"
+      ],
+      "correct_answer": "B",
+      "explanation": "Nitrogen is absorbed from the soil and is vital for the synthesis of proteins in plants.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q37",
+      "question_text": "How do herbivores obtain their nutrients?",
+      "options": [
+        "By scavenging dead organisms",
+        "By consuming plants",
+        "By producing their own food",
+        "By consuming both plants and animals"
+      ],
+      "correct_answer": "B",
+      "explanation": "Herbivores obtain their nutrients by feeding exclusively on plants.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q38",
+      "question_text": "Which of the following best defines the term \"interdependence\" in ecosystems?",
+      "options": [
+        "Organisms live in isolation",
+        "Organisms compete for resources",
+        "Organisms rely on one another for survival",
+        "Organisms adapt to environmental changes"
+      ],
+      "correct_answer": "C",
+      "explanation": "Interdependence refers to the reliance of different organisms on each other for survival and sustenance within ecosystems.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q39",
+      "question_text": "What role do vitamins play in the nutrition of living organisms?",
+      "options": [
+        "They provide energy directly",
+        "They are essential for various biochemical processes",
+        "They are a primary source of proteins",
+        "They serve as the main structural components of cells"
+      ],
+      "correct_answer": "B",
+      "explanation": "Vitamins are organic compounds required in small quantities for various biochemical processes and overall health.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_ea7f494d_q40",
+      "question_text": "In terms of energy production, what is the primary function of carbohydrates?",
+      "options": [
+        "To form cell membranes",
+        "To provide immediate energy",
+        "To assist in hormone production",
+        "To store genetic information"
+      ],
+      "correct_answer": "B",
+      "explanation": "Carbohydrates primarily serve as a source of immediate energy for living organisms.",
+      "topic": ""
+    }
+  ],
+  "total_questions": 40,
+  "quiz_type": "course",
+  "module_week": null
+}

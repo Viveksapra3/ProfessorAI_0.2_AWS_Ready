@@ -1,0 +1,271 @@
+{
+  "quiz_id": "module_1_ab869b54",
+  "title": "Module 1 Quiz: Introduction to Nutrition in Plants",
+  "description": "20-question MCQ quiz covering content from Week 1",
+  "questions": [
+    {
+      "question_id": "module_1_ab869b54_q1",
+      "question_text": "What is the primary role of food for living organisms?",
+      "options": [
+        "To provide oxygen",
+        "To serve as a source of energy and nutrients",
+        "To produce waste",
+        "To maintain body temperature"
+      ],
+      "correct_answer": "B",
+      "explanation": "Food serves as the primary source of energy and nutrients necessary for growth, repair, and overall maintenance of bodily functions.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_ab869b54_q2",
+      "question_text": "Which of the following nutrients is considered a macronutrient?",
+      "options": [
+        "Vitamin C",
+        "Iron",
+        "Carbohydrates",
+        "Calcium"
+      ],
+      "correct_answer": "C",
+      "explanation": "Macronutrients include carbohydrates, proteins, and fats, which are needed in larger amounts for energy and health.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_ab869b54_q3",
+      "question_text": "In what process do plants synthesize their own food?",
+      "options": [
+        "Respiration",
+        "Digestion",
+        "Photosynthesis",
+        "Fermentation"
+      ],
+      "correct_answer": "C",
+      "explanation": "Photosynthesis is the process by which plants synthesize food using carbon dioxide, water, and sunlight.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_ab869b54_q4",
+      "question_text": "Which of the following best describes heterotrophic nutrition?",
+      "options": [
+        "Organisms produce their own food",
+        "Organisms rely on consuming other organisms for food",
+        "Organisms do not require food",
+        "Organisms can photosynthesize"
+      ],
+      "correct_answer": "B",
+      "explanation": "Heterotrophic nutrition refers to organisms that cannot produce their own food and must obtain nutrients by consuming other organisms.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_ab869b54_q5",
+      "question_text": "What are the primary producers in an ecosystem?",
+      "options": [
+        "Herbivores",
+        "Carnivores",
+        "Decomposers",
+        "Plants"
+      ],
+      "correct_answer": "D",
+      "explanation": "Plants are primary producers as they synthesize their own food through photosynthesis, forming the base of the food chain.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_ab869b54_q6",
+      "question_text": "What role do vitamins play in living organisms?",
+      "options": [
+        "They provide energy",
+        "They are structural components of cells",
+        "They assist in various biochemical functions",
+        "They are used for storage of energy"
+      ],
+      "correct_answer": "C",
+      "explanation": "Vitamins are organic compounds required in small quantities for various biochemical functions, including metabolism.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_ab869b54_q7",
+      "question_text": "Which nutrient is primarily responsible for tissue growth and repair?",
+      "options": [
+        "Carbohydrates",
+        "Fats",
+        "Proteins",
+        "Vitamins"
+      ],
+      "correct_answer": "C",
+      "explanation": "Proteins, composed of amino acids, are essential for growth and repair of tissues in living organisms.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_ab869b54_q8",
+      "question_text": "How do plants obtain nitrogen, an essential nutrient?",
+      "options": [
+        "From the air",
+        "By photosynthesis",
+        "From soil bacteria like Rhizobium",
+        "From animal waste"
+      ],
+      "correct_answer": "C",
+      "explanation": "Plants absorb nitrogen in a soluble form, often facilitated by soil bacteria like Rhizobium, which convert atmospheric nitrogen into usable forms.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_ab869b54_q9",
+      "question_text": "What is the main function of carbohydrates in plants?",
+      "options": [
+        "To provide structural support",
+        "To serve as a secondary energy source",
+        "To store energy and provide a primary energy source",
+        "To aid in nutrient absorption"
+      ],
+      "correct_answer": "C",
+      "explanation": "Carbohydrates serve as the primary energy source for most living organisms and can be stored for later use in plants.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_ab869b54_q10",
+      "question_text": "Which of the following statements about symbiosis is true?",
+      "options": [
+        "One organism always benefits at the expense of the other.",
+        "Both organisms benefit from the relationship.",
+        "Symbiosis only occurs between plants.",
+        "It has no impact on nutrient absorption."
+      ],
+      "correct_answer": "B",
+      "explanation": "In a symbiotic relationship, both organisms benefit from the interaction, such as plants and fungi exchanging nutrients.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_ab869b54_q11",
+      "question_text": "What is the consequence of nutrient deficiency in plants?",
+      "options": [
+        "Increased growth",
+        "Decreased energy production",
+        "Enhanced photosynthesis",
+        "Improved soil quality"
+      ],
+      "correct_answer": "B",
+      "explanation": "Nutrient deficiency can lead to decreased energy production and overall poor health in plants, affecting their growth and development.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_ab869b54_q12",
+      "question_text": "How do herbivores obtain their nutrients?",
+      "options": [
+        "By photosynthesis",
+        "By consuming other animals",
+        "By consuming plants",
+        "By absorbing nutrients from the soil"
+      ],
+      "correct_answer": "C",
+      "explanation": "Herbivores obtain their nutrients by consuming plants directly as they are unable to synthesize their own food.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_ab869b54_q13",
+      "question_text": "Which nutrient is essential for the absorption of fat-soluble vitamins?",
+      "options": [
+        "Carbohydrates",
+        "Fats",
+        "Proteins",
+        "Water"
+      ],
+      "correct_answer": "B",
+      "explanation": "Fats are important for the absorption of fat-soluble vitamins, aiding in various biochemical processes in the body.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_ab869b54_q14",
+      "question_text": "What is a practical reason for farmers to apply fertilizers to soil?",
+      "options": [
+        "To enhance the growth of weeds",
+        "To replenish essential nutrients for plant health",
+        "To reduce soil moisture",
+        "To eliminate pests"
+      ],
+      "correct_answer": "B",
+      "explanation": "Farmers apply fertilizers to replenish essential nutrients in the soil, ensuring healthy plant growth and crop production.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_ab869b54_q15",
+      "question_text": "Which of the following is a characteristic of autotrophic organisms?",
+      "options": [
+        "They consume other organisms for energy.",
+        "They can synthesize their own food.",
+        "They rely solely on animal sources for nutrients.",
+        "They do not require sunlight."
+      ],
+      "correct_answer": "B",
+      "explanation": "Autotrophic organisms, like plants, can synthesize their own food through processes like photosynthesis.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_ab869b54_q16",
+      "question_text": "What happens during photosynthesis?",
+      "options": [
+        "Plants absorb carbon dioxide and release nitrogen.",
+        "Plants convert sunlight into chemical energy.",
+        "Plants consume oxygen for energy.",
+        "Plants store energy as fats."
+      ],
+      "correct_answer": "B",
+      "explanation": "During photosynthesis, plants convert sunlight into chemical energy by synthesizing glucose from carbon dioxide and water.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_ab869b54_q17",
+      "question_text": "Which of the following is an example of a parasitic plant?",
+      "options": [
+        "Oak tree",
+        "Cuscuta",
+        "Rose bush",
+        "Wheat"
+      ],
+      "correct_answer": "B",
+      "explanation": "Cuscuta is an example of a parasitic plant that derives its nutrients from a host plant.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_ab869b54_q18",
+      "question_text": "The interdependence of life forms can best be illustrated by which of the following?",
+      "options": [
+        "Plants producing food and oxygen for animals",
+        "Animals producing food for plants",
+        "Soil bacteria only helping plants",
+        "Fungi living in isolation"
+      ],
+      "correct_answer": "A",
+      "explanation": "The interdependence of life forms is illustrated by plants producing food and oxygen for animals, which is crucial for their survival.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_ab869b54_q19",
+      "question_text": "In what way do omnivores differ from herbivores and carnivores?",
+      "options": [
+        "They only eat plants.",
+        "They only eat animals.",
+        "They eat both plants and animals.",
+        "They do not require food."
+      ],
+      "correct_answer": "C",
+      "explanation": "Omnivores consume both plant and animal sources, allowing for a more varied intake of nutrients compared to herbivores and carnivores.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_ab869b54_q20",
+      "question_text": "Which nutrient is crucial for muscle contraction?",
+      "options": [
+        "Carbohydrates",
+        "Calcium",
+        "Fats",
+        "Proteins"
+      ],
+      "correct_answer": "B",
+      "explanation": "Calcium is essential for muscle contraction and plays a vital role in nerve function and overall physiological processes.",
+      "topic": ""
+    }
+  ],
+  "total_questions": 20,
+  "quiz_type": "module",
+  "module_week": 1,
+  "course_id": "1"
+}

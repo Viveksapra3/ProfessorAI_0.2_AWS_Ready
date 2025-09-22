@@ -1,0 +1,31 @@
+{
+  "quiz_id": "module_1_37b08932",
+  "answers": {
+    "module_1_37b08932_q1": "C",
+    "module_1_37b08932_q2": "C",
+    "module_1_37b08932_q3": "C",
+    "module_1_37b08932_q4": "B",
+    "module_1_37b08932_q5": "C",
+    "module_1_37b08932_q6": "B",
+    "module_1_37b08932_q7": "C",
+    "module_1_37b08932_q8": "B",
+    "module_1_37b08932_q9": "B",
+    "module_1_37b08932_q10": "B",
+    "module_1_37b08932_q11": "B",
+    "module_1_37b08932_q12": "B",
+    "module_1_37b08932_q13": "B",
+    "module_1_37b08932_q14": "C",
+    "module_1_37b08932_q15": "B",
+    "module_1_37b08932_q16": "B",
+    "module_1_37b08932_q17": "A",
+    "module_1_37b08932_q18": "B",
+    "module_1_37b08932_q19": "B",
+    "module_1_37b08932_q20": "C"
+  },
+  "quiz": {
+    "title": "Module 1 Quiz: Introduction to Nutrition in Plants",
+    "total_questions": 20,
+    "quiz_type": "module",
+    "created_at": "2025-09-20T20:24:52.285600"
+  }
+}

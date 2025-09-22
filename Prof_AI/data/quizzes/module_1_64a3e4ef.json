@@ -1,0 +1,271 @@
+{
+  "quiz_id": "module_1_64a3e4ef",
+  "title": "Module 1 Quiz: Introduction to Nutrition in Plants",
+  "description": "20-question MCQ quiz covering content from Week 1",
+  "questions": [
+    {
+      "question_id": "module_1_64a3e4ef_q1",
+      "question_text": "What is the primary source of energy for all living organisms?",
+      "options": [
+        "Water",
+        "Food",
+        "Oxygen",
+        "Sunlight"
+      ],
+      "correct_answer": "B",
+      "explanation": "Food serves as the primary source of energy for all living organisms, providing the necessary nutrients for various life processes.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_64a3e4ef_q2",
+      "question_text": "Which macronutrient is primarily responsible for building and repairing tissues in organisms?",
+      "options": [
+        "Carbohydrates",
+        "Fats",
+        "Proteins",
+        "Vitamins"
+      ],
+      "correct_answer": "C",
+      "explanation": "Proteins, composed of amino acids, are essential for growth and repair of tissues and play a crucial role in various bodily functions.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_64a3e4ef_q3",
+      "question_text": "What process do plants use to synthesize their own food?",
+      "options": [
+        "Respiration",
+        "Photosynthesis",
+        "Fermentation",
+        "Digestion"
+      ],
+      "correct_answer": "B",
+      "explanation": "Photosynthesis is the process by which plants convert carbon dioxide and water into glucose and oxygen using sunlight.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_64a3e4ef_q4",
+      "question_text": "What type of nutrition do animals exhibit?",
+      "options": [
+        "Autotrophic",
+        "Heterotrophic",
+        "Parasitic",
+        "Symbiotic"
+      ],
+      "correct_answer": "B",
+      "explanation": "Animals are heterotrophic, meaning they cannot synthesize their own food and must obtain nutrients from plants or other animals.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_64a3e4ef_q5",
+      "question_text": "Which nutrient is crucial for the absorption of fat-soluble vitamins?",
+      "options": [
+        "Carbohydrates",
+        "Proteins",
+        "Fats",
+        "Minerals"
+      ],
+      "correct_answer": "C",
+      "explanation": "Fats are important for the absorption of fat-soluble vitamins, contributing to overall health.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_64a3e4ef_q6",
+      "question_text": "What role do chlorophyll molecules play in plants?",
+      "options": [
+        "Energy storage",
+        "Nutrient absorption",
+        "Photosynthesis",
+        "Plant reproduction"
+      ],
+      "correct_answer": "C",
+      "explanation": "Chlorophyll captures sunlight, enabling the process of photosynthesis, which allows plants to synthesize their own food.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_64a3e4ef_q7",
+      "question_text": "Which of the following is a micronutrient?",
+      "options": [
+        "Carbohydrates",
+        "Calcium",
+        "Proteins",
+        "Fats"
+      ],
+      "correct_answer": "B",
+      "explanation": "Calcium is a mineral that is categorized as a micronutrient, required in small quantities for various physiological functions.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_64a3e4ef_q8",
+      "question_text": "How do plants primarily obtain nitrogen for growth?",
+      "options": [
+        "From the atmosphere directly",
+        "From soil bacteria like Rhizobium",
+        "From photosynthesis",
+        "From water"
+      ],
+      "correct_answer": "B",
+      "explanation": "Plants obtain nitrogen from soil bacteria like Rhizobium, which convert atmospheric nitrogen into a form that plants can absorb.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_64a3e4ef_q9",
+      "question_text": "What is the main function of carbohydrates in living organisms?",
+      "options": [
+        "Repair tissues",
+        "Provide energy",
+        "Support cell structure",
+        "Regulate metabolism"
+      ],
+      "correct_answer": "B",
+      "explanation": "Carbohydrates serve as the primary energy source for most living organisms, providing fuel for various life processes.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_64a3e4ef_q10",
+      "question_text": "Which type of relationship is described by symbiosis?",
+      "options": [
+        "One organism harms another",
+        "Both organisms benefit",
+        "One organism benefits at the expense of another",
+        "Organisms compete for resources"
+      ],
+      "correct_answer": "B",
+      "explanation": "Symbiosis is a type of relationship where two different organisms benefit from each other, such as plants and certain fungi.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_64a3e4ef_q11",
+      "question_text": "What happens to nutrient levels in the soil over time as plants absorb them?",
+      "options": [
+        "They increase",
+        "They stay the same",
+        "They deplete",
+        "They become toxic"
+      ],
+      "correct_answer": "C",
+      "explanation": "As plants absorb nutrients from the soil, the nutrient levels can deplete over time, necessitating replenishment through fertilizers.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_64a3e4ef_q12",
+      "question_text": "Which of the following is NOT a macronutrient?",
+      "options": [
+        "Proteins",
+        "Vitamins",
+        "Carbohydrates",
+        "Fats"
+      ],
+      "correct_answer": "B",
+      "explanation": "Vitamins are classified as micronutrients, while proteins, carbohydrates, and fats are macronutrients.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_64a3e4ef_q13",
+      "question_text": "Why is photosynthesis important for aerobic organisms?",
+      "options": [
+        "It produces carbon dioxide",
+        "It releases oxygen",
+        "It consumes nutrients",
+        "It creates fats"
+      ],
+      "correct_answer": "B",
+      "explanation": "Photosynthesis is important for aerobic organisms because it releases oxygen into the atmosphere, which is essential for their survival.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_64a3e4ef_q14",
+      "question_text": "In what way do herbivores obtain their nutrients?",
+      "options": [
+        "By consuming other animals",
+        "By eating plants",
+        "By photosynthesis",
+        "By scavenging"
+      ],
+      "correct_answer": "B",
+      "explanation": "Herbivores obtain nutrients by consuming plants, breaking down their complex carbohydrates into simpler sugars for energy.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_64a3e4ef_q15",
+      "question_text": "Which nutrient deficiency is commonly addressed by applying fertilizers in agriculture?",
+      "options": [
+        "Vitamin C",
+        "Calcium",
+        "Nitrogen",
+        "Iron"
+      ],
+      "correct_answer": "C",
+      "explanation": "Nitrogen deficiency is common in crops, and fertilizers are often applied to replenish nitrogen levels in the soil.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_64a3e4ef_q16",
+      "question_text": "What is a practical approach to ensuring healthy plant growth in agriculture?",
+      "options": [
+        "Ignoring nutrient levels",
+        "Regularly applying fertilizers",
+        "Reducing water supply",
+        "Stopping photosynthesis"
+      ],
+      "correct_answer": "B",
+      "explanation": "Regularly applying fertilizers helps replenish essential nutrients in the soil, promoting healthy plant growth.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_64a3e4ef_q17",
+      "question_text": "What distinguishes autotrophic nutrition from heterotrophic nutrition?",
+      "options": [
+        "Energy source",
+        "Nutrient absorption method",
+        "Dependency on other organisms",
+        "All of the above"
+      ],
+      "correct_answer": "D",
+      "explanation": "Autotrophic nutrition involves synthesizing food independently, while heterotrophic nutrition depends on other organisms for food and nutrients.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_64a3e4ef_q18",
+      "question_text": "Which of the following represents a parasitic plant?",
+      "options": [
+        "Oak tree",
+        "Cuscuta",
+        "Grass",
+        "Tomato plant"
+      ],
+      "correct_answer": "B",
+      "explanation": "Cuscuta is a parasitic plant that derives its nutrients from a host plant, showcasing a different form of nutritional relationship.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_64a3e4ef_q19",
+      "question_text": "If a farmer notices poor crop growth, which nutrient should they check for deficiency first?",
+      "options": [
+        "Water",
+        "Nitrogen",
+        "Oxygen",
+        "Sunlight"
+      ],
+      "correct_answer": "B",
+      "explanation": "Nitrogen is a crucial nutrient for plant growth, and its deficiency is commonly linked to poor crop performance.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_64a3e4ef_q20",
+      "question_text": "What is the role of fungi in the symbiotic relationship with plant roots?",
+      "options": [
+        "To produce energy",
+        "To absorb sunlight",
+        "To supply water and minerals",
+        "To consume plant tissues"
+      ],
+      "correct_answer": "C",
+      "explanation": "In a symbiotic relationship with plant roots, fungi supply water and minerals to the plants while receiving nutrients in return.",
+      "topic": ""
+    }
+  ],
+  "total_questions": 20,
+  "quiz_type": "module",
+  "module_week": 1,
+  "course_id": "1"
+}

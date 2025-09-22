@@ -1,0 +1,17 @@
+{
+  "submission": {
+    "quiz_id": "module_15_c0bcb7bb",
+    "user_id": "userId",
+    "answers": {}
+  },
+  "result": {
+    "quiz_id": "module_15_c0bcb7bb",
+    "user_id": "userId",
+    "score": 0,
+    "total_questions": 20,
+    "percentage": 0.0,
+    "passed": false,
+    "detailed_results": []
+  },
+  "submitted_at": "2025-09-20T21:35:19.347974"
+}

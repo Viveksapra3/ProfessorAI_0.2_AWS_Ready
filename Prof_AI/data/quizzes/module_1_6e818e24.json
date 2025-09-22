@@ -1,0 +1,271 @@
+{
+  "quiz_id": "module_1_6e818e24",
+  "title": "Module 1 Quiz: Introduction to Nutrition in Plants",
+  "description": "20-question MCQ quiz covering content from Week 1",
+  "questions": [
+    {
+      "question_id": "module_1_6e818e24_q1",
+      "question_text": "What is the primary source of energy for living organisms?",
+      "options": [
+        "Vitamins",
+        "Carbohydrates",
+        "Minerals",
+        "Proteins"
+      ],
+      "correct_answer": "B",
+      "explanation": "Carbohydrates are the primary source of energy for most living organisms, providing the necessary fuel for various life processes.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_6e818e24_q2",
+      "question_text": "Which process do plants use to synthesize their own food?",
+      "options": [
+        "Digestion",
+        "Photosynthesis",
+        "Fermentation",
+        "Respiration"
+      ],
+      "correct_answer": "B",
+      "explanation": "Photosynthesis is the process by which plants convert carbon dioxide and water into glucose and oxygen using sunlight.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_6e818e24_q3",
+      "question_text": "Which nutrient is essential for tissue growth and repair?",
+      "options": [
+        "Fats",
+        "Carbohydrates",
+        "Proteins",
+        "Water"
+      ],
+      "correct_answer": "C",
+      "explanation": "Proteins, made up of amino acids, are essential for the growth and repair of tissues in living organisms.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_6e818e24_q4",
+      "question_text": "What type of nutrition do plants exhibit?",
+      "options": [
+        "Heterotrophic",
+        "Autotrophic",
+        "Parasitic",
+        "Symbiotic"
+      ],
+      "correct_answer": "B",
+      "explanation": "Plants exhibit autotrophic nutrition, meaning they can synthesize their own food through photosynthesis.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_6e818e24_q5",
+      "question_text": "Which of the following is a macronutrient?",
+      "options": [
+        "Vitamin C",
+        "Calcium",
+        "Glucose",
+        "Iron"
+      ],
+      "correct_answer": "C",
+      "explanation": "Glucose is a type of carbohydrate, which is classified as a macronutrient essential for energy.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_6e818e24_q6",
+      "question_text": "How do animals obtain their nutrients?",
+      "options": [
+        "Photosynthesis",
+        "Absorption from soil",
+        "Direct consumption of other organisms",
+        "Through chlorophyll"
+      ],
+      "correct_answer": "C",
+      "explanation": "Animals are heterotrophic and obtain nutrients by consuming plants or other animals.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_6e818e24_q7",
+      "question_text": "Which nutrient role is primarily performed by vitamins?",
+      "options": [
+        "Energy storage",
+        "Immune function and metabolism",
+        "Muscle contraction",
+        "Structural support"
+      ],
+      "correct_answer": "B",
+      "explanation": "Vitamins play critical roles in various biochemical functions, including metabolism and immune function.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_6e818e24_q8",
+      "question_text": "What is the role of chlorophyll in plants?",
+      "options": [
+        "Energy storage",
+        "Nutrient absorption",
+        "Capturing sunlight for photosynthesis",
+        "Growth promotion"
+      ],
+      "correct_answer": "C",
+      "explanation": "Chlorophyll captures sunlight, which is essential for the process of photosynthesis in plants.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_6e818e24_q9",
+      "question_text": "Why is nitrogen important for plants?",
+      "options": [
+        "It provides energy",
+        "It is a component of proteins",
+        "It helps in photosynthesis",
+        "It creates glucose"
+      ],
+      "correct_answer": "B",
+      "explanation": "Nitrogen is essential for the synthesis of amino acids, which are the building blocks of proteins.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_6e818e24_q10",
+      "question_text": "What type of relationship is seen in mycorrhizal associations?",
+      "options": [
+        "Parasitism",
+        "Predation",
+        "Symbiosis",
+        "Competition"
+      ],
+      "correct_answer": "C",
+      "explanation": "Mycorrhizal associations between fungi and plant roots exemplify a symbiotic relationship where both parties benefit.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_6e818e24_q11",
+      "question_text": "What happens to nutrient levels in the soil over time?",
+      "options": [
+        "They increase indefinitely",
+        "They become depleted",
+        "They remain constant",
+        "They are automatically replenished"
+      ],
+      "correct_answer": "B",
+      "explanation": "Nutrient levels in soil can deplete as plants absorb them, necessitating replenishment through fertilizers or organic matter.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_6e818e24_q12",
+      "question_text": "What is the primary role of fats in the body?",
+      "options": [
+        "Energy source and hormone production",
+        "Storage of vitamins only",
+        "Directly involved in photosynthesis",
+        "Providing immediate energy"
+      ],
+      "correct_answer": "A",
+      "explanation": "Fats provide a concentrated source of energy and are important for hormone production and absorption of fat-soluble vitamins.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_6e818e24_q13",
+      "question_text": "Which of the following best describes a herbivore?",
+      "options": [
+        "An animal that eats both plants and animals",
+        "An organism that produces its own food",
+        "An animal that exclusively consumes plants",
+        "An organism that decomposes organic matter"
+      ],
+      "correct_answer": "C",
+      "explanation": "A herbivore is an animal that primarily eats plants.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_6e818e24_q14",
+      "question_text": "In what form do plants absorb nitrogen from the soil?",
+      "options": [
+        "Gaseous form",
+        "Solid form",
+        "Soluble form",
+        "Liquid form"
+      ],
+      "correct_answer": "C",
+      "explanation": "Plants absorb nitrogen in a soluble form, often facilitated by nitrogen-fixing bacteria in the soil.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_6e818e24_q15",
+      "question_text": "How does photosynthesis contribute to the food web?",
+      "options": [
+        "It decreases the amount of oxygen",
+        "It provides food for primary consumers",
+        "It is only beneficial for plants",
+        "It stores energy in animal tissues"
+      ],
+      "correct_answer": "B",
+      "explanation": "Photosynthesis by plants produces glucose, which serves as food for primary consumers, forming the basis of the food web.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_6e818e24_q16",
+      "question_text": "Which of the following is an example of an omnivore?",
+      "options": [
+        "Cow",
+        "Lion",
+        "Bear",
+        "Rabbit"
+      ],
+      "correct_answer": "C",
+      "explanation": "Bears are omnivores as they consume both plant and animal foods.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_6e818e24_q17",
+      "question_text": "What is a common consequence of nutrient deficiency in crops?",
+      "options": [
+        "Increased photosynthesis",
+        "Improved soil health",
+        "Stunted growth",
+        "Enhanced reproduction"
+      ],
+      "correct_answer": "C",
+      "explanation": "Nutrient deficiencies, such as nitrogen deficiency, can lead to stunted growth and poor plant health.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_6e818e24_q18",
+      "question_text": "Why is it important for farmers to apply fertilizers?",
+      "options": [
+        "To reduce plant variety",
+        "To enhance soil nutrient levels",
+        "To decrease plant growth",
+        "To eliminate pests"
+      ],
+      "correct_answer": "B",
+      "explanation": "Fertilizers are applied to enhance soil nutrient levels, ensuring healthy plant growth.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_6e818e24_q19",
+      "question_text": "Which of the following nutrients helps with nerve function and muscle contraction?",
+      "options": [
+        "Phosphorus",
+        "Potassium",
+        "Nitrogen",
+        "Calcium"
+      ],
+      "correct_answer": "B",
+      "explanation": "Potassium is crucial for nerve function and muscle contraction in living organisms.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_6e818e24_q20",
+      "question_text": "What is the role of decomposers in an ecosystem?",
+      "options": [
+        "They produce food for plants",
+        "They provide energy to herbivores",
+        "They recycle nutrients back into the soil",
+        "They compete with plants for nutrients"
+      ],
+      "correct_answer": "C",
+      "explanation": "Decomposers break down dead organic matter, recycling nutrients back into the soil and supporting plant growth.",
+      "topic": ""
+    }
+  ],
+  "total_questions": 20,
+  "quiz_type": "module",
+  "module_week": 1,
+  "course_id": "1"
+}

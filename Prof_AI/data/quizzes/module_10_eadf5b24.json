@@ -1,0 +1,271 @@
+{
+  "quiz_id": "module_10_eadf5b24",
+  "title": "Module 10 Quiz: Heat and Temperature",
+  "description": "20-question MCQ quiz covering content from Week 10",
+  "questions": [
+    {
+      "question_id": "module_10_eadf5b24_q1",
+      "question_text": "What is the primary function of a thermometer?",
+      "options": [
+        "To measure pressure",
+        "To measure temperature",
+        "To measure volume",
+        "To measure mass"
+      ],
+      "correct_answer": "B",
+      "explanation": "A thermometer is specifically designed to measure temperature by observing changes in physical properties of materials with temperature.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_eadf5b24_q2",
+      "question_text": "Which of the following materials is an example of a good conductor of heat?",
+      "options": [
+        "Rubber",
+        "Wood",
+        "Copper",
+        "Glass"
+      ],
+      "correct_answer": "C",
+      "explanation": "Copper is an excellent conductor of heat, making it suitable for various applications like cookware.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_eadf5b24_q3",
+      "question_text": "What does the Zeroth Law of Thermodynamics state?",
+      "options": [
+        "Heat cannot be created or destroyed",
+        "If two systems are in thermal equilibrium with a third, they are in thermal equilibrium with each other",
+        "Energy is always conserved",
+        "Temperature is a measure of energy"
+      ],
+      "correct_answer": "B",
+      "explanation": "The Zeroth Law establishes that if two systems are each in thermal equilibrium with a third system, they are in thermal equilibrium with each other.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_eadf5b24_q4",
+      "question_text": "What temperature range does a typical clinical thermometer measure?",
+      "options": [
+        "–10°C to 110°C",
+        "0°C to 100°C",
+        "35°C to 42°C",
+        "20°C to 30°C"
+      ],
+      "correct_answer": "C",
+      "explanation": "Clinical thermometers are designed to measure human body temperature, typically within the range of 35°C to 42°C.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_eadf5b24_q5",
+      "question_text": "What type of heat transfer occurs when you place a metal spoon in a hot pot of soup?",
+      "options": [
+        "Convection",
+        "Radiation",
+        "Conduction",
+        "Insulation"
+      ],
+      "correct_answer": "C",
+      "explanation": "Conduction is the transfer of heat through direct contact, which occurs when the spoon touches the hot soup.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_eadf5b24_q6",
+      "question_text": "When water is heated in a pot, what causes the warmer water to rise and cooler water to sink?",
+      "options": [
+        "Conduction",
+        "Convection",
+        "Radiation",
+        "Insulation"
+      ],
+      "correct_answer": "B",
+      "explanation": "Convection involves the movement of fluid where warmer, less dense fluid rises and cooler, denser fluid sinks.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_eadf5b24_q7",
+      "question_text": "Which of the following is true about insulators?",
+      "options": [
+        "They allow heat to pass through easily.",
+        "They resist heat flow.",
+        "They are made of metals.",
+        "They are generally used for cooking."
+      ],
+      "correct_answer": "B",
+      "explanation": "Insulators are materials that resist the flow of heat, such as rubber and glass.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_eadf5b24_q8",
+      "question_text": "What is the Celsius temperature equivalent of 100°F?",
+      "options": [
+        "37.8°C",
+        "40.0°C",
+        "32.0°C",
+        "50.0°C"
+      ],
+      "correct_answer": "A",
+      "explanation": "The conversion from Fahrenheit to Celsius is done using the formula \\(C = (F - 32) \\times \\frac{5}{9}\\), resulting in approximately 37.8°C.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_eadf5b24_q9",
+      "question_text": "When two objects at different temperatures are brought into contact, what happens?",
+      "options": [
+        "Heat flows from the cooler object to the hotter object.",
+        "Heat flows from the hotter object to the cooler object.",
+        "No heat transfer occurs.",
+        "Both objects lose heat equally."
+      ],
+      "correct_answer": "B",
+      "explanation": "Heat transfer occurs from the hotter object to the cooler object until thermal equilibrium is reached.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_eadf5b24_q10",
+      "question_text": "What is the primary reason for using different temperature scales?",
+      "options": [
+        "To confuse people",
+        "Different regions have different historical practices",
+        "To measure temperature in different units",
+        "To simplify measurements"
+      ],
+      "correct_answer": "B",
+      "explanation": "Different temperature scales, like Celsius and Fahrenheit, have historical significance and are used in different regions.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_eadf5b24_q11",
+      "question_text": "Which of the following is a characteristic of radiation as a heat transfer method?",
+      "options": [
+        "Requires direct contact",
+        "Requires a medium (solid, liquid, or gas)",
+        "Does not require a medium",
+        "Occurs only in liquids"
+      ],
+      "correct_answer": "C",
+      "explanation": "Radiation involves heat transfer through electromagnetic waves and does not require a medium.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_eadf5b24_q12",
+      "question_text": "If a clinical thermometer reads 38.5°C, what can we infer about the individual's health?",
+      "options": [
+        "They are perfectly healthy.",
+        "They likely have a fever.",
+        "They are hypothermic.",
+        "Their temperature is below normal."
+      ],
+      "correct_answer": "B",
+      "explanation": "A body temperature reading of 38.5°C is above the normal range and typically indicates a fever.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_eadf5b24_q13",
+      "question_text": "What happens to the mercury in a clinical thermometer when the temperature increases?",
+      "options": [
+        "It expands and rises in the tube.",
+        "It contracts and falls in the tube.",
+        "It remains the same.",
+        "It evaporates."
+      ],
+      "correct_answer": "A",
+      "explanation": "As temperature increases, mercury expands and rises in the thermometer, indicating a higher temperature.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_eadf5b24_q14",
+      "question_text": "In which scenario would conduction be the primary mechanism of heat transfer?",
+      "options": [
+        "Heating water in a kettle",
+        "Feeling the warmth of sunlight",
+        "Touching a hot stove",
+        "Boiling water on the stove"
+      ],
+      "correct_answer": "C",
+      "explanation": "Conduction occurs when heat is transferred through direct contact, such as touching a hot stove.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_eadf5b24_q15",
+      "question_text": "Which of the following is NOT a typical use of accurate temperature measurement?",
+      "options": [
+        "Cooking",
+        "Health monitoring",
+        "Measuring volume",
+        "Scientific experiments"
+      ],
+      "correct_answer": "C",
+      "explanation": "Accurate temperature measurement is not related to measuring volume; it is essential in cooking, health monitoring, and scientific experiments.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_eadf5b24_q16",
+      "question_text": "What is the primary purpose of the clinical thermometer's design?",
+      "options": [
+        "To be decorative",
+        "To be lightweight",
+        "To provide precise temperature readings",
+        "To be easily disposable"
+      ],
+      "correct_answer": "C",
+      "explanation": "The design of a clinical thermometer focuses on providing precise and accurate temperature readings for health monitoring.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_eadf5b24_q17",
+      "question_text": "If two systems are in thermal equilibrium, what does that imply?",
+      "options": [
+        "They are at different temperatures.",
+        "They cannot exchange heat.",
+        "They are at the same temperature.",
+        "They are made of the same materials."
+      ],
+      "correct_answer": "C",
+      "explanation": "Thermal equilibrium means that two systems are at the same temperature and there is no net heat transfer between them.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_eadf5b24_q18",
+      "question_text": "Why are metals typically considered good conductors of heat?",
+      "options": [
+        "They have low atomic density.",
+        "Their electrons are tightly bound.",
+        "They have free-moving electrons.",
+        "They are solid at room temperature."
+      ],
+      "correct_answer": "C",
+      "explanation": "Metals have free-moving electrons that facilitate the transfer of heat energy, making them good conductors.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_eadf5b24_q19",
+      "question_text": "In practical applications, why is understanding heat transfer mechanisms important?",
+      "options": [
+        "To cook food faster",
+        "To improve aesthetic design",
+        "To ensure safety and efficiency in energy use",
+        "To increase air pollution"
+      ],
+      "correct_answer": "C",
+      "explanation": "Understanding heat transfer mechanisms helps in designing systems that are safe and energy-efficient, impacting heating, cooling, and insulation methods.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_eadf5b24_q20",
+      "question_text": "How does the principle of thermal equilibrium relate to thermometers?",
+      "options": [
+        "It makes them obsolete.",
+        "It ensures they measure temperature accurately.",
+        "It complicates their use.",
+        "It limits their application."
+      ],
+      "correct_answer": "B",
+      "explanation": "The principle of thermal equilibrium allows thermometers to provide accurate temperature readings by ensuring they reach the same temperature as the substance being measured.",
+      "topic": ""
+    }
+  ],
+  "total_questions": 20,
+  "quiz_type": "module",
+  "module_week": 10,
+  "course_id": "1"
+}

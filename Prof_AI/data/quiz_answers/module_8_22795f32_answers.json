@@ -1,0 +1,31 @@
+{
+  "quiz_id": "module_8_22795f32",
+  "answers": {
+    "module_8_22795f32_q1": "C",
+    "module_8_22795f32_q2": "B",
+    "module_8_22795f32_q3": "C",
+    "module_8_22795f32_q4": "B",
+    "module_8_22795f32_q5": "B",
+    "module_8_22795f32_q6": "B",
+    "module_8_22795f32_q7": "B",
+    "module_8_22795f32_q8": "B",
+    "module_8_22795f32_q9": "C",
+    "module_8_22795f32_q10": "B",
+    "module_8_22795f32_q11": "C",
+    "module_8_22795f32_q12": "B",
+    "module_8_22795f32_q13": "B",
+    "module_8_22795f32_q14": "B",
+    "module_8_22795f32_q15": "B",
+    "module_8_22795f32_q16": "B",
+    "module_8_22795f32_q17": "B",
+    "module_8_22795f32_q18": "C",
+    "module_8_22795f32_q19": "C",
+    "module_8_22795f32_q20": "B"
+  },
+  "quiz": {
+    "title": "Module 8 Quiz: Assessment Strategies and Feedback Mechanisms",
+    "total_questions": 20,
+    "quiz_type": "module",
+    "created_at": "2025-09-21T12:43:49.331985"
+  }
+}

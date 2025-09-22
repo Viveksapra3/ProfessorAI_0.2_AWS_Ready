@@ -1,0 +1,271 @@
+{
+  "quiz_id": "module_1_8d873048",
+  "title": "Module 1 Quiz: Introduction to Nutrition in Plants",
+  "description": "20-question MCQ quiz covering content from Week 1",
+  "questions": [
+    {
+      "question_id": "module_1_8d873048_q1",
+      "question_text": "What is the primary source of energy for most living organisms?",
+      "options": [
+        "Proteins",
+        "Fats",
+        "Carbohydrates",
+        "Vitamins"
+      ],
+      "correct_answer": "C",
+      "explanation": "Carbohydrates are the primary source of energy for most living organisms, as they are easily metabolized to release energy.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8d873048_q2",
+      "question_text": "Which of the following nutrients is essential for tissue repair in organisms?",
+      "options": [
+        "Carbohydrates",
+        "Proteins",
+        "Fats",
+        "Vitamins"
+      ],
+      "correct_answer": "B",
+      "explanation": "Proteins are made of amino acids, which are vital for the growth and repair of tissues.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8d873048_q3",
+      "question_text": "What process do plants use to synthesize food?",
+      "options": [
+        "Respiration",
+        "Photosynthesis",
+        "Fermentation",
+        "Digestion"
+      ],
+      "correct_answer": "B",
+      "explanation": "Photosynthesis is the process by which plants convert carbon dioxide and water into glucose using sunlight.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8d873048_q4",
+      "question_text": "Which nutrient is NOT considered a macronutrient?",
+      "options": [
+        "Carbohydrates",
+        "Proteins",
+        "Vitamins",
+        "Fats"
+      ],
+      "correct_answer": "C",
+      "explanation": "Vitamins are classified as micronutrients, while carbohydrates, proteins, and fats are macronutrients.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8d873048_q5",
+      "question_text": "What role does chlorophyll play in photosynthesis?",
+      "options": [
+        "It provides energy",
+        "It captures sunlight",
+        "It absorbs water",
+        "It releases oxygen"
+      ],
+      "correct_answer": "B",
+      "explanation": "Chlorophyll captures sunlight, which is essential for the process of photosynthesis.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8d873048_q6",
+      "question_text": "How do animals obtain their nutrients?",
+      "options": [
+        "Through photosynthesis",
+        "By consuming other organisms",
+        "By absorbing minerals from the soil",
+        "By synthesizing their own food"
+      ],
+      "correct_answer": "B",
+      "explanation": "Animals are heterotrophic and must obtain nutrients by consuming plants or other animals.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8d873048_q7",
+      "question_text": "Which of the following is an example of a herbivore?",
+      "options": [
+        "Eagle",
+        "Lion",
+        "Rabbit",
+        "Wolf"
+      ],
+      "correct_answer": "C",
+      "explanation": "Rabbits are herbivores as they primarily consume plants.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8d873048_q8",
+      "question_text": "What is the main function of fats in the body?",
+      "options": [
+        "To provide a primary energy source",
+        "To aid in digestion",
+        "To support cell structure and absorb vitamins",
+        "To repair tissues"
+      ],
+      "correct_answer": "C",
+      "explanation": "Fats provide a concentrated source of energy, support cell structure, and help absorb fat-soluble vitamins.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8d873048_q9",
+      "question_text": "What is a major nutrient deficiency that can affect plant growth?",
+      "options": [
+        "Calcium",
+        "Nitrogen",
+        "Iron",
+        "Oxygen"
+      ],
+      "correct_answer": "B",
+      "explanation": "Nitrogen deficiency is common in plants because they cannot use atmospheric nitrogen directly without the help of bacteria.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8d873048_q10",
+      "question_text": "What type of nutrition do plants exhibit?",
+      "options": [
+        "Heterotrophic",
+        "Autotrophic",
+        "Symbiotic",
+        "Parasitic"
+      ],
+      "correct_answer": "B",
+      "explanation": "Plants are autotrophic, meaning they synthesize their own food through photosynthesis.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8d873048_q11",
+      "question_text": "In what way do fungi and plant roots engage in a symbiotic relationship?",
+      "options": [
+        "Fungi consume plant tissues",
+        "Plants provide nutrients to fungi, and fungi supply water and minerals to plants",
+        "Fungi produce energy for plants",
+        "There is no relationship; they compete for resources"
+      ],
+      "correct_answer": "B",
+      "explanation": "In this mutualistic relationship, plants provide carbohydrates to fungi, and fungi help the plants absorb water and nutrients.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8d873048_q12",
+      "question_text": "Which process allows some plants to derive nutrients from a host plant?",
+      "options": [
+        "Photosynthesis",
+        "Parasitism",
+        "Symbiosis",
+        "Heterotrophy"
+      ],
+      "correct_answer": "B",
+      "explanation": "Parasitism is when one organism, like certain plants, derives nutrients from a host plant.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8d873048_q13",
+      "question_text": "Why is it essential for farmers to apply fertilizers to the soil?",
+      "options": [
+        "To reduce water consumption",
+        "To replenish essential nutrients",
+        "To increase the amount of sunlight",
+        "To decrease plant growth"
+      ],
+      "correct_answer": "B",
+      "explanation": "Fertilizers replenish essential nutrients in the soil that are depleted as plants absorb them.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8d873048_q14",
+      "question_text": "Which nutrient is important for vision and is classified as a vitamin?",
+      "options": [
+        "Vitamin A",
+        "Vitamin C",
+        "Calcium",
+        "Iron"
+      ],
+      "correct_answer": "A",
+      "explanation": "Vitamin A is crucial for vision and is a well-known vitamin.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8d873048_q15",
+      "question_text": "During photosynthesis, what do plants release as a byproduct?",
+      "options": [
+        "Carbon dioxide",
+        "Nitrogen",
+        "Oxygen",
+        "Glucose"
+      ],
+      "correct_answer": "C",
+      "explanation": "During photosynthesis, plants release oxygen as a byproduct of converting carbon dioxide and water into glucose.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8d873048_q16",
+      "question_text": "What is the role of nitrogen-fixing bacteria in soil?",
+      "options": [
+        "They produce carbohydrates",
+        "They convert atmospheric nitrogen into a usable form for plants",
+        "They decompose organic matter",
+        "They absorb excess water"
+      ],
+      "correct_answer": "B",
+      "explanation": "Nitrogen-fixing bacteria convert atmospheric nitrogen into forms that plants can absorb and utilize.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8d873048_q17",
+      "question_text": "Which of the following is an example of an omnivore?",
+      "options": [
+        "Cow",
+        "Eagle",
+        "Human",
+        "Deer"
+      ],
+      "correct_answer": "C",
+      "explanation": "Humans are omnivores as they consume both plant and animal sources for nutrition.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8d873048_q18",
+      "question_text": "Which nutrient is important for muscle contraction and nerve function in animals?",
+      "options": [
+        "Nitrogen",
+        "Calcium",
+        "Magnesium",
+        "Potassium"
+      ],
+      "correct_answer": "D",
+      "explanation": "Potassium is crucial for nerve function and muscle contraction.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8d873048_q19",
+      "question_text": "What is a major characteristic of autotrophic organisms?",
+      "options": [
+        "They consume other organisms",
+        "They cannot produce their own food",
+        "They synthesize their own food",
+        "They rely on sunlight only"
+      ],
+      "correct_answer": "C",
+      "explanation": "Autotrophic organisms, like plants, synthesize their own food through processes such as photosynthesis.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8d873048_q20",
+      "question_text": "In what way does the relationship between plants and animals illustrate ecosystem interdependence?",
+      "options": [
+        "Plants produce food that animals consume, while animals provide carbon dioxide for plants",
+        "Animals compete with plants for sunlight",
+        "Plants and animals do not rely on each other",
+        "Animals prevent plants from growing"
+      ],
+      "correct_answer": "A",
+      "explanation": "Plants produce food through photosynthesis, which animals consume, while animals exhale carbon dioxide, which plants use for photosynthesis.",
+      "topic": ""
+    }
+  ],
+  "total_questions": 20,
+  "quiz_type": "module",
+  "module_week": 1,
+  "course_id": "1"
+}

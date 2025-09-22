@@ -1,0 +1,531 @@
+{
+  "quiz_id": "course_1e7febda",
+  "title": "Final Course Quiz: sample",
+  "description": "40-question comprehensive MCQ quiz covering the entire course content",
+  "questions": [
+    {
+      "question_id": "course_1e7febda_q1",
+      "question_text": "What is the primary aim of the CBSE curriculum as outlined in the NEP 2020?",
+      "options": [
+        "To focus solely on academic excellence",
+        "To provide opportunities for holistic development",
+        "To standardize education across all states",
+        "To promote rote memorization techniques"
+      ],
+      "correct_answer": "B",
+      "explanation": "The CBSE curriculum aims to foster holistic development, emphasizing academic, physical, emotional, and social growth.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q2",
+      "question_text": "Which of the following is a key feature of the constructivist learning approach in the CBSE curriculum?",
+      "options": [
+        "Emphasis on memorization",
+        "Hands-on learning experiences",
+        "Strict adherence to textbooks",
+        "Individualized assessments only"
+      ],
+      "correct_answer": "B",
+      "explanation": "Constructivist learning prioritizes hands-on experiences that allow students to actively engage with the material.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q3",
+      "question_text": "How many years does the foundational stage of the 5+3+3+4 schooling model encompass?",
+      "options": [
+        "3 years",
+        "5 years",
+        "4 years",
+        "2 years"
+      ],
+      "correct_answer": "B",
+      "explanation": "The foundational stage consists of 5 years focused on early childhood education and holistic development.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q4",
+      "question_text": "Which subject is included in the CBSE curriculum to promote physical health?",
+      "options": [
+        "Mathematics",
+        "Health and Physical Education",
+        "Social Science",
+        "Fine Arts"
+      ],
+      "correct_answer": "B",
+      "explanation": "Health and Physical Education is integral to the CBSE curriculum, emphasizing physical health and wellness.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q5",
+      "question_text": "The National Curriculum Framework for School Education (NCF-SE) is essential for:",
+      "options": [
+        "Standardizing examination formats",
+        "Guiding the implementation of the CBSE curriculum",
+        "Creating a uniform syllabus across all boards",
+        "Developing online learning platforms"
+      ],
+      "correct_answer": "B",
+      "explanation": "The NCF-SE provides guidelines for implementing the CBSE curriculum effectively across schools.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q6",
+      "question_text": "What type of learning does the CBSE curriculum promote through interdisciplinary studies?",
+      "options": [
+        "Disconnected subject learning",
+        "Exploration of themes across different disciplines",
+        "Focus on a single subject in isolation",
+        "Memorization of facts from various subjects"
+      ],
+      "correct_answer": "B",
+      "explanation": "Interdisciplinary learning encourages students to explore themes that connect various subjects, enhancing their understanding.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q7",
+      "question_text": "Which of the following is NOT a dimension of holistic development according to the CBSE curriculum?",
+      "options": [
+        "Intellectual growth",
+        "Artistic expression",
+        "Emotional well-being",
+        "Social skills"
+      ],
+      "correct_answer": "B",
+      "explanation": "While artistic expression is important, it is not explicitly mentioned as a dimension of holistic development in the CBSE curriculum.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q8",
+      "question_text": "What role does the School Curriculum Committee play in the implementation of the CBSE curriculum?",
+      "options": [
+        "They set examination papers",
+        "They oversee curriculum delivery and adherence to guidelines",
+        "They manage student admissions",
+        "They conduct teacher training sessions"
+      ],
+      "correct_answer": "B",
+      "explanation": "The School Curriculum Committee is responsible for ensuring effective curriculum delivery and compliance with CBSE standards.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q9",
+      "question_text": "The constructivist approach in the CBSE curriculum helps develop which of the following skills?",
+      "options": [
+        "Rote memorization",
+        "Critical thinking and problem-solving",
+        "Basic arithmetic only",
+        "Passive learning"
+      ],
+      "correct_answer": "B",
+      "explanation": "The constructivist approach encourages critical thinking and problem-solving through active engagement and experiential learning.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q10",
+      "question_text": "Which stage of the 5+3+3+4 model focuses on introducing basic literacy and numeracy?",
+      "options": [
+        "Foundational Stage",
+        "Preparatory Stage",
+        "Middle Stage",
+        "Secondary Stage"
+      ],
+      "correct_answer": "B",
+      "explanation": "The Preparatory Stage (3 years) is designed to introduce basic literacy and numeracy skills to students.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q11",
+      "question_text": "Which of the following best describes the CBSE curriculum's approach to assessments?",
+      "options": [
+        "Solely based on examinations",
+        "Emphasizing project-based and collaborative assessments",
+        "Focused on rote memorization",
+        "Only standardized tests"
+      ],
+      "correct_answer": "B",
+      "explanation": "The CBSE curriculum emphasizes diverse assessment methods, including project-based and collaborative assessments, to gauge understanding.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q12",
+      "question_text": "The CBSE curriculum's emphasis on social development prepares students to:",
+      "options": [
+        "Compete against each other",
+        "Become responsible citizens",
+        "Focus only on academic achievements",
+        "Avoid teamwork"
+      ],
+      "correct_answer": "B",
+      "explanation": "The curriculum encourages collaborative learning, enhancing students’ social skills and preparing them to be responsible citizens.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q13",
+      "question_text": "In a constructivist classroom, students are expected to:",
+      "options": [
+        "Memorize facts from textbooks",
+        "Passively listen to lectures",
+        "Actively engage in hands-on activities",
+        "Avoid participation in discussions"
+      ],
+      "correct_answer": "C",
+      "explanation": "Constructivist classrooms promote active engagement through hands-on activities that help students construct their own understanding.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q14",
+      "question_text": "What is the significance of the Examination Bye-Laws of CBSE for schools?",
+      "options": [
+        "They provide guidelines for school infrastructure",
+        "They offer a framework for curriculum delivery and assessment",
+        "They dictate teacher hiring processes",
+        "They define extracurricular activities"
+      ],
+      "correct_answer": "B",
+      "explanation": "The Examination Bye-Laws provide a framework for schools to align their teaching practices and assessments with the CBSE curriculum.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q15",
+      "question_text": "Which of the following best illustrates interdisciplinary learning in the CBSE curriculum?",
+      "options": [
+        "Studying mathematics in isolation",
+        "Conducting a project on environmental issues that includes science and social studies",
+        "Memorizing historical dates",
+        "Focusing on language arts alone"
+      ],
+      "correct_answer": "B",
+      "explanation": "Interdisciplinary learning encourages projects that span multiple subjects, such as combining science and social studies.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q16",
+      "question_text": "The CBSE curriculum aims to create learners who can:",
+      "options": [
+        "Rely solely on textbooks",
+        "Think independently and apply knowledge in real-world contexts",
+        "Avoid teamwork and collaboration",
+        "Memorize facts without understanding concepts"
+      ],
+      "correct_answer": "B",
+      "explanation": "The curriculum focuses on developing independent thinkers who can apply knowledge practically in various contexts.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q17",
+      "question_text": "How does the CBSE curriculum address emotional well-being?",
+      "options": [
+        "By excluding physical activities",
+        "Through inclusion of Health and Physical Education",
+        "By focusing solely on academic subjects",
+        "By providing no resources for emotional support"
+      ],
+      "correct_answer": "B",
+      "explanation": "Health and Physical Education contributes to students' emotional well-being through physical activities and health education.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q18",
+      "question_text": "Which phase of the 5+3+3+4 model is focused on specialization in subjects?",
+      "options": [
+        "Foundational Stage",
+        "Preparatory Stage",
+        "Middle Stage",
+        "Secondary Stage"
+      ],
+      "correct_answer": "D",
+      "explanation": "The Secondary Stage (4 years) emphasizes specialization and deeper engagement in subjects of interest.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q19",
+      "question_text": "What is a major benefit of the hands-on experience encouraged by the CBSE curriculum?",
+      "options": [
+        "It promotes memorization over understanding",
+        "It limits students' creativity",
+        "It enhances retention and understanding of concepts",
+        "It focuses only on theoretical knowledge"
+      ],
+      "correct_answer": "C",
+      "explanation": "Hands-on experiences help students retain information better and understand concepts more deeply.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q20",
+      "question_text": "The holistic development promoted by the CBSE curriculum includes which of the following components?",
+      "options": [
+        "Only academic success",
+        "Physical, intellectual, emotional, and social development",
+        "Focus on individual achievement",
+        "Strict adherence to traditional teaching methods"
+      ],
+      "correct_answer": "B",
+      "explanation": "Holistic development encompasses multiple dimensions of a student's growth, including physical, intellectual, emotional, and social aspects.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q21",
+      "question_text": "What is the primary goal of the CBSE curriculum?",
+      "options": [
+        "To provide a list of subjects",
+        "To achieve excellence in learning",
+        "To prepare students for competitive exams",
+        "To focus solely on academic subjects"
+      ],
+      "correct_answer": "B",
+      "explanation": "The primary goal of the CBSE curriculum is to provide students with opportunities to achieve excellence in learning, emphasizing holistic education.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q22",
+      "question_text": "Which educational approach is emphasized in the CBSE curriculum?",
+      "options": [
+        "Traditional teaching",
+        "Rote memorization",
+        "Constructivist learning",
+        "Passive learning"
+      ],
+      "correct_answer": "C",
+      "explanation": "The CBSE curriculum emphasizes a constructivist learning approach, encouraging students to construct their own understanding through experiences.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q23",
+      "question_text": "What does holistic development in the CBSE curriculum include?",
+      "options": [
+        "Only intellectual development",
+        "Physical, emotional, and social development",
+        "Only social development",
+        "Only academic excellence"
+      ],
+      "correct_answer": "B",
+      "explanation": "Holistic development in the CBSE curriculum encompasses physical, emotional, and social dimensions, not just intellectual pursuits.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q24",
+      "question_text": "What is the role of the School Curriculum Committee in CBSE-affiliated schools?",
+      "options": [
+        "To develop national policies",
+        "To oversee curriculum delivery",
+        "To conduct student assessments",
+        "To manage school finances"
+      ],
+      "correct_answer": "B",
+      "explanation": "The School Curriculum Committee is responsible for overseeing the effective delivery of the curriculum in schools, ensuring compliance with CBSE guidelines.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q25",
+      "question_text": "The foundational stage of the 5+3+3+4 schooling model lasts for how many years?",
+      "options": [
+        "3 years",
+        "4 years",
+        "5 years",
+        "6 years"
+      ],
+      "correct_answer": "C",
+      "explanation": "The foundational stage of the 5+3+3+4 schooling model lasts for 5 years, focusing on holistic development.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q26",
+      "question_text": "Which of the following is NOT a component of the CBSE curriculum's holistic development?",
+      "options": [
+        "Health and Physical Education",
+        "Social skills",
+        "Rote memorization",
+        "Emotional well-being"
+      ],
+      "correct_answer": "C",
+      "explanation": "Rote memorization is not a component of holistic development; the curriculum focuses on comprehensive growth including health, social skills, and emotional well-being.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q27",
+      "question_text": "How does the CBSE curriculum promote physical development?",
+      "options": [
+        "By eliminating physical education",
+        "By focusing exclusively on academics",
+        "By including Health and Physical Education in the curriculum",
+        "By encouraging sedentary activities"
+      ],
+      "correct_answer": "C",
+      "explanation": "The CBSE curriculum promotes physical development by including Health and Physical Education, encouraging students to engage in sports and physical activities.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q28",
+      "question_text": "What is the significance of interdisciplinary learning in the CBSE curriculum?",
+      "options": [
+        "It focuses on memorizing facts from different subjects",
+        "It allows exploration of themes across various disciplines",
+        "It isolates subjects from one another",
+        "It limits learning to a single subject area"
+      ],
+      "correct_answer": "B",
+      "explanation": "Interdisciplinary learning in the CBSE curriculum encourages students to explore themes that span across various subjects, enhancing their overall understanding.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q29",
+      "question_text": "Which of the following statements best describes constructivist learning in the CBSE context?",
+      "options": [
+        "It solely relies on textbook knowledge",
+        "It emphasizes passive reception of information",
+        "It involves hands-on experiences and active engagement",
+        "It discourages collaboration among students"
+      ],
+      "correct_answer": "C",
+      "explanation": "Constructivist learning in the CBSE curriculum involves hands-on experiences and active engagement, fostering a deeper understanding of the material.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q30",
+      "question_text": "Why is the National Curriculum Framework for School Education important for the CBSE curriculum?",
+      "options": [
+        "It outlines financial regulations for schools",
+        "It provides guidelines for implementation of the curriculum",
+        "It focuses only on primary education",
+        "It eliminates the need for a curriculum"
+      ],
+      "correct_answer": "B",
+      "explanation": "The National Curriculum Framework for School Education provides essential guidelines for the implementation of the CBSE curriculum.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q31",
+      "question_text": "What is a key outcome of the constructivist approach in the CBSE curriculum?",
+      "options": [
+        "Enhanced rote memorization",
+        "Development of critical thinking and problem-solving skills",
+        "Isolation of subjects",
+        "Decreased student engagement"
+      ],
+      "correct_answer": "B",
+      "explanation": "A key outcome of the constructivist approach is the development of critical thinking and problem-solving skills among students.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q32",
+      "question_text": "In which stage of the 5+3+3+4 model is basic literacy and numeracy introduced?",
+      "options": [
+        "Foundational Stage",
+        "Preparatory Stage",
+        "Middle Stage",
+        "Secondary Stage"
+      ],
+      "correct_answer": "B",
+      "explanation": "The Preparatory Stage, which lasts for 3 years, introduces students to basic literacy and numeracy, along with experiential learning.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q33",
+      "question_text": "Which of the following best describes the CBSE curriculum's approach to intellectual development?",
+      "options": [
+        "Emphasis on memorizing facts",
+        "Promotion of collaborative learning",
+        "Encouragement of deep exploration of concepts",
+        "Focus on standardized testing"
+      ],
+      "correct_answer": "C",
+      "explanation": "The CBSE curriculum promotes intellectual development by encouraging deep exploration and understanding of concepts rather than mere memorization.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q34",
+      "question_text": "How does the CBSE curriculum address social development?",
+      "options": [
+        "By promoting individual work",
+        "Through collaborative learning environments",
+        "By eliminating group projects",
+        "By focusing only on theoretical knowledge"
+      ],
+      "correct_answer": "B",
+      "explanation": "The CBSE curriculum fosters social development through collaborative learning environments, enhancing communication and interpersonal skills.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q35",
+      "question_text": "What is the primary focus of the secondary stage in the 5+3+3+4 model?",
+      "options": [
+        "Early childhood education",
+        "Basic literacy and numeracy",
+        "Specialization in subjects of interest",
+        "Rote learning of information"
+      ],
+      "correct_answer": "C",
+      "explanation": "The primary focus of the secondary stage (4 years) is on specialization and deeper engagement in subjects of interest.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q36",
+      "question_text": "What is a common criticism of traditional education that the CBSE curriculum seeks to address?",
+      "options": [
+        "Focus on experiential learning",
+        "Emphasis on standardized testing",
+        "Over-reliance on rote memorization",
+        "Integrative learning approaches"
+      ],
+      "correct_answer": "C",
+      "explanation": "The CBSE curriculum seeks to address the criticism of traditional education by moving away from an over-reliance on rote memorization toward a more holistic and constructive approach.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q37",
+      "question_text": "Which component of the CBSE curriculum helps instill values such as teamwork and discipline?",
+      "options": [
+        "Academic subjects",
+        "Health and Physical Education",
+        "Rote memorization",
+        "Theoretical knowledge"
+      ],
+      "correct_answer": "B",
+      "explanation": "Health and Physical Education in the CBSE curriculum helps instill values such as teamwork and discipline through sports and physical activities.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q38",
+      "question_text": "How does the CBSE curriculum support the National Education Policy (NEP) 2020?",
+      "options": [
+        "By focusing solely on academic excellence",
+        "By aligning with holistic educational practices",
+        "By promoting rote learning",
+        "By isolating subjects"
+      ],
+      "correct_answer": "B",
+      "explanation": "The CBSE curriculum supports the NEP 2020 by aligning with holistic educational practices that emphasize comprehensive student development.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q39",
+      "question_text": "Which stage of the schooling model involves developing critical thinking and interdisciplinary learning?",
+      "options": [
+        "Foundational Stage",
+        "Preparatory Stage",
+        "Middle Stage",
+        "Secondary Stage"
+      ],
+      "correct_answer": "C",
+      "explanation": "The Middle Stage (3 years) focuses on developing critical thinking and interdisciplinary learning among students.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_1e7febda_q40",
+      "question_text": "In the context of the CBSE curriculum, what is the significance of hands-on learning experiences?",
+      "options": [
+        "They distract from theoretical knowledge",
+        "They enhance retention and understanding of concepts",
+        "They are less effective than traditional methods",
+        "They are optional for students"
+      ],
+      "correct_answer": "B",
+      "explanation": "Hands-on learning experiences in the CBSE curriculum enhance retention and understanding of concepts, aligning with the constructivist approach to education.",
+      "topic": ""
+    }
+  ],
+  "total_questions": 40,
+  "quiz_type": "course",
+  "module_week": null,
+  "course_id": "2"
+}

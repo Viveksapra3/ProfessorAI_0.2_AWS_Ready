@@ -1,0 +1,271 @@
+{
+  "quiz_id": "module_2_6ee11b58",
+  "title": "Module 2 Quiz: Modes of Nutrition in Plants",
+  "description": "20-question MCQ quiz covering content from Week 2",
+  "questions": [
+    {
+      "question_id": "module_2_6ee11b58_q1",
+      "question_text": "What is autotrophic nutrition?",
+      "options": [
+        "A mode of nutrition in which organisms consume other organisms for food",
+        "A mode of nutrition in which organisms produce their own food from inorganic substances",
+        "A type of nutrition that only occurs in animals",
+        "A method of obtaining food through symbiotic relationships"
+      ],
+      "correct_answer": "B",
+      "explanation": "Autotrophic nutrition refers to the ability of organisms, particularly plants, to produce their own food from simple inorganic substances like carbon dioxide and water.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_2_6ee11b58_q2",
+      "question_text": "Which process do green plants primarily use to produce food?",
+      "options": [
+        "Respiration",
+        "Fermentation",
+        "Photosynthesis",
+        "Digestion"
+      ],
+      "correct_answer": "C",
+      "explanation": "Photosynthesis is the process by which green plants convert light energy into chemical energy, specifically glucose, using chlorophyll, carbon dioxide, and water.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_2_6ee11b58_q3",
+      "question_text": "What are the primary products of photosynthesis?",
+      "options": [
+        "Carbon dioxide and glucose",
+        "Glucose and oxygen",
+        "Water and minerals",
+        "Oxygen and nitrogen"
+      ],
+      "correct_answer": "B",
+      "explanation": "The primary products of photosynthesis are glucose, which serves as an energy source, and oxygen, which is released as a byproduct.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_2_6ee11b58_q4",
+      "question_text": "What role do autotrophs play in the ecosystem?",
+      "options": [
+        "They are the primary consumers in food chains",
+        "They decompose organic matter",
+        "They serve as the primary producers",
+        "They are predators"
+      ],
+      "correct_answer": "C",
+      "explanation": "Autotrophs, such as plants, serve as the primary producers in food chains, providing energy for all other organisms (heterotrophs) that depend on them.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_2_6ee11b58_q5",
+      "question_text": "Which of the following is NOT a characteristic of heterotrophic nutrition?",
+      "options": [
+        "They can synthesize their own food",
+        "They obtain food from other organisms",
+        "They rely on autotrophs for sustenance",
+        "They may exhibit various feeding strategies"
+      ],
+      "correct_answer": "A",
+      "explanation": "Heterotrophic organisms cannot synthesize their own food; they depend on other organisms for their nutritional needs.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_2_6ee11b58_q6",
+      "question_text": "What type of heterotroph primarily consumes plants?",
+      "options": [
+        "Carnivores",
+        "Omnivores",
+        "Herbivores",
+        "Saprotrophs"
+      ],
+      "correct_answer": "C",
+      "explanation": "Herbivores are organisms that primarily consume plants, playing a vital role in transferring energy from plants to higher trophic levels.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_2_6ee11b58_q7",
+      "question_text": "Which of the following is an example of a carnivore?",
+      "options": [
+        "Cow",
+        "Deer",
+        "Lion",
+        "Rabbit"
+      ],
+      "correct_answer": "C",
+      "explanation": "Lions are examples of carnivores, as they primarily eat other animals.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_2_6ee11b58_q8",
+      "question_text": "What is the primary function of saprotrophs in an ecosystem?",
+      "options": [
+        "To produce oxygen",
+        "To capture sunlight",
+        "To decompose dead organic matter",
+        "To provide energy to herbivores"
+      ],
+      "correct_answer": "C",
+      "explanation": "Saprotrophs, such as fungi and bacteria, play a vital role in decomposing dead organic matter and recycling nutrients within ecosystems.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_2_6ee11b58_q9",
+      "question_text": "Which of the following processes occurs first in heterotrophic nutrition?",
+      "options": [
+        "Absorption",
+        "Ingestion",
+        "Digestion",
+        "Egestion"
+      ],
+      "correct_answer": "B",
+      "explanation": "Ingestion is the first step in heterotrophic nutrition, where food is taken into the body.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_2_6ee11b58_q10",
+      "question_text": "What does the term \"ectoparasite\" refer to?",
+      "options": [
+        "A parasite that lives inside a host",
+        "A parasite that lives on the surface of a host",
+        "A type of herbivore",
+        "A saprotrophic organism"
+      ],
+      "correct_answer": "B",
+      "explanation": "Ectoparasites are parasites that live on the surface of a host, obtaining nourishment at the host's expense.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_2_6ee11b58_q11",
+      "question_text": "Which of the following statements about photosynthesis is true?",
+      "options": [
+        "It occurs only in animals",
+        "It requires nitrogen as a primary raw material",
+        "It converts light energy into chemical energy",
+        "It produces glucose and water"
+      ],
+      "correct_answer": "C",
+      "explanation": "Photosynthesis converts light energy into chemical energy, resulting in the production of glucose and oxygen.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_2_6ee11b58_q12",
+      "question_text": "How do insectivorous plants obtain nutrients?",
+      "options": [
+        "Through photosynthesis only",
+        "By capturing and digesting insects",
+        "By absorbing nutrients from the soil",
+        "Through symbiotic relationships"
+      ],
+      "correct_answer": "B",
+      "explanation": "Insectivorous plants obtain nutrients by capturing and digesting insects, which provides them with essential nutrients in nutrient-poor environments.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_2_6ee11b58_q13",
+      "question_text": "What role do autotrophs play in mitigating climate change?",
+      "options": [
+        "They produce carbon dioxide",
+        "They consume dead organic matter",
+        "They reduce atmospheric carbon dioxide levels",
+        "They only provide energy to herbivores"
+      ],
+      "correct_answer": "C",
+      "explanation": "Autotrophs, particularly plants, play a significant role in reducing atmospheric carbon dioxide levels through photosynthesis.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_2_6ee11b58_q14",
+      "question_text": "What is the main difference between autotrophs and heterotrophs?",
+      "options": [
+        "Autotrophs can produce their own food; heterotrophs cannot",
+        "Autotrophs are always plants; heterotrophs are always animals",
+        "Heterotrophs can produce their own food; autotrophs cannot",
+        "There is no difference; they are the same"
+      ],
+      "correct_answer": "A",
+      "explanation": "The main difference is that autotrophs can synthesize their own food from inorganic substances, while heterotrophs must consume organic material.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_2_6ee11b58_q15",
+      "question_text": "In which stage of heterotrophic nutrition are nutrients absorbed into the bloodstream?",
+      "options": [
+        "Ingestion",
+        "Digestion",
+        "Absorption",
+        "Assimilation"
+      ],
+      "correct_answer": "C",
+      "explanation": "Absorption is the stage where digested nutrients are taken into the bloodstream for utilization by the body.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_2_6ee11b58_q16",
+      "question_text": "Which type of nutrition is characterized by obtaining nutrients from decomposing organic matter?",
+      "options": [
+        "Autotrophic",
+        "Heterotrophic",
+        "Saprotrophic",
+        "Parasitic"
+      ],
+      "correct_answer": "C",
+      "explanation": "Saprotrophic nutrition involves obtaining nutrients from dead and decaying organic matter, often performed by fungi and bacteria.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_2_6ee11b58_q17",
+      "question_text": "What is the significance of chlorophyll in photosynthesis?",
+      "options": [
+        "It absorbs water",
+        "It captures solar energy",
+        "It produces glucose",
+        "It releases oxygen"
+      ],
+      "correct_answer": "B",
+      "explanation": "Chlorophyll is the green pigment in plants that captures solar energy, which is essential for the process of photosynthesis.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_2_6ee11b58_q18",
+      "question_text": "What is a common adaptation of herbivores to help them digest plant materials?",
+      "options": [
+        "Sharp teeth",
+        "Large stomachs",
+        "Specialized digestive systems",
+        "Short intestines"
+      ],
+      "correct_answer": "C",
+      "explanation": "Herbivores often have specialized digestive systems that help them break down complex plant materials, such as cellulose.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_2_6ee11b58_q19",
+      "question_text": "Why is autotrophic nutrition essential for aerobic organisms?",
+      "options": [
+        "It produces carbon dioxide",
+        "It reduces oxygen levels",
+        "It provides oxygen as a byproduct",
+        "It consumes organic matter"
+      ],
+      "correct_answer": "C",
+      "explanation": "Autotrophic nutrition is essential for aerobic organisms because it produces oxygen as a byproduct, which is crucial for their survival.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_2_6ee11b58_q20",
+      "question_text": "In humans, what is the final step of the heterotrophic nutrition process?",
+      "options": [
+        "Digestion",
+        "Absorption",
+        "Egestion",
+        "Assimilation"
+      ],
+      "correct_answer": "C",
+      "explanation": "Egestion is the final step where undigested food and waste products are expelled from the body, maintaining health and balance.",
+      "topic": ""
+    }
+  ],
+  "total_questions": 20,
+  "quiz_type": "module",
+  "module_week": 2,
+  "course_id": "1"
+}

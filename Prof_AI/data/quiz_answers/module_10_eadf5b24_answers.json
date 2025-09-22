@@ -1,0 +1,31 @@
+{
+  "quiz_id": "module_10_eadf5b24",
+  "answers": {
+    "module_10_eadf5b24_q1": "B",
+    "module_10_eadf5b24_q2": "C",
+    "module_10_eadf5b24_q3": "B",
+    "module_10_eadf5b24_q4": "C",
+    "module_10_eadf5b24_q5": "C",
+    "module_10_eadf5b24_q6": "B",
+    "module_10_eadf5b24_q7": "B",
+    "module_10_eadf5b24_q8": "A",
+    "module_10_eadf5b24_q9": "B",
+    "module_10_eadf5b24_q10": "B",
+    "module_10_eadf5b24_q11": "C",
+    "module_10_eadf5b24_q12": "B",
+    "module_10_eadf5b24_q13": "A",
+    "module_10_eadf5b24_q14": "C",
+    "module_10_eadf5b24_q15": "C",
+    "module_10_eadf5b24_q16": "C",
+    "module_10_eadf5b24_q17": "C",
+    "module_10_eadf5b24_q18": "C",
+    "module_10_eadf5b24_q19": "C",
+    "module_10_eadf5b24_q20": "B"
+  },
+  "quiz": {
+    "title": "Module 10 Quiz: Heat and Temperature",
+    "total_questions": 20,
+    "quiz_type": "module",
+    "created_at": "2025-09-20T18:54:57.676509"
+  }
+}

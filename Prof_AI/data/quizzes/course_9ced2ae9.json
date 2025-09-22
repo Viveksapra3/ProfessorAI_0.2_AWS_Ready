@@ -1,0 +1,530 @@
+{
+  "quiz_id": "course_9ced2ae9",
+  "title": "Final Course Quiz: Comprehensive Study of Nutrition and Changes in Matter",
+  "description": "40-question comprehensive MCQ quiz covering the entire course content",
+  "questions": [
+    {
+      "question_id": "course_9ced2ae9_q1",
+      "question_text": "What is the primary source of energy for most living organisms?",
+      "options": [
+        "Proteins",
+        "Fats",
+        "Vitamins",
+        "Carbohydrates"
+      ],
+      "correct_answer": "D",
+      "explanation": "Carbohydrates serve as the primary energy source for most living organisms.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q2",
+      "question_text": "Which process do plants use to synthesize their own food?",
+      "options": [
+        "Respiration",
+        "Digestion",
+        "Photosynthesis",
+        "Fermentation"
+      ],
+      "correct_answer": "C",
+      "explanation": "Plants synthesize their own food through photosynthesis, using sunlight, carbon dioxide, and water.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q3",
+      "question_text": "What role do proteins play in living organisms?",
+      "options": [
+        "Provide energy",
+        "Store genetic information",
+        "Assist in growth and repair of tissues",
+        "Serve as a primary energy source"
+      ],
+      "correct_answer": "C",
+      "explanation": "Proteins are essential for growth and repair of tissues in living organisms.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q4",
+      "question_text": "In which of the following modes of nutrition do organisms directly depend on others for sustenance?",
+      "options": [
+        "Autotrophic",
+        "Heterotrophic",
+        "Symbiotic",
+        "Parasitic"
+      ],
+      "correct_answer": "B",
+      "explanation": "Heterotrophic nutrition refers to organisms that cannot synthesize their own food and depend on others for sustenance.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q5",
+      "question_text": "What is the main component of food that provides concentrated energy and supports cell structure?",
+      "options": [
+        "Vitamins",
+        "Carbohydrates",
+        "Proteins",
+        "Fats"
+      ],
+      "correct_answer": "D",
+      "explanation": "Fats provide a concentrated source of energy and support cell structure.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q6",
+      "question_text": "Which of the following is an example of a symbiotic relationship?",
+      "options": [
+        "A lion hunting a deer",
+        "A plant deriving nutrients from a host plant",
+        "A cow eating grass",
+        "A human consuming fish"
+      ],
+      "correct_answer": "B",
+      "explanation": "A plant deriving nutrients from a host plant is an example of a symbiotic relationship, specifically parasitism.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q7",
+      "question_text": "What nutrient is essential for the synthesis of collagen in the human body?",
+      "options": [
+        "Calcium",
+        "Vitamin C",
+        "Iron",
+        "Vitamin A"
+      ],
+      "correct_answer": "B",
+      "explanation": "Vitamin C is essential for the synthesis of collagen, important for skin health and tissue repair.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q8",
+      "question_text": "Which nutrient is primarily responsible for nerve function and muscle contraction?",
+      "options": [
+        "Calcium",
+        "Potassium",
+        "Magnesium",
+        "Sodium"
+      ],
+      "correct_answer": "B",
+      "explanation": "Potassium is crucial for nerve function and muscle contraction.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q9",
+      "question_text": "What do plants absorb from the soil to synthesize proteins?",
+      "options": [
+        "Oxygen",
+        "Nitrogen",
+        "Carbon dioxide",
+        "Glucose"
+      ],
+      "correct_answer": "B",
+      "explanation": "Plants absorb nitrogen from the soil, which is essential for synthesizing proteins.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q10",
+      "question_text": "What is the unique characteristic of autotrophic organisms?",
+      "options": [
+        "They depend on other organisms for food.",
+        "They can synthesize their own food.",
+        "They only consume plants.",
+        "They are always multicellular."
+      ],
+      "correct_answer": "B",
+      "explanation": "Autotrophic organisms can synthesize their own food through processes like photosynthesis.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q11",
+      "question_text": "How do heterotrophic organisms obtain their nutrients?",
+      "options": [
+        "Through photosynthesis",
+        "By consuming other organisms",
+        "By absorbing minerals from soil",
+        "Through chemical synthesis"
+      ],
+      "correct_answer": "B",
+      "explanation": "Heterotrophic organisms obtain their nutrients by consuming other organisms, whether plants or animals.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q12",
+      "question_text": "Which macronutrient is essential for energy storage in plants?",
+      "options": [
+        "Proteins",
+        "Carbohydrates",
+        "Fats",
+        "Vitamins"
+      ],
+      "correct_answer": "B",
+      "explanation": "Carbohydrates are essential for energy storage in plants, often stored as starch.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q13",
+      "question_text": "What type of relationship do lichens represent?",
+      "options": [
+        "Parasitism",
+        "Mutualism",
+        "Commensalism",
+        "Predation"
+      ],
+      "correct_answer": "B",
+      "explanation": "Lichens represent mutualism, where both the fungus and the alga benefit from the relationship.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q14",
+      "question_text": "Why are vitamins considered micronutrients?",
+      "options": [
+        "They are required in large quantities.",
+        "They are organic compounds required in small amounts.",
+        "They provide energy directly.",
+        "They are synthesized by the body."
+      ],
+      "correct_answer": "B",
+      "explanation": "Vitamins are considered micronutrients because they are organic compounds required in small amounts for various bodily functions.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q15",
+      "question_text": "What is the primary purpose of chlorophyll in plants?",
+      "options": [
+        "To absorb nutrients",
+        "To capture sunlight for photosynthesis",
+        "To store energy",
+        "To synthesize proteins"
+      ],
+      "correct_answer": "B",
+      "explanation": "Chlorophyll captures sunlight, which is essential for photosynthesis in plants.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q16",
+      "question_text": "In what way do plants contribute to the survival of aerobic organisms?",
+      "options": [
+        "By decomposing organic matter",
+        "By releasing carbon dioxide",
+        "By releasing oxygen during photosynthesis",
+        "By consuming other organisms"
+      ],
+      "correct_answer": "C",
+      "explanation": "Plants release oxygen during photosynthesis, which is essential for the survival of aerobic organisms.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q17",
+      "question_text": "Which of the following statements best describes the significance of food in living organisms?",
+      "options": [
+        "Food is only necessary for energy.",
+        "Food provides energy and essential nutrients for growth and repair.",
+        "Food is purely for pleasure and taste.",
+        "Food is not necessary for survival."
+      ],
+      "correct_answer": "B",
+      "explanation": "Food is crucial for providing energy and essential nutrients necessary for growth, repair, and maintenance of bodily functions.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q18",
+      "question_text": "How do plants contribute to nutrient cycling in ecosystems?",
+      "options": [
+        "By consuming animals",
+        "By synthesizing food and absorbing minerals",
+        "By decomposing organic matter",
+        "By competing for sunlight"
+      ],
+      "correct_answer": "B",
+      "explanation": "Plants contribute to nutrient cycling by synthesizing food and absorbing minerals from the soil, which supports various life forms in the ecosystem.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q19",
+      "question_text": "What is a common way animals acquire their nutrients?",
+      "options": [
+        "Through photosynthesis",
+        "By absorbing nutrients directly from the environment",
+        "By consuming plants or other animals",
+        "By producing their own food"
+      ],
+      "correct_answer": "C",
+      "explanation": "Animals acquire their nutrients by consuming plants or other animals, as they are heterotrophic.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q20",
+      "question_text": "What is the significance of understanding the interdependence of life forms in ecosystems?",
+      "options": [
+        "It highlights the competition among species.",
+        "It shows how energy and nutrients are exchanged among organisms.",
+        "It emphasizes the isolation of different species.",
+        "It indicates that only autotrophs are important."
+      ],
+      "correct_answer": "B",
+      "explanation": "Understanding the interdependence of life forms emphasizes how energy and nutrients are exchanged among organisms, maintaining ecosystem balance.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q21",
+      "question_text": "What is the primary purpose of food for living organisms?",
+      "options": [
+        "To enhance aesthetic qualities",
+        "To provide energy and nutrients",
+        "To serve as a habitat",
+        "To facilitate reproduction"
+      ],
+      "correct_answer": "B",
+      "explanation": "Food serves as the primary source of energy and nutrients necessary for growth, repair, and maintenance of bodily functions in all living organisms.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q22",
+      "question_text": "Which of the following macronutrients is primarily responsible for energy production?",
+      "options": [
+        "Vitamins",
+        "Proteins",
+        "Carbohydrates",
+        "Minerals"
+      ],
+      "correct_answer": "C",
+      "explanation": "Carbohydrates are the primary source of energy for most living organisms and are essential for various life processes.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q23",
+      "question_text": "What is the process called through which plants synthesize their food?",
+      "options": [
+        "Respiration",
+        "Photosynthesis",
+        "Digestion",
+        "Fermentation"
+      ],
+      "correct_answer": "B",
+      "explanation": "Photosynthesis is the process by which plants use sunlight, carbon dioxide, and water to produce glucose and oxygen.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q24",
+      "question_text": "Which type of nutrition involves organisms obtaining food from other organisms?",
+      "options": [
+        "Autotrophic",
+        "Heterotrophic",
+        "Symbiotic",
+        "Parasitic"
+      ],
+      "correct_answer": "B",
+      "explanation": "Heterotrophic nutrition refers to organisms that cannot produce their own food and instead rely on other organisms for sustenance.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q25",
+      "question_text": "In the context of nutrition, what role do vitamins play in living organisms?",
+      "options": [
+        "Provide energy",
+        "Support structure",
+        "Facilitate biochemical processes",
+        "Store nutrients"
+      ],
+      "correct_answer": "C",
+      "explanation": "Vitamins are organic compounds required in small quantities that play crucial roles in various biochemical processes, including metabolism and immune function.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q26",
+      "question_text": "What type of relationship do plants and fungi often exhibit that benefits both organisms?",
+      "options": [
+        "Parasitism",
+        "Commensalism",
+        "Symbiosis",
+        "Predation"
+      ],
+      "correct_answer": "C",
+      "explanation": "Symbiotic relationships benefit both organisms, such as the relationship between certain fungi and plant roots, where each provides essential nutrients to the other.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q27",
+      "question_text": "What is the main reason herbivores have adapted to consume plant material?",
+      "options": [
+        "Plants are more nutritious",
+        "Plants are easier to digest",
+        "Plants are a primary source of energy",
+        "Plants have a more complex structure"
+      ],
+      "correct_answer": "C",
+      "explanation": "Herbivores depend on plants as a primary source of energy, as plants are autotrophic and can synthesize their own food.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q28",
+      "question_text": "Which macronutrient is essential for the growth and repair of tissues?",
+      "options": [
+        "Fats",
+        "Carbohydrates",
+        "Proteins",
+        "Vitamins"
+      ],
+      "correct_answer": "C",
+      "explanation": "Proteins, composed of amino acids, play a critical role in the growth and repair of tissues in living organisms.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q29",
+      "question_text": "What structure in plant cells captures sunlight for photosynthesis?",
+      "options": [
+        "Cell wall",
+        "Mitochondria",
+        "Chlorophyll",
+        "Nucleus"
+      ],
+      "correct_answer": "C",
+      "explanation": "Chlorophyll is the green pigment in plant cells that captures sunlight, enabling the process of photosynthesis to occur.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q30",
+      "question_text": "Which of the following is a characteristic of autotrophic nutrition?",
+      "options": [
+        "Dependence on other organisms for food",
+        "Synthesis of food using sunlight",
+        "Inability to produce energy",
+        "Predation on other organisms"
+      ],
+      "correct_answer": "B",
+      "explanation": "Autotrophic nutrition refers to organisms, like plants, that synthesize their own food using sunlight and raw materials.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q31",
+      "question_text": "Which nutrient is crucial for bone health in humans?",
+      "options": [
+        "Vitamin C",
+        "Calcium",
+        "Protein",
+        "Carbohydrates"
+      ],
+      "correct_answer": "B",
+      "explanation": "Calcium is an essential mineral that plays a vital role in maintaining bone health and structure.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q32",
+      "question_text": "How do plants absorb minerals necessary for their growth?",
+      "options": [
+        "Through photosynthesis",
+        "Through root systems from soil",
+        "From the atmosphere",
+        "From animal waste"
+      ],
+      "correct_answer": "B",
+      "explanation": "Plants absorb minerals from the soil through their root systems, which are essential for various physiological functions.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q33",
+      "question_text": "In a food chain, plants are referred to as what type of organisms?",
+      "options": [
+        "Consumers",
+        "Decomposers",
+        "Primary producers",
+        "Secondary consumers"
+      ],
+      "correct_answer": "C",
+      "explanation": "In a food chain, plants are the primary producers as they convert solar energy into chemical energy through photosynthesis.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q34",
+      "question_text": "Which nutrient is primarily responsible for hormone production in the body?",
+      "options": [
+        "Carbohydrates",
+        "Proteins",
+        "Fats",
+        "Vitamins"
+      ],
+      "correct_answer": "C",
+      "explanation": "Fats play a significant role in the production of hormones and are also important for the absorption of fat-soluble vitamins.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q35",
+      "question_text": "What is the relationship called when one organism benefits at the expense of another?",
+      "options": [
+        "Mutualism",
+        "Commensalism",
+        "Parasitism",
+        "Symbiosis"
+      ],
+      "correct_answer": "C",
+      "explanation": "Parasitism is a relationship where one organism benefits while the other is harmed, as seen with certain parasitic plants.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q36",
+      "question_text": "Which of the following processes occurs in both plants and animals?",
+      "options": [
+        "Photosynthesis",
+        "Respiration",
+        "Nitrogen fixation",
+        "Symbiosis"
+      ],
+      "correct_answer": "B",
+      "explanation": "Respiration is a process that occurs in both plants and animals, where energy is released from food.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q37",
+      "question_text": "What is the role of nitrogen in plant nutrition?",
+      "options": [
+        "Energy production",
+        "Tissue repair",
+        "Protein synthesis",
+        "Oxygen production"
+      ],
+      "correct_answer": "C",
+      "explanation": "Nitrogen is essential for plants to synthesize proteins, which are crucial for growth and development.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q38",
+      "question_text": "How do animals primarily obtain their nutrients?",
+      "options": [
+        "Photosynthesis",
+        "Absorption from soil",
+        "Consumption of other organisms",
+        "Atmospheric absorption"
+      ],
+      "correct_answer": "C",
+      "explanation": "Animals obtain their nutrients primarily by consuming plants or other animals, as they are heterotrophic organisms.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q39",
+      "question_text": "What type of nutrition involves both mutual benefit and dependency between organisms?",
+      "options": [
+        "Autotrophic",
+        "Heterotrophic",
+        "Parasitic",
+        "Symbiotic"
+      ],
+      "correct_answer": "D",
+      "explanation": "Symbiotic nutrition involves a relationship where two different organisms benefit from each other, often leading to mutual dependency.",
+      "topic": ""
+    },
+    {
+      "question_id": "course_9ced2ae9_q40",
+      "question_text": "Why is the process of photosynthesis crucial for the survival of aerobic organisms?",
+      "options": [
+        "It produces glucose only",
+        "It consumes carbon dioxide",
+        "It releases oxygen into the atmosphere",
+        "It absorbs nutrients from the soil"
+      ],
+      "correct_answer": "C",
+      "explanation": "Photosynthesis is crucial as it releases oxygen into the atmosphere, which is essential for the survival of aerobic organisms, including humans.",
+      "topic": ""
+    }
+  ],
+  "total_questions": 40,
+  "quiz_type": "course",
+  "module_week": null
+}

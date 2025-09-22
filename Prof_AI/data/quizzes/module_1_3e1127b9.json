@@ -1,0 +1,271 @@
+{
+  "quiz_id": "module_1_3e1127b9",
+  "title": "Module 1 Quiz: Introduction to the Curriculum Framework",
+  "description": "20-question MCQ quiz covering content from Week 1",
+  "questions": [
+    {
+      "question_id": "module_1_3e1127b9_q1",
+      "question_text": "What is the primary goal of the CBSE curriculum?",
+      "options": [
+        "To provide students with opportunities to memorize facts",
+        "To encourage rote learning in students",
+        "To provide opportunities for excellence in learning",
+        "To focus solely on academic subjects"
+      ],
+      "correct_answer": "C",
+      "explanation": "The primary goal of the CBSE curriculum is to provide students with opportunities to achieve excellence in learning, aligning with the holistic approach emphasized in the NEP 2020.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_3e1127b9_q2",
+      "question_text": "Which pedagogical approach is emphasized in the CBSE curriculum?",
+      "options": [
+        "Traditional learning",
+        "Constructivist learning",
+        "Behaviorist learning",
+        "Direct instruction"
+      ],
+      "correct_answer": "B",
+      "explanation": "The CBSE curriculum emphasizes a constructivist learning approach, encouraging students to construct their own understanding through experiences.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_3e1127b9_q3",
+      "question_text": "What is the foundational stage of the NCF-SE model?",
+      "options": [
+        "4 years of secondary education",
+        "3 years of preparatory education",
+        "5 years of early childhood education",
+        "3 years of middle education"
+      ],
+      "correct_answer": "C",
+      "explanation": "The foundational stage consists of 5 years of early childhood education, focusing on holistic development.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_3e1127b9_q4",
+      "question_text": "How does the CBSE curriculum support physical development?",
+      "options": [
+        "By limiting physical activities",
+        "By excluding health-related subjects",
+        "By including Health and Physical Education",
+        "By prioritizing academic subjects only"
+      ],
+      "correct_answer": "C",
+      "explanation": "The CBSE curriculum includes Health and Physical Education to promote physical health and instill values such as teamwork and discipline.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_3e1127b9_q5",
+      "question_text": "What role does the School Curriculum Committee play in CBSE schools?",
+      "options": [
+        "They are responsible for setting examination papers.",
+        "They oversee curriculum delivery and ensure adherence to guidelines.",
+        "They only focus on extracurricular activities.",
+        "They manage financial aspects of the school."
+      ],
+      "correct_answer": "B",
+      "explanation": "The School Curriculum Committee is responsible for overseeing the delivery of the curriculum and ensuring it meets the guidelines set by CBSE.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_3e1127b9_q6",
+      "question_text": "Which of the following best describes holistic development in the CBSE curriculum?",
+      "options": [
+        "Focus solely on intellectual growth",
+        "Inclusion of physical, intellectual, emotional, and social dimensions",
+        "Prioritization of sports over academics",
+        "Emphasis on memorization of facts"
+      ],
+      "correct_answer": "B",
+      "explanation": "Holistic development encompasses physical, intellectual, emotional, and social dimensions of a learner, as outlined in the CBSE curriculum.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_3e1127b9_q7",
+      "question_text": "Which stage of education focuses on interdisciplinary learning according to the NCF-SE?",
+      "options": [
+        "Foundational Stage",
+        "Preparatory Stage",
+        "Middle Stage",
+        "Secondary Stage"
+      ],
+      "correct_answer": "C",
+      "explanation": "The Middle Stage emphasizes the development of critical thinking and interdisciplinary learning.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_3e1127b9_q8",
+      "question_text": "What is a key feature of the constructivist learning approach emphasized in the CBSE curriculum?",
+      "options": [
+        "Memorization of theories",
+        "Hands-on learning experiences",
+        "Passive learning environments",
+        "Strict adherence to textbooks"
+      ],
+      "correct_answer": "B",
+      "explanation": "The constructivist approach encourages hands-on learning experiences, allowing students to actively engage with the material.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_3e1127b9_q9",
+      "question_text": "How does the CBSE curriculum promote social development among students?",
+      "options": [
+        "By encouraging solitary study",
+        "Through collaborative learning environments",
+        "By focusing only on individual assessments",
+        "By limiting group activities"
+      ],
+      "correct_answer": "B",
+      "explanation": "Social development is fostered through collaborative learning environments where students engage in group projects and discussions.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_3e1127b9_q10",
+      "question_text": "What is the purpose of the National Curriculum Framework for School Education (NCF-SE)?",
+      "options": [
+        "To provide a list of subjects to be taught",
+        "To guide the implementation of the CBSE curriculum",
+        "To restrict the types of assessments used",
+        "To limit the scope of education to academic subjects only"
+      ],
+      "correct_answer": "B",
+      "explanation": "The NCF-SE is a pivotal document that guides the implementation of the CBSE curriculum, ensuring a cohesive educational experience.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_3e1127b9_q11",
+      "question_text": "Which of the following is NOT a component of holistic development according to the CBSE curriculum?",
+      "options": [
+        "Emotional well-being",
+        "Intellectual pursuits",
+        "Rote memorization",
+        "Physical health"
+      ],
+      "correct_answer": "C",
+      "explanation": "Rote memorization is not a component of holistic development; the curriculum focuses on various dimensions of growth beyond memorization.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_3e1127b9_q12",
+      "question_text": "How does the CBSE curriculum encourage critical thinking in students?",
+      "options": [
+        "By promoting rote learning",
+        "Through experiential learning opportunities",
+        "By providing limited subject choices",
+        "By discouraging questions in class"
+      ],
+      "correct_answer": "B",
+      "explanation": "The curriculum promotes critical thinking by providing experiential learning opportunities that allow students to explore concepts deeply.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_3e1127b9_q13",
+      "question_text": "What aspect of learning does the CBSE curriculum prioritize in subjects like Mathematics and Science?",
+      "options": [
+        "Memorization of formulas",
+        "Conceptual understanding",
+        "Speed of calculations",
+        "Completing homework assignments"
+      ],
+      "correct_answer": "B",
+      "explanation": "The curriculum prioritizes developing conceptual understanding alongside procedural fluency in these subjects.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_3e1127b9_q14",
+      "question_text": "In the context of the CBSE curriculum, what does interdisciplinary learning entail?",
+      "options": [
+        "Learning subjects in isolation",
+        "Exploring themes that span multiple subjects",
+        "Focusing solely on one discipline",
+        "Avoiding real-world applications"
+      ],
+      "correct_answer": "B",
+      "explanation": "Interdisciplinary learning encourages students to explore themes that span various subjects, enriching their overall understanding.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_3e1127b9_q15",
+      "question_text": "Which of the following best describes the holistic approach of the CBSE curriculum?",
+      "options": [
+        "Focus only on academic performance",
+        "Integration of physical, emotional, and social education",
+        "Sole emphasis on intellectual achievement",
+        "Limitations on extracurricular activities"
+      ],
+      "correct_answer": "B",
+      "explanation": "The holistic approach integrates various dimensions of education, including physical, emotional, and social education.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_3e1127b9_q16",
+      "question_text": "What is emphasized through the inclusion of Health and Physical Education in the CBSE curriculum?",
+      "options": [
+        "Academic excellence only",
+        "Fitness and health awareness",
+        "Competitive sports only",
+        "Exclusive focus on mental health"
+      ],
+      "correct_answer": "B",
+      "explanation": "Health and Physical Education emphasize fitness and health awareness, promoting overall well-being.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_3e1127b9_q17",
+      "question_text": "Which committee is responsible for adapting the curriculum to meet the specific needs of students in CBSE schools?",
+      "options": [
+        "Examination Committee",
+        "School Curriculum Committee",
+        "Teacher Advisory Committee",
+        "Parent-Teacher Association"
+      ],
+      "correct_answer": "B",
+      "explanation": "The School Curriculum Committee adapts the curriculum to meet the specific needs of their student population.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_3e1127b9_q18",
+      "question_text": "What is a fundamental aim of the CBSE curriculum with respect to student learning?",
+      "options": [
+        "To prepare students for standardized tests only",
+        "To cultivate independent thinkers",
+        "To limit classroom discussions",
+        "To discourage practical applications"
+      ],
+      "correct_answer": "B",
+      "explanation": "A fundamental aim of the CBSE curriculum is to cultivate independent thinkers who can apply their knowledge in various contexts.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_3e1127b9_q19",
+      "question_text": "Which of the following themes would most likely be explored in an interdisciplinary project under the CBSE curriculum?",
+      "options": [
+        "History of a single civilization",
+        "Impact of climate change on societies and environments",
+        "Memorization of historical dates",
+        "Individual subject assessments"
+      ],
+      "correct_answer": "B",
+      "explanation": "An interdisciplinary project may explore themes like the impact of climate change, integrating scientific, historical, and socio-economic perspectives.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_3e1127b9_q20",
+      "question_text": "What is the ultimate goal of the CBSE curriculum as outlined in the module?",
+      "options": [
+        "To create educated individuals only",
+        "To prepare students for the complexities of the modern world",
+        "To standardize all educational practices",
+        "To prioritize academic subjects over all others"
+      ],
+      "correct_answer": "B",
+      "explanation": "The ultimate goal of the CBSE curriculum is to prepare students for the complexities of the modern world, ensuring well-rounded development.",
+      "topic": ""
+    }
+  ],
+  "total_questions": 20,
+  "quiz_type": "module",
+  "module_week": 1,
+  "course_id": "2"
+}

@@ -1,0 +1,271 @@
+{
+  "quiz_id": "module_10_32574c5b",
+  "title": "Module 10 Quiz: Heat and Temperature",
+  "description": "20-question MCQ quiz covering content from Week 10",
+  "questions": [
+    {
+      "question_id": "module_10_32574c5b_q1",
+      "question_text": "What is temperature a measure of?",
+      "options": [
+        "The amount of heat an object contains",
+        "The degree of hotness or coldness of an object",
+        "The weight of an object",
+        "The color of an object"
+      ],
+      "correct_answer": "B",
+      "explanation": "Temperature quantifies how hot or cold an object is, serving as a fundamental concept in thermodynamics.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_32574c5b_q2",
+      "question_text": "Which thermometer is commonly used for measuring human body temperature?",
+      "options": [
+        "Laboratory thermometer",
+        "Clinical thermometer",
+        "Digital thermometer",
+        "Infrared thermometer"
+      ],
+      "correct_answer": "B",
+      "explanation": "Clinical thermometers are specifically designed to measure body temperature, typically ranging from 35°C to 42°C.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_32574c5b_q3",
+      "question_text": "What is the primary mechanism of heat transfer in solids?",
+      "options": [
+        "Convection",
+        "Radiation",
+        "Conduction",
+        "Evaporation"
+      ],
+      "correct_answer": "C",
+      "explanation": "Conduction is the dominant mode of heat transfer in solids, occurring through direct contact between materials.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_32574c5b_q4",
+      "question_text": "The Zeroth Law of Thermodynamics is important because it helps establish:",
+      "options": [
+        "The laws of motion",
+        "The concept of thermal equilibrium",
+        "The relationship between heat and work",
+        "The speed of sound"
+      ],
+      "correct_answer": "B",
+      "explanation": "The Zeroth Law states that if two systems are in thermal equilibrium with a third system, they are also in thermal equilibrium with each other.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_32574c5b_q5",
+      "question_text": "Which of the following materials is an example of a good conductor of heat?",
+      "options": [
+        "Rubber",
+        "Glass",
+        "Copper",
+        "Styrofoam"
+      ],
+      "correct_answer": "C",
+      "explanation": "Copper is an excellent conductor of heat, making it useful in cookware and heat exchangers.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_32574c5b_q6",
+      "question_text": "What happens to the mercury in a clinical thermometer when body temperature increases?",
+      "options": [
+        "It contracts",
+        "It remains constant",
+        "It evaporates",
+        "It expands"
+      ],
+      "correct_answer": "D",
+      "explanation": "The mercury expands and rises in the tube as the temperature increases, providing a visible reading.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_32574c5b_q7",
+      "question_text": "In which temperature scale is the freezing point of water at 0 degrees?",
+      "options": [
+        "Fahrenheit",
+        "Kelvin",
+        "Celsius",
+        "Rankine"
+      ],
+      "correct_answer": "C",
+      "explanation": "The Celsius scale defines the freezing point of water at 0 degrees and the boiling point at 100 degrees.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_32574c5b_q8",
+      "question_text": "Which of the following is NOT a mechanism of heat transfer?",
+      "options": [
+        "Conduction",
+        "Convection",
+        "Radiation",
+        "Compression"
+      ],
+      "correct_answer": "D",
+      "explanation": "Compression is not a mechanism of heat transfer; the three mechanisms are conduction, convection, and radiation.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_32574c5b_q9",
+      "question_text": "In convection, heat is transferred through:",
+      "options": [
+        "Solid contact only",
+        "Movement of fluids",
+        "Electromagnetic waves",
+        "Direct touching"
+      ],
+      "correct_answer": "B",
+      "explanation": "Convection involves the movement of fluids (liquids and gases) to transfer heat.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_32574c5b_q10",
+      "question_text": "A material that resists heat flow is known as:",
+      "options": [
+        "Conductor",
+        "Insulator",
+        "Radiator",
+        "Convector"
+      ],
+      "correct_answer": "B",
+      "explanation": "Insulators are materials that resist heat flow, such as rubber and wood.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_32574c5b_q11",
+      "question_text": "Which of the following temperatures would indicate a fever in a human?",
+      "options": [
+        "36.0°C",
+        "37.5°C",
+        "38.0°C",
+        "39.0°C"
+      ],
+      "correct_answer": "C",
+      "explanation": "A fever is typically defined as a body temperature above 37.5°C.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_32574c5b_q12",
+      "question_text": "What principle do thermometers operate on to provide accurate temperature readings?",
+      "options": [
+        "Expansion of gas",
+        "Change in pressure",
+        "Change in physical properties with temperature",
+        "Variation of color with heat"
+      ],
+      "correct_answer": "C",
+      "explanation": "Thermometers work based on the principle that certain physical properties of materials change with temperature.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_32574c5b_q13",
+      "question_text": "Which type of heat transfer does not require a medium?",
+      "options": [
+        "Conduction",
+        "Convection",
+        "Radiation",
+        "Both A and B"
+      ],
+      "correct_answer": "C",
+      "explanation": "Radiation is the transfer of heat through electromagnetic waves, which does not require a medium.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_32574c5b_q14",
+      "question_text": "If two objects are in thermal equilibrium, what can we say about their temperatures?",
+      "options": [
+        "They are different",
+        "They are the same",
+        "One is higher than the other",
+        "They cannot be compared"
+      ],
+      "correct_answer": "B",
+      "explanation": "Two objects in thermal equilibrium have the same temperature, meaning no net heat transfer occurs between them.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_32574c5b_q15",
+      "question_text": "Which temperature scale uses the freezing point of water as 32 degrees?",
+      "options": [
+        "Celsius",
+        "Fahrenheit",
+        "Kelvin",
+        "Rankine"
+      ],
+      "correct_answer": "B",
+      "explanation": "The Fahrenheit scale defines the freezing point of water at 32 degrees.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_32574c5b_q16",
+      "question_text": "Why is accurate temperature measurement important in scientific experiments?",
+      "options": [
+        "To reduce costs",
+        "For reproducibility and accuracy",
+        "To impress peers",
+        "To speed up reactions"
+      ],
+      "correct_answer": "B",
+      "explanation": "Precise temperature control is vital for reproducibility and accuracy in scientific experiments.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_32574c5b_q17",
+      "question_text": "When heating water on a stove, what happens to the cooler water?",
+      "options": [
+        "It sinks",
+        "It evaporates",
+        "It remains still",
+        "It cools down"
+      ],
+      "correct_answer": "A",
+      "explanation": "In convection, the warmer, less dense water rises while the cooler, denser water sinks, creating a convection current.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_32574c5b_q18",
+      "question_text": "What is the main reason metals are used in cookware?",
+      "options": [
+        "They are lightweight",
+        "They are good insulators",
+        "They are good conductors of heat",
+        "They are non-reactive"
+      ],
+      "correct_answer": "C",
+      "explanation": "Metals like copper and aluminum are good conductors of heat, making them ideal for cookware.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_32574c5b_q19",
+      "question_text": "Which of the following statements is true regarding the Celsius and Fahrenheit scales?",
+      "options": [
+        "0°C is equal to 32°F",
+        "100°C is equal to 212°F",
+        "Both A and B",
+        "Neither A nor B"
+      ],
+      "correct_answer": "C",
+      "explanation": "Both statements are correct; 0°C is equal to 32°F, and 100°C is equal to 212°F.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_10_32574c5b_q20",
+      "question_text": "How does the Zeroth Law of Thermodynamics apply in practical situations?",
+      "options": [
+        "It allows for temperature conversions",
+        "It helps in measuring blood pressure",
+        "It establishes a consistent temperature scale for thermometers",
+        "It defines states of matter"
+      ],
+      "correct_answer": "C",
+      "explanation": "The Zeroth Law allows for establishing thermal equilibrium, which is fundamental in creating a consistent temperature scale for thermometers.",
+      "topic": ""
+    }
+  ],
+  "total_questions": 20,
+  "quiz_type": "module",
+  "module_week": 10,
+  "course_id": "1"
+}
