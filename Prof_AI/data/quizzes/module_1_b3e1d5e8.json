@@ -1,0 +1,271 @@
+{
+  "quiz_id": "module_1_b3e1d5e8",
+  "title": "Module 1 Quiz: Introduction to Nutrition in Plants",
+  "description": "20-question MCQ quiz covering content from Week 1",
+  "questions": [
+    {
+      "question_id": "module_1_b3e1d5e8_q1",
+      "question_text": "What is the primary function of carbohydrates in living organisms?",
+      "options": [
+        "Building cell structures",
+        "Providing energy",
+        "Synthesizing hormones",
+        "Supporting immune response"
+      ],
+      "correct_answer": "B",
+      "explanation": "Carbohydrates serve as the primary source of energy for most living organisms.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_b3e1d5e8_q2",
+      "question_text": "Which nutrient is primarily responsible for tissue repair and growth?",
+      "options": [
+        "Carbohydrates",
+        "Fats",
+        "Proteins",
+        "Vitamins"
+      ],
+      "correct_answer": "C",
+      "explanation": "Proteins are essential for growth and repair of tissues, as they are composed of amino acids.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_b3e1d5e8_q3",
+      "question_text": "What role do vitamins play in living organisms?",
+      "options": [
+        "Energy production",
+        "Structural support",
+        "Various biochemical functions",
+        "Oxygen production"
+      ],
+      "correct_answer": "C",
+      "explanation": "Vitamins are organic compounds required in small quantities for various biochemical functions, such as metabolism and immune response.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_b3e1d5e8_q4",
+      "question_text": "Which of the following is a macronutrient?",
+      "options": [
+        "Vitamin A",
+        "Iron",
+        "Carbohydrates",
+        "Calcium"
+      ],
+      "correct_answer": "C",
+      "explanation": "Macronutrients include carbohydrates, proteins, and fats, which are needed in larger quantities compared to micronutrients like vitamins and minerals.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_b3e1d5e8_q5",
+      "question_text": "In plants, what is the process called that converts sunlight into chemical energy?",
+      "options": [
+        "Respiration",
+        "Fermentation",
+        "Photosynthesis",
+        "Digestion"
+      ],
+      "correct_answer": "C",
+      "explanation": "Photosynthesis is the process through which plants convert sunlight into chemical energy, producing glucose and oxygen.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_b3e1d5e8_q6",
+      "question_text": "Which of the following nutrients is most directly involved in the synthesis of proteins?",
+      "options": [
+        "Glucose",
+        "Amino acids",
+        "Fatty acids",
+        "Simple sugars"
+      ],
+      "correct_answer": "B",
+      "explanation": "Proteins are made up of amino acids, which are the building blocks required for protein synthesis.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_b3e1d5e8_q7",
+      "question_text": "What is the significance of chlorophyll in plants?",
+      "options": [
+        "It stores energy",
+        "It captures sunlight for photosynthesis",
+        "It absorbs minerals from the soil",
+        "It produces oxygen"
+      ],
+      "correct_answer": "B",
+      "explanation": "Chlorophyll captures sunlight, which is essential for the process of photosynthesis in plants.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_b3e1d5e8_q8",
+      "question_text": "Animals that primarily feed on plants are known as:",
+      "options": [
+        "Carnivores",
+        "Herbivores",
+        "Omnivores",
+        "Detritivores"
+      ],
+      "correct_answer": "B",
+      "explanation": "Herbivores are animals that primarily consume plants for their nutritional needs.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_b3e1d5e8_q9",
+      "question_text": "How do plants primarily acquire nitrogen?",
+      "options": [
+        "From the atmosphere in gaseous form",
+        "Through the soil from organic matter",
+        "By utilizing bacteria that convert atmospheric nitrogen",
+        "From sunlight"
+      ],
+      "correct_answer": "C",
+      "explanation": "Plants acquire nitrogen through soil bacteria like Rhizobium, which convert atmospheric nitrogen into a usable form.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_b3e1d5e8_q10",
+      "question_text": "Which type of nutrition describes organisms that cannot produce their own food?",
+      "options": [
+        "Autotrophic",
+        "Symbiotic",
+        "Heterotrophic",
+        "Parasitic"
+      ],
+      "correct_answer": "C",
+      "explanation": "Heterotrophic nutrition refers to organisms that depend on other organisms for their food.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_b3e1d5e8_q11",
+      "question_text": "What is the main role of fats in the body?",
+      "options": [
+        "Energy storage and hormone production",
+        "Energy production only",
+        "Structural support only",
+        "Water absorption"
+      ],
+      "correct_answer": "A",
+      "explanation": "Fats provide a concentrated source of energy and are important for the absorption of fat-soluble vitamins and hormone production.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_b3e1d5e8_q12",
+      "question_text": "What is a common consequence of nutrient deficiency in plants?",
+      "options": [
+        "Increased photosynthesis",
+        "Stunted growth",
+        "Enhanced reproduction",
+        "Accelerated metabolism"
+      ],
+      "correct_answer": "B",
+      "explanation": "Nutrient deficiency often leads to stunted growth and poor health in plants.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_b3e1d5e8_q13",
+      "question_text": "Which of the following is an example of a symbiotic relationship?",
+      "options": [
+        "Cuscuta and its host plant",
+        "Lions and zebras",
+        "Mycorrhizal fungi and plant roots",
+        "Humans and dogs"
+      ],
+      "correct_answer": "C",
+      "explanation": "Mycorrhizal fungi form a symbiotic relationship with plant roots, aiding in nutrient absorption while receiving carbohydrates in return.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_b3e1d5e8_q14",
+      "question_text": "What nutrient is essential for the synthesis of collagen in the body?",
+      "options": [
+        "Vitamin D",
+        "Vitamin C",
+        "Vitamin K",
+        "Vitamin A"
+      ],
+      "correct_answer": "B",
+      "explanation": "Vitamin C is essential for the synthesis of collagen, which is important for skin and tissue health.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_b3e1d5e8_q15",
+      "question_text": "What happens to the nutrient levels in soil over time as plants absorb them?",
+      "options": [
+        "They increase",
+        "They remain constant",
+        "They deplete",
+        "They become toxic"
+      ],
+      "correct_answer": "C",
+      "explanation": "As plants absorb nutrients from the soil, the nutrient levels can deplete over time, necessitating replenishment.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_b3e1d5e8_q16",
+      "question_text": "Which organism is considered a primary producer in an ecosystem?",
+      "options": [
+        "Lion",
+        "Deer",
+        "Oak tree",
+        "Eagle"
+      ],
+      "correct_answer": "C",
+      "explanation": "Plants, such as an oak tree, are primary producers that synthesize their own food through photosynthesis.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_b3e1d5e8_q17",
+      "question_text": "What is a characteristic of omnivores?",
+      "options": [
+        "They only eat plants",
+        "They only eat animals",
+        "They consume both plants and animals",
+        "They do not require food"
+      ],
+      "correct_answer": "C",
+      "explanation": "Omnivores have a diverse diet that includes both plant and animal sources.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_b3e1d5e8_q18",
+      "question_text": "Why are minerals important for living organisms?",
+      "options": [
+        "They provide energy",
+        "They are required for various physiological functions",
+        "They aid in photosynthesis",
+        "They are a source of carbohydrates"
+      ],
+      "correct_answer": "B",
+      "explanation": "Minerals are essential for various physiological functions, such as bone health and nerve function.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_b3e1d5e8_q19",
+      "question_text": "Which nutrient is critical for muscle contraction and nerve function?",
+      "options": [
+        "Calcium",
+        "Fiber",
+        "Glucose",
+        "Protein"
+      ],
+      "correct_answer": "A",
+      "explanation": "Calcium is crucial for muscle contraction and nerve function in living organisms.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_b3e1d5e8_q20",
+      "question_text": "How do animals contribute to the nutrient cycle in ecosystems?",
+      "options": [
+        "By producing oxygen",
+        "By consuming plants and returning nutrients to the soil through waste",
+        "By performing photosynthesis",
+        "By directly synthesizing their food"
+      ],
+      "correct_answer": "B",
+      "explanation": "Animals contribute to the nutrient cycle by consuming plants and returning nutrients to the soil through their waste products.",
+      "topic": ""
+    }
+  ],
+  "total_questions": 20,
+  "quiz_type": "module",
+  "module_week": 1,
+  "course_id": "1"
+}

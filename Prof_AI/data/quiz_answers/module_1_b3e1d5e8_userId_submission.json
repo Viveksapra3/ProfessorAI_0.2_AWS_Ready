@@ -1,0 +1,159 @@
+{
+  "submission": {
+    "quiz_id": "module_1_b3e1d5e8",
+    "user_id": "userId",
+    "answers": {
+      "module_1_b3e1d5e8_q1": "A",
+      "module_1_b3e1d5e8_q2": "A",
+      "module_1_b3e1d5e8_q3": "D",
+      "module_1_b3e1d5e8_q4": "D",
+      "module_1_b3e1d5e8_q5": "D",
+      "module_1_b3e1d5e8_q6": "D",
+      "module_1_b3e1d5e8_q7": "D",
+      "module_1_b3e1d5e8_q8": "D",
+      "module_1_b3e1d5e8_q9": "D",
+      "module_1_b3e1d5e8_q10": "D",
+      "module_1_b3e1d5e8_q11": "D",
+      "module_1_b3e1d5e8_q12": "D",
+      "module_1_b3e1d5e8_q13": "D",
+      "module_1_b3e1d5e8_q14": "D",
+      "module_1_b3e1d5e8_q15": "D",
+      "module_1_b3e1d5e8_q16": "D",
+      "module_1_b3e1d5e8_q17": "D",
+      "module_1_b3e1d5e8_q18": "D",
+      "module_1_b3e1d5e8_q19": "D",
+      "module_1_b3e1d5e8_q20": "D"
+    }
+  },
+  "result": {
+    "quiz_id": "module_1_b3e1d5e8",
+    "user_id": "userId",
+    "score": 0,
+    "total_questions": 20,
+    "percentage": 0.0,
+    "passed": false,
+    "detailed_results": [
+      {
+        "question_id": "module_1_b3e1d5e8_q1",
+        "user_answer": "A",
+        "correct_answer": "B",
+        "is_correct": false
+      },
+      {
+        "question_id": "module_1_b3e1d5e8_q2",
+        "user_answer": "A",
+        "correct_answer": "C",
+        "is_correct": false
+      },
+      {
+        "question_id": "module_1_b3e1d5e8_q3",
+        "user_answer": "D",
+        "correct_answer": "C",
+        "is_correct": false
+      },
+      {
+        "question_id": "module_1_b3e1d5e8_q4",
+        "user_answer": "D",
+        "correct_answer": "C",
+        "is_correct": false
+      },
+      {
+        "question_id": "module_1_b3e1d5e8_q5",
+        "user_answer": "D",
+        "correct_answer": "C",
+        "is_correct": false
+      },
+      {
+        "question_id": "module_1_b3e1d5e8_q6",
+        "user_answer": "D",
+        "correct_answer": "B",
+        "is_correct": false
+      },
+      {
+        "question_id": "module_1_b3e1d5e8_q7",
+        "user_answer": "D",
+        "correct_answer": "B",
+        "is_correct": false
+      },
+      {
+        "question_id": "module_1_b3e1d5e8_q8",
+        "user_answer": "D",
+        "correct_answer": "B",
+        "is_correct": false
+      },
+      {
+        "question_id": "module_1_b3e1d5e8_q9",
+        "user_answer": "D",
+        "correct_answer": "C",
+        "is_correct": false
+      },
+      {
+        "question_id": "module_1_b3e1d5e8_q10",
+        "user_answer": "D",
+        "correct_answer": "C",
+        "is_correct": false
+      },
+      {
+        "question_id": "module_1_b3e1d5e8_q11",
+        "user_answer": "D",
+        "correct_answer": "A",
+        "is_correct": false
+      },
+      {
+        "question_id": "module_1_b3e1d5e8_q12",
+        "user_answer": "D",
+        "correct_answer": "B",
+        "is_correct": false
+      },
+      {
+        "question_id": "module_1_b3e1d5e8_q13",
+        "user_answer": "D",
+        "correct_answer": "C",
+        "is_correct": false
+      },
+      {
+        "question_id": "module_1_b3e1d5e8_q14",
+        "user_answer": "D",
+        "correct_answer": "B",
+        "is_correct": false
+      },
+      {
+        "question_id": "module_1_b3e1d5e8_q15",
+        "user_answer": "D",
+        "correct_answer": "C",
+        "is_correct": false
+      },
+      {
+        "question_id": "module_1_b3e1d5e8_q16",
+        "user_answer": "D",
+        "correct_answer": "C",
+        "is_correct": false
+      },
+      {
+        "question_id": "module_1_b3e1d5e8_q17",
+        "user_answer": "D",
+        "correct_answer": "C",
+        "is_correct": false
+      },
+      {
+        "question_id": "module_1_b3e1d5e8_q18",
+        "user_answer": "D",
+        "correct_answer": "B",
+        "is_correct": false
+      },
+      {
+        "question_id": "module_1_b3e1d5e8_q19",
+        "user_answer": "D",
+        "correct_answer": "A",
+        "is_correct": false
+      },
+      {
+        "question_id": "module_1_b3e1d5e8_q20",
+        "user_answer": "D",
+        "correct_answer": "B",
+        "is_correct": false
+      }
+    ]
+  },
+  "submitted_at": "2025-09-22T20:44:06.058135"
+}

@@ -1280,18 +1280,15 @@ def main():
     Main entry point for the ProfAI WebSocket server.
     """
     import argparse
-import os
+    import os
     
     parser = argparse.ArgumentParser(description='ProfAI WebSocket Server')
-    parser.add_argument('--host', default=os.getenv('WEBSOCKET_HOST', '0.0.0.0'), help='Host to bind to')
-    parser.add_argument('--port', type=int, default=int(os.getenv('WEBSOCKET_PORT', 8765)), help='Port to bind to')
+    parser.add_argument('--host', type=str, default=config.WEBSOCKET_HOST, help='Host to bind the server to')
+    parser.add_argument('--port', type=int, default=config.WEBSOCKET_PORT, help='Port to bind the server to')
     parser.add_argument('--debug', action='store_true', help='Enable debug logging')
     
     args = parser.parse_args()
     
-    if args.debug:
-        logging.getLogger().setLevel(logging.DEBUG)
-        log("Debug logging enabled")
     
     try:
         # Run the WebSocket server

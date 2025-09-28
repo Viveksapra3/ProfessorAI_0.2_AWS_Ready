@@ -51,9 +51,9 @@ async def start_websocket_server_async(host, port):
 def main():
     """Main startup function."""
     # Get host and port from environment variables
-    fastapi_host = os.getenv("HOST", "127.0.0.1")
+    fastapi_host = os.getenv("HOST", "0.0.0.0")
     fastapi_port = int(os.getenv("PORT", 5001))
-    websocket_host = os.getenv("WEBSOCKET_HOST", "127.0.0.1")
+    websocket_host = os.getenv("WEBSOCKET_HOST", "0.0.0.0")
     websocket_port = int(os.getenv("WEBSOCKET_PORT", 8765))
 
     print("=" * 60)

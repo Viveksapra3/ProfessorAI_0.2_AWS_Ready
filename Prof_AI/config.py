@@ -43,7 +43,7 @@ OUTPUT_JSON_PATH = os.path.join(COURSES_DIR, "course_output.json")
 SARVAM_TTS_SPEAKER = "anushka"
 
 # --- Server Configuration ---
-HOST = os.getenv("HOST", "127.0.0.1")
+HOST = os.getenv("HOST", "0.0.0.0")
 PORT = int(os.getenv("PORT", 5001))
 DEBUG = os.getenv("DEBUG", "True").lower() == "true"
 

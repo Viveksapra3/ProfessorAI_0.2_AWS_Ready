@@ -1,0 +1,31 @@
+{
+  "quiz_id": "course_5ea15553",
+  "answers": {
+    "course_5ea15553_q21": "B",
+    "course_5ea15553_q22": "D",
+    "course_5ea15553_q23": "A",
+    "course_5ea15553_q24": "B",
+    "course_5ea15553_q25": "B",
+    "course_5ea15553_q26": "A",
+    "course_5ea15553_q27": "C",
+    "course_5ea15553_q28": "C",
+    "course_5ea15553_q29": "C",
+    "course_5ea15553_q30": "C",
+    "course_5ea15553_q31": "C",
+    "course_5ea15553_q32": "B",
+    "course_5ea15553_q33": "A",
+    "course_5ea15553_q34": "B",
+    "course_5ea15553_q35": "C",
+    "course_5ea15553_q36": "B",
+    "course_5ea15553_q37": "C",
+    "course_5ea15553_q38": "A",
+    "course_5ea15553_q39": "B",
+    "course_5ea15553_q40": "B"
+  },
+  "quiz": {
+    "title": "Final Course Quiz: AI & Machine Learning",
+    "total_questions": 20,
+    "quiz_type": "course",
+    "created_at": "2025-09-24T00:51:05.986484"
+  }
+}

@@ -1,0 +1,271 @@
+{
+  "quiz_id": "module_1_8b13bcc5",
+  "title": "Module 1 Quiz: Introduction to Nutrition in Plants",
+  "description": "20-question MCQ quiz covering content from Week 1",
+  "questions": [
+    {
+      "question_id": "module_1_8b13bcc5_q1",
+      "question_text": "What is the primary source of energy for most living organisms?",
+      "options": [
+        "Proteins",
+        "Fats",
+        "Carbohydrates",
+        "Vitamins"
+      ],
+      "correct_answer": "C",
+      "explanation": "Carbohydrates are the primary source of energy, providing fuel for various life processes.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8b13bcc5_q2",
+      "question_text": "Which mode of nutrition do plants primarily utilize?",
+      "options": [
+        "Heterotrophic",
+        "Autotrophic",
+        "Symbiotic",
+        "Parasitic"
+      ],
+      "correct_answer": "B",
+      "explanation": "Plants are autotrophic, meaning they synthesize their own food through photosynthesis.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8b13bcc5_q3",
+      "question_text": "What is the primary product of photosynthesis in plants?",
+      "options": [
+        "Oxygen",
+        "Carbon dioxide",
+        "Glucose",
+        "Nitrogen"
+      ],
+      "correct_answer": "C",
+      "explanation": "The main product of photosynthesis is glucose, which plants use for energy and growth.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8b13bcc5_q4",
+      "question_text": "Which of the following nutrients is essential for tissue repair and growth?",
+      "options": [
+        "Carbohydrates",
+        "Proteins",
+        "Fats",
+        "Minerals"
+      ],
+      "correct_answer": "B",
+      "explanation": "Proteins are made of amino acids and are vital for growth and repair of tissues.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8b13bcc5_q5",
+      "question_text": "Animals that eat only plants are referred to as:",
+      "options": [
+        "Carnivores",
+        "Omnivores",
+        "Herbivores",
+        "Detritivores"
+      ],
+      "correct_answer": "C",
+      "explanation": "Herbivores exclusively consume plants for their nutritional needs.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8b13bcc5_q6",
+      "question_text": "Which nutrient is most directly involved in energy storage in plants?",
+      "options": [
+        "Proteins",
+        "Fats",
+        "Vitamins",
+        "Minerals"
+      ],
+      "correct_answer": "B",
+      "explanation": "Fats provide a concentrated source of energy and are important for energy storage in plants.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8b13bcc5_q7",
+      "question_text": "What role do vitamins play in living organisms?",
+      "options": [
+        "Energy source",
+        "Structural components",
+        "Biochemical functions",
+        "All of the above"
+      ],
+      "correct_answer": "C",
+      "explanation": "Vitamins are organic compounds required in small amounts for various biochemical functions.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8b13bcc5_q8",
+      "question_text": "What is the function of chlorophyll in plants?",
+      "options": [
+        "Energy storage",
+        "Nutrient absorption",
+        "Light absorption for photosynthesis",
+        "Cell division"
+      ],
+      "correct_answer": "C",
+      "explanation": "Chlorophyll captures sunlight, enabling plants to convert carbon dioxide and water into glucose during photosynthesis.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8b13bcc5_q9",
+      "question_text": "How do animals obtain nutrients?",
+      "options": [
+        "Through photosynthesis",
+        "By consuming other organisms",
+        "By absorbing nutrients from the soil",
+        "By synthesizing their own food"
+      ],
+      "correct_answer": "B",
+      "explanation": "Animals are heterotrophic and must obtain their nutrients by consuming plants or other animals.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8b13bcc5_q10",
+      "question_text": "Which nutrient deficiency is commonly associated with poor plant growth?",
+      "options": [
+        "Calcium",
+        "Nitrogen",
+        "Vitamin C",
+        "Carbohydrates"
+      ],
+      "correct_answer": "B",
+      "explanation": "Nitrogen deficiency can lead to stunted growth as nitrogen is crucial for protein synthesis and overall plant health.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8b13bcc5_q11",
+      "question_text": "What is a symbiotic relationship?",
+      "options": [
+        "One organism benefits at the expense of another",
+        "Both organisms benefit from each other",
+        "Organisms compete for the same resources",
+        "One organism is dependent on the other for survival"
+      ],
+      "correct_answer": "B",
+      "explanation": "In a symbiotic relationship, both organisms interact beneficially, enhancing each other's survival.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8b13bcc5_q12",
+      "question_text": "Which type of plants can derive nutrients from a host plant?",
+      "options": [
+        "Autotrophic plants",
+        "Carnivorous plants",
+        "Parasitic plants",
+        "Symbiotic plants"
+      ],
+      "correct_answer": "C",
+      "explanation": "Parasitic plants, like Cuscuta, derive their nutrients from a host plant.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8b13bcc5_q13",
+      "question_text": "What role do minerals play in plant health?",
+      "options": [
+        "They provide energy",
+        "They are used for photosynthesis",
+        "They are essential for physiological functions",
+        "They act as proteins"
+      ],
+      "correct_answer": "C",
+      "explanation": "Minerals are essential for various physiological functions, including growth and development in plants.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8b13bcc5_q14",
+      "question_text": "Which of the following is NOT a macronutrient?",
+      "options": [
+        "Carbohydrates",
+        "Proteins",
+        "Iron",
+        "Fats"
+      ],
+      "correct_answer": "C",
+      "explanation": "Iron is a micronutrient, while carbohydrates, proteins, and fats are classified as macronutrients.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8b13bcc5_q15",
+      "question_text": "In what way can farmers help replenish nutrients in the soil?",
+      "options": [
+        "By limiting water supply",
+        "By using synthetic fertilizers",
+        "By planting only one crop",
+        "By avoiding crop rotation"
+      ],
+      "correct_answer": "B",
+      "explanation": "Farmers often apply synthetic fertilizers to replenish depleted nutrients in the soil for healthy crop growth.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8b13bcc5_q16",
+      "question_text": "How do legumes benefit from their relationship with Rhizobium bacteria?",
+      "options": [
+        "They obtain energy through photosynthesis",
+        "They receive nitrogen in a usable form",
+        "They absorb more sunlight",
+        "They increase their water intake"
+      ],
+      "correct_answer": "B",
+      "explanation": "Legumes form a symbiotic relationship with Rhizobium bacteria, allowing them to utilize atmospheric nitrogen for growth.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8b13bcc5_q17",
+      "question_text": "What is the primary function of carbohydrates in living organisms?",
+      "options": [
+        "To provide structure",
+        "To act as enzymes",
+        "To serve as a primary energy source",
+        "To assist in nutrient absorption"
+      ],
+      "correct_answer": "C",
+      "explanation": "Carbohydrates primarily function as a source of energy for most living organisms.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8b13bcc5_q18",
+      "question_text": "What happens to the glucose produced in photosynthesis?",
+      "options": [
+        "It is always used immediately for energy",
+        "It is stored as starch for later use",
+        "It is converted into proteins",
+        "It is released as carbon dioxide"
+      ],
+      "correct_answer": "B",
+      "explanation": "Glucose can be stored as starch for later use, providing energy when needed.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8b13bcc5_q19",
+      "question_text": "Which of the following is an example of a heterotrophic organism?",
+      "options": [
+        "Oak tree",
+        "Green algae",
+        "Lion",
+        "Cactus"
+      ],
+      "correct_answer": "C",
+      "explanation": "Lions are heterotrophic as they rely on consuming other animals for their nutrients.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_8b13bcc5_q20",
+      "question_text": "Why is the process of photosynthesis crucial for life on Earth?",
+      "options": [
+        "It produces glucose and oxygen, supporting life",
+        "It consumes all available carbon dioxide",
+        "It helps plants grow without nutrients",
+        "It eliminates the need for animals"
+      ],
+      "correct_answer": "A",
+      "explanation": "Photosynthesis is essential because it produces glucose for energy and oxygen, which is vital for aerobic organisms.",
+      "topic": ""
+    }
+  ],
+  "total_questions": 20,
+  "quiz_type": "module",
+  "module_week": 1,
+  "course_id": "1"
+}
