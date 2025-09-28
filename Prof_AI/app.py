@@ -74,16 +74,26 @@ teaching_service = None
 quiz_service = None
 
 if SERVICES_AVAILABLE:
-    try:
-        chat_service = ChatService()
-        document_service = DocumentService()
-        audio_service = AudioService()
-        teaching_service = TeachingService()
-        quiz_service = QuizService()
-        print("✅ All services initialized successfully")
-    except Exception as e:
-        print(f"⚠️ Failed to initialize services: {e}")
-        SERVICES_AVAILABLE = False
+    MAX_RETRIES = 3
+    RETRY_DELAY = 5  # seconds
+    for attempt in range(MAX_RETRIES):
+        try:
+            logging.info(f"Attempting to initialize services (Attempt {attempt + 1}/{MAX_RETRIES})...")
+            chat_service = ChatService()
+            document_service = DocumentService()
+            audio_service = AudioService()
+            teaching_service = TeachingService()
+            quiz_service = QuizService()
+            logging.info("✅ All services initialized successfully")
+            break  # Exit loop on success
+        except Exception as e:
+            logging.warning(f"⚠️ Failed to initialize services on attempt {attempt + 1}: {e}")
+            if attempt < MAX_RETRIES - 1:
+                logging.info(f"Retrying in {RETRY_DELAY} seconds...")
+                time.sleep(RETRY_DELAY)
+            else:
+                logging.error("❌ All retries failed. Some services will be unavailable.")
+                SERVICES_AVAILABLE = False
 
 # ===== COURSE MANAGEMENT ENDPOINTS =====
 

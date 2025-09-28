@@ -10,7 +10,7 @@ langchain-community
 langchain-core
 langchain-openai
 chromadb
-sentence-transformers
+sentens
 
 # Document Processing
 PyPDF2

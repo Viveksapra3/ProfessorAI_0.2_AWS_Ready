@@ -23,6 +23,12 @@ CHROMA_DB_PATH = os.path.join(VECTORSTORE_DIR, "chroma")
 FAISS_DB_PATH = os.path.join(VECTORSTORE_DIR, "faiss")
 CHROMA_COLLECTION_NAME = "profai_documents"
 
+# --- ChromaDB Cloud Settings ---
+CHROMA_CLOUD_API_KEY = os.getenv("CHROMA_CLOUD_API_KEY")
+CHROMA_CLOUD_TENANT = os.getenv("CHROMA_CLOUD_TENANT")
+CHROMA_CLOUD_DATABASE = os.getenv("CHROMA_CLOUD_DATABASE")
+USE_CHROMA_CLOUD = os.getenv("USE_CHROMA_CLOUD", "False").lower() == "true"
+
 # --- LLM & RAG Settings ---
 LLM_MODEL_NAME = "gpt-4o-mini"
 EMBEDDING_MODEL_NAME = "text-embedding-3-large"
@@ -30,9 +36,9 @@ CURRICULUM_GENERATION_MODEL = "gpt-4o-mini"
 CONTENT_GENERATION_MODEL = "gpt-4o-mini"
 
 # --- Text Processing ---
-CHUNK_SIZE = 500
+CHUNK_SIZE = 1000
 CHUNK_OVERLAP = 100
-MAX_CHUNK_SIZE = 800
+MAX_CHUNK_SIZE = 1500
 RETRIEVAL_K = 4
 RETRIEVAL_SEARCH_TYPE = "mmr"
 

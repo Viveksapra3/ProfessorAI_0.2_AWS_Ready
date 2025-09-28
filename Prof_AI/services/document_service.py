@@ -66,15 +66,25 @@ class DocumentService:
             logging.info("STEP 3: Creating vector store...")
             vectorizer = Vectorizer(embedding_model=config.EMBEDDING_MODEL_NAME, api_key=config.OPENAI_API_KEY)
             
-            # Clean up existing vector store safely
-            self._safe_cleanup_vectorstore()
-            
-            vector_store = vectorizer.create_vector_store(doc_chunks)
-            if not vector_store:
-                raise Exception("Vector store could not be created")
-            
-            # Save vector store to FAISS directory (more reliable on Windows)
-            vectorizer.save_vector_store(vector_store, config.FAISS_DB_PATH)
+            if config.USE_CHROMA_CLOUD:
+                from core.cloud_vectorizer import CloudVectorizer
+                logging.info("Using ChromaDB Cloud for vector store.")
+                cloud_vectorizer = CloudVectorizer()
+                vector_store = cloud_vectorizer.get_vector_store()
+                # Add documents to the cloud vector store
+                vector_store.add_documents(documents=doc_chunks)
+                logging.info(f"Added {len(doc_chunks)} chunks to ChromaDB Cloud collection: {config.CHROMA_COLLECTION_NAME}")
+            else:
+                logging.info("Using local FAISS for vector store.")
+                # Clean up existing vector store safely
+                self._safe_cleanup_vectorstore()
+                
+                vector_store = vectorizer.create_vector_store(doc_chunks)
+                if not vector_store:
+                    raise Exception("Vector store could not be created")
+                
+                # Save vector store to FAISS directory (more reliable on Windows)
+                vectorizer.save_vector_store(vector_store, config.FAISS_DB_PATH)
 
             logging.info("STEP 4: Generating course...")
             course_generator = CourseGenerator()

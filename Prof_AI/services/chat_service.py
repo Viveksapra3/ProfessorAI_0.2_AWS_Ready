@@ -18,18 +18,18 @@ class ChatService:
         self.sarvam_service = SarvamService()
         self.document_processor = DocumentProcessor()
         
-        # Initialize vectorstore and RAG
-        self.vectorstore = self.document_processor.get_vectorstore()
-        self._load_course_content_if_available()
+        # Initialize RAGService, which will handle its own vectorstore creation
+        self.rag_service = RAGService()
+        self.vectorstore = self.rag_service.vectorstore
         
         if self.vectorstore:
-            self.rag_service = RAGService(self.vectorstore)
             self.is_rag_active = True
-            print("✅ Vectorstore loaded and RAG chain initialized")
+            print("✅ RAG service initialized successfully.")
+            # Now that vectorstore is confirmed, load any existing course content
+            self._load_course_content_if_available()
         else:
-            self.rag_service = None
             self.is_rag_active = False
-            print("❗ No vectorstore found. Operating in general knowledge mode")
+            print("❗ RAG service could not initialize a vectorstore. Operating in general knowledge mode.")
     
     def _load_course_content_if_available(self):
         """Load generated course content into the vectorstore if available."""

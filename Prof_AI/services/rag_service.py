@@ -12,15 +12,36 @@ import config
 class RAGService:
     """Service for RAG-based question answering."""
     
-    def __init__(self, vectorstore: Chroma):
-        self.vectorstore = vectorstore
+    def __init__(self, vectorstore: Chroma = None):
+        from langchain_openai import OpenAIEmbeddings
+
+        if vectorstore is None:
+            if config.USE_CHROMA_CLOUD:
+                from core.cloud_vectorizer import CloudVectorizer
+                cloud_vectorizer = CloudVectorizer()
+                self.vectorstore = cloud_vectorizer.get_vector_store()
+            else:
+                from core.vectorizer import Vectorizer
+                embeddings = OpenAIEmbeddings(model=config.EMBEDDING_MODEL_NAME, openai_api_key=config.OPENAI_API_KEY)
+                self.vectorstore = Vectorizer.load_vector_store(config.FAISS_DB_PATH, embeddings)
+                if not self.vectorstore:
+                    # If loading fails, create an empty FAISS store to avoid crashing
+                    from langchain_community.vectorstores import FAISS
+                    import numpy as np
+                    # Create a dummy document and embedding to initialize an empty store
+                    dummy_doc = ["Initial empty document"]
+                    dummy_embeddings = OpenAIEmbeddings(model=config.EMBEDDING_MODEL_NAME, openai_api_key=config.OPENAI_API_KEY)
+                    self.vectorstore = FAISS.from_texts(dummy_doc, dummy_embeddings)
+        else:
+            self.vectorstore = vectorstore
+
         self.llm = ChatGroq(
-             model="llama-3.1-8b-instant",
+            model="llama-3.1-8b-instant",
             temperature=0,
             groq_api_key=config.GROQ_API_KEY
         )
         self.prompt = ChatPromptTemplate.from_template(config.QA_PROMPT_TEMPLATE)
-        self.retriever = vectorstore.as_retriever(
+        self.retriever = self.vectorstore.as_retriever(
             search_type=config.RETRIEVAL_SEARCH_TYPE,
             search_kwargs={"k": config.RETRIEVAL_K}
         )
