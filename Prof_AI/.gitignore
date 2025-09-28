@@ -69,3 +69,6 @@ Thumbs.db
 
 data.zip
 Contelligence/*
+
+*.DS_Store
+

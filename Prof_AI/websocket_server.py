@@ -334,7 +334,7 @@ class ProfAIAgent:
                 
                 response_data = await asyncio.wait_for(
                     self.chat_service.ask_question(query, language),
-                    timeout=10.0  # Increased timeout for better reliability
+                    timeout=30.0  # Increased timeout for better reliability
                 )
                 response_text = response_data.get('answer') or response_data.get('response', '')
                 
@@ -527,7 +527,7 @@ class ProfAIAgent:
                 # Load course data with timeout protection - pass course_id for proper loading
                 course_data = await asyncio.wait_for(
                     self._load_course_data_async(course_id),
-                    timeout=3.0  # 3 second timeout for file loading
+                    timeout=30.0  # 3 second timeout for file loading
                 )
                 
                 # Validate indices
@@ -1021,7 +1021,7 @@ class ProfAIAgent:
                 # Transcribe audio
                 transcribed_text = await asyncio.wait_for(
                     self.audio_service.transcribe_audio(audio_buffer, language),
-                    timeout=10.0  # 10 second timeout
+                    timeout=30.0  # 10 second timeout
                 )
                 
                 if not transcribed_text:

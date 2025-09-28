@@ -3,6 +3,7 @@ Chat Service - Handles RAG-based conversations and multilingual support
 """
 
 import time
+import logging
 from typing import Dict, Any
 import config
 from services.document_service import DocumentProcessor
@@ -17,49 +18,31 @@ class ChatService:
         self.llm_service = LLMService()
         self.sarvam_service = SarvamService()
         self.document_processor = DocumentProcessor()
+        self.vector_store = self._initialize_vector_store()
         
-        # Initialize RAGService, which will handle its own vectorstore creation
-        self.rag_service = RAGService()
-        self.vectorstore = self.rag_service.vectorstore
-        
-        if self.vectorstore:
+        if self.vector_store:
+            self.rag_service = RAGService(self.vector_store)
             self.is_rag_active = True
-            print("✅ RAG service initialized successfully.")
-            # Now that vectorstore is confirmed, load any existing course content
-            self._load_course_content_if_available()
+            logging.info("✅ Vectorstore loaded and RAG chain initialized")
         else:
+            self.rag_service = None
             self.is_rag_active = False
-            print("❗ RAG service could not initialize a vectorstore. Operating in general knowledge mode.")
-    
-    def _load_course_content_if_available(self):
-        """Load generated course content into the vectorstore if available."""
+            logging.warning("❗ No vectorstore found. Operating in general knowledge mode")
+
+    def _initialize_vector_store(self):
+        """Initializes the vector store from ChromaDB Cloud or local FAISS."""
         try:
-            import os
-            
-            if os.path.exists(config.OUTPUT_JSON_PATH):
-                print("📚 Found generated course content, loading into RAG system...")
-                
-                # Load course documents
-                course_docs = self.document_processor.load_course_content_as_documents(config.OUTPUT_JSON_PATH)
-                if course_docs:
-                    # Split documents
-                    print(f"📄 Loaded {len(course_docs)} course documents")
-                   
-                    split_course_docs = self.document_processor.split_documents(course_docs)
-                    print(f"✂️ Split into {len(split_course_docs)} chunks")                    
-                    # Create or update vectorstore
-                    if self.vectorstore is None:
-                        # Create new vectorstore with course content
-                        self.vectorstore = self.document_processor.create_vectorstore_from_documents(split_course_docs)
-                        print(f"✅ Created new vectorstore with {len(split_course_docs)} course content chunks")
-                    else:
-                        # Add to existing vectorstore
-                        self.vectorstore.add_documents(split_course_docs)
-                        print(f"✅ Added {len(split_course_docs)} course content chunks to existing vectorstore")
-                    
-                        
+            if config.USE_CHROMA_CLOUD:
+                from core.cloud_vectorizer import CloudVectorizer
+                logging.info("Attempting to load vector store from ChromaDB Cloud...")
+                cloud_vectorizer = CloudVectorizer()
+                return cloud_vectorizer.get_vector_store()
+            else:
+                logging.info("Attempting to load vector store from local FAISS...")
+                return self.document_processor.get_vectorstore()
         except Exception as e:
-            print(f"⚠️ Could not load course content: {e}")
+            logging.error(f"Failed to initialize vector store: {e}")
+            return None
 
     async def ask_question(self, query: str, query_language_code: str = "en-IN") -> Dict[str, Any]:
         """Answer a question using RAG with multilingual support."""
@@ -74,43 +57,43 @@ class ChatService:
             start_time = time.time()
             english_query = query
             if query_language_code != "en-IN":
-                print("[TASK] Translating query to English using Sarvam AI...")
+                logging.info("[TASK] Translating query to English using Sarvam AI...")
                 english_query = await self.sarvam_service.translate_text(
                     text=query,
                     source_language_code=query_language_code,
                     target_language_code="en-IN"
                 )
                 end_time = time.time()
-                print(f"  > Translation complete in {end_time - start_time:.2f}s. (Query: '{english_query}')")
+                logging.info(f"  > Translation complete in {end_time - start_time:.2f}s. (Query: '{english_query}')")
             
             try:
                 # Execute RAG chain
-                print("[TASK] Executing RAG chain...")
+                logging.info("[TASK] Executing RAG chain...")
                 start_time = time.time()
                 answer = await self.rag_service.get_answer(english_query, response_lang_name)
                 end_time = time.time()
-                print(f"  > RAG chain complete in {end_time - start_time:.2f}s.")
+                logging.info(f"  > RAG chain complete in {end_time - start_time:.2f}s.")
                 
                 # Check if RAG found an answer
                 if "I cannot find the answer" in answer:
-                    print("  > RAG chain failed. Falling back to general LLM...")
+                    logging.info("  > RAG chain failed. Falling back to general LLM...")
                     start_time = time.time()
                     answer = await self.llm_service.get_general_response(query, response_lang_name)
                     end_time = time.time()
-                    print(f"  > Fallback complete in {end_time - start_time:.2f}s.")
+                    logging.info(f"  > Fallback complete in {end_time - start_time:.2f}s.")
                     return {"answer": answer, "sources": ["General Knowledge Fallback"]}
 
                 return {"answer": answer, "sources": ["Course Content"]}
 
             except Exception as e:
-                print(f"  > Error during RAG chain invocation: {e}. Falling back...")
+                logging.error(f"  > Error during RAG chain invocation: {e}. Falling back...")
         
         # Fallback to general knowledge
-        print("[TASK] Using general knowledge fallback...")
+        logging.info("[TASK] Using general knowledge fallback...")
         start_time = time.time()
         answer = await self.llm_service.get_general_response(query, response_lang_name)
         end_time = time.time()
-        print(f"  > General knowledge fallback complete in {end_time - start_time:.2f}s.")
+        logging.info(f"  > General knowledge fallback complete in {end_time - start_time:.2f}s.")
         return {"answer": answer, "sources": ["General Knowledge"]}
     
     def update_with_course_content(self, course_data: dict):
@@ -124,15 +107,18 @@ class ChatService:
                 split_course_docs = self.document_processor.split_documents(course_documents)
                 
                 # Add to vectorstore
-                if self.vectorstore:
-                    self.vectorstore.add_documents(split_course_docs)
+                if self.vector_store:
+                    self.vector_store.add_documents(split_course_docs)
                 else:
-                    self.vectorstore = self.document_processor.create_vectorstore_from_documents(split_course_docs)
-                    self.rag_service = RAGService(self.vectorstore)
-                    self.is_rag_active = True
+                    # This case is unlikely if initialization is correct, but handled for safety
+                    self.vector_store = self._initialize_vector_store()
+                    if self.vector_store:
+                        self.vector_store.add_documents(split_course_docs)
+                        self.rag_service = RAGService(self.vector_store)
+                        self.is_rag_active = True
                 
-                print(f"✅ Added {len(split_course_docs)} course content chunks to RAG system")
+                logging.info(f"✅ Added {len(split_course_docs)} course content chunks to RAG system")
                 
         except Exception as e:
-            print(f"⚠️ Error updating RAG with course content: {e}")
+            logging.error(f"⚠️ Error updating RAG with course content: {e}")
             raise e

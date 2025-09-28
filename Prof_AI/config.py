@@ -8,6 +8,7 @@ load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 SARVAM_API_KEY = os.getenv("SARVAM_API_KEY")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+CHROMA_CLOUD_API_KEY = os.getenv("CHROMA_CLOUD_API_KEY")
 
 # --- Project Paths ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -17,17 +18,17 @@ VECTORSTORE_DIR = os.path.join(DATA_DIR, "vectorstore")
 COURSES_DIR = os.path.join(DATA_DIR, "courses")
 
 # --- Database Settings ---
+# Toggle between local FAISS and ChromaDB Cloud
+USE_CHROMA_CLOUD = os.getenv("USE_CHROMA_CLOUD", "True").lower() == 'true'
 
-# Use dedicated subdirectories to avoid conflicts and file-lock issues on Windows
+# Local Vectorstore paths
 CHROMA_DB_PATH = os.path.join(VECTORSTORE_DIR, "chroma")
 FAISS_DB_PATH = os.path.join(VECTORSTORE_DIR, "faiss")
-CHROMA_COLLECTION_NAME = "profai_documents"
 
-# --- ChromaDB Cloud Settings ---
-CHROMA_CLOUD_API_KEY = os.getenv("CHROMA_CLOUD_API_KEY")
+# ChromaDB Cloud Settings
+CHROMA_COLLECTION_NAME = os.getenv("CHROMA_COLLECTION_NAME", "profai_documents")
 CHROMA_CLOUD_TENANT = os.getenv("CHROMA_CLOUD_TENANT")
 CHROMA_CLOUD_DATABASE = os.getenv("CHROMA_CLOUD_DATABASE")
-USE_CHROMA_CLOUD = os.getenv("USE_CHROMA_CLOUD", "False").lower() == "true"
 
 # --- LLM & RAG Settings ---
 LLM_MODEL_NAME = "gpt-4o-mini"
@@ -36,11 +37,11 @@ CURRICULUM_GENERATION_MODEL = "gpt-4o-mini"
 CONTENT_GENERATION_MODEL = "gpt-4o-mini"
 
 # --- Text Processing ---
-CHUNK_SIZE = 1000
+CHUNK_SIZE = 500
 CHUNK_OVERLAP = 100
-MAX_CHUNK_SIZE = 1500
-RETRIEVAL_K = 4
-RETRIEVAL_SEARCH_TYPE = "mmr"
+MAX_CHUNK_SIZE = 800
+RETRIEVAL_K = 2
+RETRIEVAL_SEARCH_TYPE = "similarity"
 
 # --- File Paths ---
 OUTPUT_JSON_PATH = os.path.join(COURSES_DIR, "course_output.json")
