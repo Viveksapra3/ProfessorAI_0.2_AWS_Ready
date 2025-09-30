@@ -83,7 +83,19 @@ class DocumentService:
 
             logging.info("STEP 4: Generating course...")
             course_generator = CourseGenerator()
-            final_course = course_generator.generate_course(doc_chunks, vector_store.as_retriever(), course_title)
+            
+            # Get the primary PDF filename for source filtering
+            primary_pdf_filename = None
+            if pdf_files:
+                primary_pdf_filename = pdf_files[0].filename  # Use first uploaded PDF as primary source
+                logging.info(f"Using primary PDF source for filtering: {primary_pdf_filename}")
+            
+            final_course = course_generator.generate_course(
+                doc_chunks, 
+                vector_store.as_retriever(), 
+                course_title,
+                source_filter=primary_pdf_filename
+            )
             
             if not final_course:
                 raise Exception("Course generation failed")

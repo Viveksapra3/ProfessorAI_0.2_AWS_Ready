@@ -29,9 +29,19 @@ class CourseGenerator:
         self.curriculum_parser = JsonOutputParser(pydantic_object=CourseLMS)
         self.content_parser = StrOutputParser()
     
-    def generate_course(self, documents: List[Document], retriever, course_title: str = None) -> CourseLMS:
+    def generate_course(self, documents: List[Document], retriever, course_title: str = None, source_filter: str = None) -> CourseLMS:
         """Generate a complete course with curriculum and content."""
         try:
+            # Filter documents by source if specified
+            if source_filter:
+                logging.info(f"Filtering documents by source: {source_filter}")
+                filtered_documents = [doc for doc in documents if doc.metadata.get('source') == source_filter]
+                logging.info(f"Filtered from {len(documents)} to {len(filtered_documents)} documents")
+                documents = filtered_documents
+                
+                if not documents:
+                    raise Exception(f"No documents found for source: {source_filter}")
+            
             # Step 1: Generate curriculum structure
             logging.info("Generating curriculum structure...")
             curriculum = self._generate_curriculum(documents, course_title)
@@ -39,9 +49,10 @@ class CourseGenerator:
             if not curriculum:
                 raise Exception("Curriculum generation failed")
             
-            # Step 2: Generate content for each topic
+            # Step 2: Generate content for each topic with filtered retriever
             logging.info("Generating detailed content...")
-            final_course = self._generate_content(curriculum, retriever)
+            filtered_retriever = self._create_filtered_retriever(retriever, source_filter)
+            final_course = self._generate_content(curriculum, filtered_retriever)
             
             return final_course
             
@@ -55,8 +66,8 @@ class CourseGenerator:
             logging.error("Cannot generate curriculum: No documents provided")
             return None
         
-        # Limit context to avoid token limit (roughly 100,000 tokens = ~400,000 characters)
-        max_context_chars = 400000
+        # Limit context to stay within GPT-5's 272K token limit (roughly 68K tokens = ~272,000 characters)
+        max_context_chars = 200000
         context_parts = []
         current_length = 0
         
@@ -186,3 +197,26 @@ class CourseGenerator:
         
         logging.info("Content generation completed for all topics")
         return curriculum
+    
+    def _create_filtered_retriever(self, retriever, source_filter: str = None):
+        """Create a filtered retriever that only returns documents from specified source."""
+        if not source_filter:
+            return retriever
+        
+        # Get the underlying vectorstore from the retriever
+        vectorstore = retriever.vectorstore
+        
+        # Create a new retriever with source filter
+        try:
+            filtered_retriever = vectorstore.as_retriever(
+                search_type="similarity",
+                search_kwargs={
+                    "k": 50,
+                    "filter": {"source": source_filter}
+                }
+            )
+            logging.info(f"Created filtered retriever for source: {source_filter}")
+            return filtered_retriever
+        except Exception as e:
+            logging.warning(f"Could not create filtered retriever: {e}. Using original retriever.")
+            return retriever
