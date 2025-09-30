@@ -55,7 +55,25 @@ class CourseGenerator:
             logging.error("Cannot generate curriculum: No documents provided")
             return None
         
-        context_str = "\n---\n".join([doc.page_content for doc in documents])
+        # Limit context to avoid token limit (roughly 100,000 tokens = ~400,000 characters)
+        max_context_chars = 400000
+        context_parts = []
+        current_length = 0
+        
+        for doc in documents:
+            doc_content = doc.page_content
+            if current_length + len(doc_content) > max_context_chars:
+                # If adding this document would exceed the limit, truncate it
+                remaining_chars = max_context_chars - current_length
+                if remaining_chars > 100:  # Only add if we have meaningful space left
+                    context_parts.append(doc_content[:remaining_chars] + "...")
+                break
+            context_parts.append(doc_content)
+            current_length += len(doc_content) + 5  # +5 for separator
+        
+        context_str = "\n---\n".join(context_parts)
+        logging.info(f"Context length: {len(context_str)} characters (limited to {max_context_chars})")
+        
         
         template = """
         You are an expert instructional designer tasked with creating a university-level course curriculum.

@@ -1,0 +1,2977 @@
+=== ./core/cloud_vectorizer.py ===
+"""
+Cloud Vectorizer - Handles connection to ChromaDB Cloud
+"""
+
+import logging
+import chromadb
+from langchain_openai import OpenAIEmbeddings
+from langchain_community.vectorstores import Chroma
+
+import config
+
+class CloudVectorizer:
+    """Handles connection and operations with ChromaDB Cloud."""
+
+    def __init__(self):
+        """Initializes the connection to ChromaDB Cloud."""
+        if not all([config.CHROMA_CLOUD_API_KEY, config.CHROMA_CLOUD_TENANT, config.CHROMA_CLOUD_DATABASE]):
+            raise ValueError("ChromaDB Cloud credentials are not fully configured in the .env file.")
+        
+        self.client = chromadb.CloudClient(
+            api_key=config.CHROMA_CLOUD_API_KEY,
+            tenant=config.CHROMA_CLOUD_TENANT,
+            database=config.CHROMA_CLOUD_DATABASE
+        )
+        self.embeddings = OpenAIEmbeddings(
+            model=config.EMBEDDING_MODEL_NAME, 
+            openai_api_key=config.OPENAI_API_KEY,
+            chunk_size=200
+        )
+        logging.info("ChromaDB Cloud client initialized.")
+
+    def get_vector_store(self):
+        """
+        Retrieves the existing vector store from ChromaDB Cloud.
+        This is used for querying (e.g., in ChatService).
+        """
+        try:
+            logging.info(f"Loading existing ChromaDB Cloud collection: {config.CHROMA_COLLECTION_NAME}")
+            vector_store = Chroma(
+                client=self.client,
+                collection_name=config.CHROMA_COLLECTION_NAME,
+                embedding_function=self.embeddings,
+            )
+            return vector_store
+        except Exception as e:
+            logging.error(f"Failed to load ChromaDB collection: {e}")
+            # This might happen if the collection doesn't exist yet.
+            # It will be created when documents are added.
+            return None
+
+    def create_vector_store_from_documents(self, documents):
+        """
+        Creates a new vector store in ChromaDB Cloud from a list of documents.
+        This is used for ingestion (e.g., in DocumentService).
+        """
+        if not documents:
+            logging.error("Cannot create vector store: No documents provided.")
+            return None
+        
+        try:
+            logging.info(f"Creating/updating ChromaDB Cloud collection '{config.CHROMA_COLLECTION_NAME}' with {len(documents)} documents.")
+            
+            # Manual batching to respect ChromaDB Cloud's 300 record limit per upsert
+            batch_size = 200
+            vector_store = None
+            
+            for i in range(0, len(documents), batch_size):
+                batch = documents[i:i + batch_size]
+                logging.info(f"Processing batch {i//batch_size + 1}: {len(batch)} documents")
+                
+                if vector_store is None:
+                    # Create the initial vector store with the first batch
+                    vector_store = Chroma.from_documents(
+                        client=self.client,
+                        documents=batch,
+                        embedding=self.embeddings,
+                        collection_name=config.CHROMA_COLLECTION_NAME,
+                    )
+                else:
+                    # Add subsequent batches to the existing vector store
+                    vector_store.add_documents(batch)
+            
+            logging.info("ChromaDB Cloud collection created/updated successfully.")
+            return vector_store
+        except Exception as e:
+            logging.error(f"Failed to create ChromaDB collection from documents: {e}")
+            raise
+
+=== ./core/__init__.py ===
+# Core AI functionality package
+=== ./core/vectorizer.py ===
+"""
+Vectorizer - Handles vector embeddings and vector store operations
+"""
+
+import os
+from langchain_openai import OpenAIEmbeddings
+from langchain_community.vectorstores import FAISS
+from langchain_core.documents import Document
+from typing import List
+import logging
+
+class Vectorizer:
+    """Handles the creation, saving, and loading of vector embeddings and the vector store."""
+
+    def __init__(self, embedding_model: str, api_key: str):
+        self.embeddings = OpenAIEmbeddings(model=embedding_model, openai_api_key=api_key,chunk_size=200)
+
+    def create_vector_store(self, chunks: List[Document]):
+        """Creates a FAISS vector store from a list of document chunks."""
+        if not chunks:
+            logging.error("Cannot create vector store: No chunks provided")
+            return None
+            
+        logging.info("Creating new vector store from chunks...")
+        try:
+            vector_store = FAISS.from_documents(chunks, self.embeddings)
+            logging.info("Vector store created successfully")
+            return vector_store
+        except Exception as e:
+            logging.error(f"Failed to create vector store: {e}")
+            return None
+
+    def save_vector_store(self, vector_store, path: str):
+        """Saves the FAISS vector store to a local path."""
+        if not vector_store:
+            logging.error("Cannot save: Invalid vector store provided")
+            return
+        try:
+            os.makedirs(path, exist_ok=True)
+            vector_store.save_local(path)
+            logging.info(f"Vector store saved successfully to {path}")
+        except Exception as e:
+            logging.error(f"Failed to save vector store: {e}")
+
+    @staticmethod
+    def load_vector_store(path: str, embeddings):
+        """Loads a FAISS vector store from a local path."""
+        if not os.path.exists(path):
+            logging.error(f"Cannot load vector store: Path does not exist at {path}")
+            return None
+        try:
+            vector_store = FAISS.load_local(path, embeddings, allow_dangerous_deserialization=True)
+            logging.info(f"Vector store loaded successfully from {path}")
+            return vector_store
+        except Exception as e:
+            logging.error(f"Failed to load vector store: {e}")
+            return None
+
+=== ./core/course_generator.py ===
+"""
+Course Generator - Handles curriculum and content generation
+"""
+
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import JsonOutputParser, StrOutputParser
+from langchain_core.runnables import RunnableParallel, RunnablePassthrough
+from langchain_core.documents import Document
+from typing import List
+import logging
+import config
+from models.schemas import CourseLMS
+
+class CourseGenerator:
+    """Generates complete courses with curriculum and content."""
+    
+    def __init__(self):
+        self.curriculum_model = ChatOpenAI(
+            model=config.CURRICULUM_GENERATION_MODEL, 
+            temperature=0.2, 
+            openai_api_key=config.OPENAI_API_KEY
+        )
+        self.content_model = ChatOpenAI(
+            model=config.CONTENT_GENERATION_MODEL, 
+            temperature=0.5, 
+            openai_api_key=config.OPENAI_API_KEY
+        )
+        self.curriculum_parser = JsonOutputParser(pydantic_object=CourseLMS)
+        self.content_parser = StrOutputParser()
+    
+    def generate_course(self, documents: List[Document], retriever, course_title: str = None) -> CourseLMS:
+        """Generate a complete course with curriculum and content."""
+        try:
+            # Step 1: Generate curriculum structure
+            logging.info("Generating curriculum structure...")
+            curriculum = self._generate_curriculum(documents, course_title)
+            
+            if not curriculum:
+                raise Exception("Curriculum generation failed")
+            
+            # Step 2: Generate content for each topic
+            logging.info("Generating detailed content...")
+            final_course = self._generate_content(curriculum, retriever)
+            
+            return final_course
+            
+        except Exception as e:
+            logging.error(f"Course generation failed: {e}")
+            raise e
+    
+    def _generate_curriculum(self, documents: List[Document], course_title: str = None) -> CourseLMS:
+        """Generate the curriculum structure."""
+        if not documents:
+            logging.error("Cannot generate curriculum: No documents provided")
+            return None
+        
+        # Limit context to avoid token limit (roughly 100,000 tokens = ~400,000 characters)
+        max_context_chars = 400000
+        context_parts = []
+        current_length = 0
+        
+        for doc in documents:
+            doc_content = doc.page_content
+            if current_length + len(doc_content) > max_context_chars:
+                # If adding this document would exceed the limit, truncate it
+                remaining_chars = max_context_chars - current_length
+                if remaining_chars > 100:  # Only add if we have meaningful space left
+                    context_parts.append(doc_content[:remaining_chars] + "...")
+                break
+            context_parts.append(doc_content)
+            current_length += len(doc_content) + 5  # +5 for separator
+        
+        context_str = "\n---\n".join(context_parts)
+        logging.info(f"Context length: {len(context_str)} characters (limited to {max_context_chars})")
+        
+        
+        template = """
+        You are an expert instructional designer tasked with creating a university-level course curriculum.
+        Analyze the provided context from various documents and generate a logical, week-by-week learning path.
+
+        CONTEXT:
+        {context}
+
+        INSTRUCTIONS:
+        1. Create a comprehensive course structure with a clear title.
+        2. Organize the content into weekly modules.
+        3. For each week, define a clear module title and a list of specific sub-topics to be covered.
+        4. Ensure the learning path is logical and progressive.
+        5. The course should span a reasonable number of weeks based on the provided content.
+        
+        {format_instructions}
+        """
+        
+        prompt = ChatPromptTemplate.from_template(
+            template,
+            partial_variables={"format_instructions": self.curriculum_parser.get_format_instructions()}
+        )
+        
+        try:
+            chain = prompt | self.curriculum_model | self.curriculum_parser
+            result = chain.invoke({"context": context_str})
+            
+            logging.info(f"Raw curriculum result type: {type(result)}")
+            logging.info(f"Raw curriculum result: {result}")
+            
+            # Handle case where result might be a dict instead of CourseLMS object
+            if isinstance(result, dict):
+                logging.info("Converting dict result to CourseLMS object")
+                curriculum = CourseLMS(**result)
+            else:
+                curriculum = result
+            
+            # Validate that curriculum has modules
+            if not hasattr(curriculum, 'modules') or not curriculum.modules:
+                logging.error("Generated curriculum has no modules")
+                return None
+            
+            # Override title if provided
+            if course_title and hasattr(curriculum, 'course_title'):
+                curriculum.course_title = course_title
+            
+            logging.info(f"Generated curriculum with {len(curriculum.modules)} modules")
+            return curriculum
+            
+        except Exception as e:
+            logging.error(f"Error generating curriculum: {e}")
+            import traceback
+            logging.error(f"Traceback: {traceback.format_exc()}")
+            return None
+    
+    def _generate_content(self, curriculum: CourseLMS, retriever) -> CourseLMS:
+        """Generate detailed content for each topic in the curriculum."""
+        if not retriever:
+            raise ValueError("Retriever must be provided for content generation")
+        
+        template = """
+        You are an expert university professor. Write detailed, clear, and engaging lecture content
+        for the given topic based *only* on the provided context.
+
+        CONTEXT:
+        {context}
+
+        TOPIC:
+        {topic}
+
+        INSTRUCTIONS:
+        - Explain the topic thoroughly using the provided context.
+        - Use examples from the context if available.
+        - Structure the content with clear headings and paragraphs.
+        - The tone should be academic and authoritative, yet accessible.
+        - Provide comprehensive coverage of the topic.
+        """
+        
+        prompt = ChatPromptTemplate.from_template(template)
+        
+        # Build RAG chain for content generation
+        def get_context(topic_dict):
+            topic = topic_dict['topic']
+            docs = retriever.get_relevant_documents(topic)
+            return {"context": "\n---\n".join(doc.page_content for doc in docs), "topic": topic}
+        
+        content_chain = (
+            RunnablePassthrough()
+            | get_context
+            | prompt
+            | self.content_model
+            | self.content_parser
+        )
+        
+        # Generate content for each sub-topic
+        for module in curriculum.modules:
+            logging.info(f"Generating content for Week {module.week}: {module.title}")
+            
+            for sub_topic in module.sub_topics:
+                try:
+                    logging.info(f"  Generating content for: {sub_topic.title}")
+                    
+                    content = content_chain.invoke({"topic": sub_topic.title})
+                    sub_topic.content = content
+                    
+                    logging.info(f"  Content generated successfully for: {sub_topic.title}")
+                    
+                except Exception as e:
+                    logging.error(f"  Failed to generate content for {sub_topic.title}: {e}")
+                    sub_topic.content = f"Content generation failed for this topic. Error: {str(e)}"
+        
+        logging.info("Content generation completed for all topics")
+        return curriculum
+
+=== ./services/transcription_service.py ===
+"""
+Transcription Service for ProfAI
+Handles audio-to-text conversion using multiple providers
+"""
+
+import logging
+import io
+import tempfile
+import os
+from typing import Optional
+import asyncio
+
+class TranscriptionService:
+    """Handles audio transcription using multiple providers."""
+    
+    def __init__(self):
+        self.temp_dir = tempfile.gettempdir()
+        
+    async def transcribe_audio(self, audio_buffer: io.BytesIO, language: str = "en-IN") -> Optional[str]:
+        """
+        Transcribe audio to text using available transcription services.
+        
+        Args:
+            audio_buffer: Audio data as BytesIO
+            language: Language code for transcription
+            
+        Returns:
+            Transcribed text or None if failed
+        """
+        try:
+            logging.info(f"🎤 Starting audio transcription (language: {language})")
+            logging.info(f"   Audio size: {audio_buffer.getbuffer().nbytes} bytes")
+            
+            # Try different transcription methods in order of preference
+            transcription_methods = [
+                self._transcribe_with_openai_whisper,
+                self._transcribe_with_sarvam,
+                self._transcribe_with_speech_recognition
+            ]
+            
+            for method in transcription_methods:
+                try:
+                    # Reset buffer position
+                    audio_buffer.seek(0)
+                    
+                    result = await method(audio_buffer, language)
+                    if result and result.strip():
+                        logging.info(f"✅ Transcription successful: {len(result)} characters")
+                        logging.info(f"   Preview: {result[:100]}...")
+                        return result.strip()
+                        
+                except Exception as e:
+                    logging.warning(f"Transcription method failed: {method.__name__}: {e}")
+                    continue
+            
+            logging.error("❌ All transcription methods failed")
+            return None
+            
+        except Exception as e:
+            logging.error(f"❌ Error in transcription service: {e}")
+            return None
+    
+    async def _transcribe_with_openai_whisper(self, audio_buffer: io.BytesIO, language: str) -> Optional[str]:
+        """Transcribe using OpenAI Whisper API."""
+        try:
+            import openai
+            from config import OPENAI_API_KEY
+            
+            if not OPENAI_API_KEY:
+                logging.info("OpenAI API key not available")
+                return None
+            
+            client = openai.OpenAI(api_key=OPENAI_API_KEY)
+            
+            # Create temporary file for Whisper API
+            temp_path = os.path.join(self.temp_dir, f"temp_audio_{os.getpid()}.wav")
+            
+            try:
+                # Write audio to temporary file
+                with open(temp_path, 'wb') as f:
+                    f.write(audio_buffer.getvalue())
+                
+                # Transcribe with Whisper
+                with open(temp_path, 'rb') as audio_file:
+                    # Map language codes
+                    whisper_language = self._map_language_for_whisper(language)
+                    
+                    transcript = client.audio.transcriptions.create(
+                        model="whisper-1",
+                        file=audio_file,
+                        language=whisper_language,
+                        response_format="text"
+                    )
+                
+                logging.info("✅ OpenAI Whisper transcription successful")
+                return transcript
+                
+            finally:
+                # Clean up temp file
+                if os.path.exists(temp_path):
+                    try:
+                        os.remove(temp_path)
+                    except Exception:
+                        pass
+                        
+        except Exception as e:
+            logging.warning(f"OpenAI Whisper transcription failed: {e}")
+            return None
+    
+    async def _transcribe_with_sarvam(self, audio_buffer: io.BytesIO, language: str) -> Optional[str]:
+        """Transcribe using Sarvam AI speech-to-text."""
+        try:
+            # Check if Sarvam service is available
+            from services.sarvam_service import SarvamService
+            from config import SARVAM_API_KEY
+            
+            if not SARVAM_API_KEY:
+                logging.info("Sarvam API key not available")
+                return None
+            
+            sarvam_service = SarvamService()
+            
+            # Use Sarvam's speech-to-text if available
+            # Note: This would need to be implemented in SarvamService
+            # For now, we'll skip this method
+            logging.info("Sarvam transcription not yet implemented")
+            return None
+            
+        except Exception as e:
+            logging.warning(f"Sarvam transcription failed: {e}")
+            return None
+    
+    async def _transcribe_with_speech_recognition(self, audio_buffer: io.BytesIO, language: str) -> Optional[str]:
+        """Transcribe using speech_recognition library with Google Speech Recognition."""
+        try:
+            import speech_recognition as sr
+            
+            # Create recognizer
+            recognizer = sr.Recognizer()
+            
+            # Create temporary file
+            temp_path = os.path.join(self.temp_dir, f"temp_audio_{os.getpid()}.wav")
+            
+            try:
+                # Write audio to temporary file
+                with open(temp_path, 'wb') as f:
+                    f.write(audio_buffer.getvalue())
+                
+                # Load audio file
+                with sr.AudioFile(temp_path) as source:
+                    # Adjust for ambient noise
+                    recognizer.adjust_for_ambient_noise(source, duration=0.5)
+                    # Record the audio
+                    audio_data = recognizer.record(source)
+                
+                # Map language code for Google Speech Recognition
+                google_language = self._map_language_for_google(language)
+                
+                # Transcribe using Google Speech Recognition
+                text = recognizer.recognize_google(audio_data, language=google_language)
+                
+                logging.info("✅ Google Speech Recognition transcription successful")
+                return text
+                
+            finally:
+                # Clean up temp file
+                if os.path.exists(temp_path):
+                    try:
+                        os.remove(temp_path)
+                    except Exception:
+                        pass
+                        
+        except ImportError:
+            logging.info("speech_recognition library not available")
+            return None
+        except Exception as e:
+            logging.warning(f"Google Speech Recognition failed: {e}")
+            return None
+    
+    def _map_language_for_whisper(self, language: str) -> str:
+        """Map language codes for OpenAI Whisper."""
+        language_map = {
+            'en-IN': 'en',
+            'hi-IN': 'hi',
+            'ta-IN': 'ta',
+            'te-IN': 'te',
+            'kn-IN': 'kn',
+            'ml-IN': 'ml',
+            'gu-IN': 'gu',
+            'mr-IN': 'mr',
+            'bn-IN': 'bn',
+            'pa-IN': 'pa',
+            'or-IN': 'or',
+            'as-IN': 'as'
+        }
+        return language_map.get(language, 'en')
+    
+    def _map_language_for_google(self, language: str) -> str:
+        """Map language codes for Google Speech Recognition."""
+        # Google uses the full language codes
+        language_map = {
+            'en-IN': 'en-IN',
+            'hi-IN': 'hi-IN',
+            'ta-IN': 'ta-IN',
+            'te-IN': 'te-IN',
+            'kn-IN': 'kn-IN',
+            'ml-IN': 'ml-IN',
+            'gu-IN': 'gu-IN',
+            'mr-IN': 'mr-IN',
+            'bn-IN': 'bn-IN',
+            'pa-IN': 'pa-IN'
+        }
+        return language_map.get(language, 'en-IN')
+    
+    async def get_transcription_info(self, audio_buffer: io.BytesIO) -> dict:
+        """Get information about the audio for transcription."""
+        try:
+            audio_size = audio_buffer.getbuffer().nbytes
+            duration_estimate = audio_size / (16000 * 2)  # Rough estimate for 16kHz 16-bit mono
+            
+            return {
+                "audio_size_bytes": audio_size,
+                "audio_size_mb": round(audio_size / (1024 * 1024), 2),
+                "estimated_duration_seconds": round(duration_estimate, 1),
+                "estimated_duration_minutes": round(duration_estimate / 60, 1)
+            }
+        except Exception as e:
+            logging.error(f"Error getting transcription info: {e}")
+            return {}
+=== ./services/llm_service.py ===
+"""
+LLM Service - Handles OpenAI language model interactions with streaming support
+"""
+
+from openai import AsyncOpenAI
+from typing import AsyncGenerator
+import config
+
+class LLMService:
+    """Service for OpenAI LLM interactions."""
+    
+    def __init__(self):
+        self.client = AsyncOpenAI(
+            api_key=config.OPENAI_API_KEY,
+            timeout=60.0  # 8 second timeout for all requests
+        )
+    
+    async def get_general_response(self, query: str, target_language: str = "English") -> str:
+        """Get a general response from the LLM."""
+        messages = [
+            {
+                "role": "system", 
+                "content": f"You are a helpful AI assistant. Answer the user's question concisely and in {target_language}."
+            },
+            {"role": "user", "content": query}
+        ]
+        
+        try:
+            response = await self.client.chat.completions.create(
+                model=config.LLM_MODEL_NAME, 
+                messages=messages, 
+                temperature=0.7
+            )
+            return response.choices[0].message.content
+        except Exception as e:
+            print(f"Error getting general LLM response: {e}")
+            return "I am sorry, I couldn't process that request at the moment."
+    
+    async def translate_text(self, text: str, target_language: str) -> str:
+        """Translate text using the LLM."""
+        if target_language.lower() == "english":
+            return text
+            
+        messages = [
+            {
+                "role": "system", 
+                "content": f"You are an expert translation assistant. Translate the following text into {target_language}. Respond with only the translated text."
+            },
+            {"role": "user", "content": text}
+        ]
+        
+        try:
+            response = await self.client.chat.completions.create(
+                model=config.LLM_MODEL_NAME, 
+                messages=messages, 
+                temperature=0.0
+            )
+            return response.choices[0].message.content
+        except Exception as e:
+            print(f"Error during LLM translation: {e}")
+            return text
+    
+    async def generate_response(self, prompt: str, temperature: float = 0.7) -> str:
+        """Generate a response from the LLM."""
+        messages = [
+            {"role": "user", "content": prompt}
+        ]
+        
+        try:
+            response = await self.client.chat.completions.create(
+                model=config.LLM_MODEL_NAME,
+                messages=messages,
+                temperature=temperature
+            )
+            return response.choices[0].message.content
+        except Exception as e:
+            print(f"Error generating LLM response: {e}")
+            return "I apologize, but I couldn't generate a response at the moment."
+    
+    async def generate_response_stream(self, prompt: str, temperature: float = 0.7) -> AsyncGenerator[str, None]:
+        """Stream response generation from the LLM."""
+        messages = [
+            {"role": "user", "content": prompt}
+        ]
+        
+        try:
+            stream = await self.client.chat.completions.create(
+                model=config.LLM_MODEL_NAME,
+                messages=messages,
+                temperature=temperature,
+                stream=True
+            )
+            
+            async for chunk in stream:
+                if chunk.choices[0].delta.content is not None:
+                    yield chunk.choices[0].delta.content
+                    
+        except Exception as e:
+            print(f"Error in streaming LLM response: {e}")
+            yield "I apologize, but I couldn't generate a response at the moment."
+=== ./services/__init__.py ===
+# Services package
+=== ./services/document_service.py ===
+"""
+Document Service - Handles PDF processing and course generation
+"""
+
+import os
+import shutil
+import json
+import logging
+from typing import List
+from fastapi import UploadFile
+from langchain_core.documents import Document
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_openai import OpenAIEmbeddings
+from langchain_community.vectorstores import Chroma
+
+import config
+
+class DocumentService:
+    """Service for processing documents and generating courses."""
+    
+    def __init__(self):
+        self.document_processor = DocumentProcessor()
+    
+    async def process_pdfs_and_generate_course(self, pdf_files: List[UploadFile], course_title: str = None):
+        """Process uploaded PDF files and generate course content."""
+        return self.process_uploaded_pdfs(pdf_files, course_title)
+    
+    def process_uploaded_pdfs(self, pdf_files: List[UploadFile], course_title: str = None):
+        """Process uploaded PDF files and generate course content."""
+        try:
+            # Clear and prepare documents directory
+            self._safe_cleanup_directory(config.DOCUMENTS_DIR)
+            os.makedirs(config.DOCUMENTS_DIR, exist_ok=True)
+            
+            # Save uploaded PDFs
+            saved_files = []
+            for pdf_file in pdf_files:
+                if not pdf_file.filename.lower().endswith('.pdf'):
+                    raise ValueError(f"File {pdf_file.filename} is not a PDF")
+                
+                file_path = os.path.join(config.DOCUMENTS_DIR, pdf_file.filename)
+                with open(file_path, "wb") as buffer:
+                    shutil.copyfileobj(pdf_file.file, buffer)
+                saved_files.append(file_path)
+                logging.info(f"Saved uploaded PDF: {pdf_file.filename}")
+            
+            # Import processing modules
+            from core.course_generator import CourseGenerator
+            from processors.pdf_extractor import PDFExtractor
+            from processors.text_chunker import TextChunker
+            from core.vectorizer import Vectorizer
+            
+            # Process documents
+            logging.info("STEP 1: Extracting text from PDFs...")
+            extractor = PDFExtractor()
+            raw_docs = extractor.extract_text_from_directory(config.DOCUMENTS_DIR)
+            if not raw_docs:
+                raise Exception("No text could be extracted from uploaded documents")
+
+            logging.info("STEP 2: Chunking documents...")
+            chunker = TextChunker(chunk_size=config.CHUNK_SIZE, chunk_overlap=config.CHUNK_OVERLAP)
+            doc_chunks = chunker.chunk_documents(raw_docs)
+            if not doc_chunks:
+                raise Exception("No chunks could be created from documents")
+
+            logging.info("STEP 3: Creating vector store...")
+            vector_store = None
+            if config.USE_CHROMA_CLOUD:
+                from core.cloud_vectorizer import CloudVectorizer
+                logging.info("Using ChromaDB Cloud for vector store.")
+                cloud_vectorizer = CloudVectorizer()
+                vector_store = cloud_vectorizer.create_vector_store_from_documents(doc_chunks)
+            else:
+                logging.info("Using local FAISS for vector store.")
+                vectorizer = Vectorizer(embedding_model=config.EMBEDDING_MODEL_NAME, api_key=config.OPENAI_API_KEY)
+                self._safe_cleanup_vectorstore()
+                vector_store = vectorizer.create_vector_store(doc_chunks)
+                if vector_store:
+                    vectorizer.save_vector_store(vector_store, config.FAISS_DB_PATH)
+
+            if not vector_store:
+                raise Exception("Vector store could not be created")
+
+            logging.info("STEP 4: Generating course...")
+            course_generator = CourseGenerator()
+            final_course = course_generator.generate_course(doc_chunks, vector_store.as_retriever(), course_title)
+            
+            if not final_course:
+                raise Exception("Course generation failed")
+
+            # Save course output - append to existing courses
+            logging.info("STEP 5: Saving course...")
+            os.makedirs(config.COURSES_DIR, exist_ok=True)
+            
+             # Convert course to dictionary and validate structure
+            course_dict = self._validate_and_prepare_course(final_course, course_title)
+            
+            # Load existing courses and append new course
+            existing_courses = self._load_existing_courses()
+            next_course_id = self._get_next_course_id(existing_courses)
+            
+            # Ensure unique course title
+            course_dict = self._ensure_unique_title(course_dict, existing_courses)
+            
+           # Assing course id   
+            course_dict['course_id'] = next_course_id
+            
+            # Append new course to existing courses
+            existing_courses.append(course_dict)
+            
+            self._save_courses_to_file(existing_courses)
+            
+            logging.info(f"Course generation completed successfully! Course ID: {next_course_id}")
+            logging.info(f"Total courses in database: {len(existing_courses)}")
+            return course_dict
+             
+        except Exception as e:
+            logging.error(f"Error processing PDFs: {e}")
+            raise e
+    
+    def _validate_and_prepare_course(self, course, course_title: str = None):
+        """Validate and prepare course data for saving."""
+        try:
+            # Convert course to dictionary if it's a Pydantic model
+            if hasattr(course, 'dict'):
+                course_dict = course.dict()
+            elif isinstance(course, dict):
+                course_dict = course.copy()
+            else:
+                raise ValueError("Invalid course format")
+            
+            # Validate required fields
+            required_fields = ['course_title', 'modules']
+            for field in required_fields:
+                if field not in course_dict:
+                    raise ValueError(f"Missing required field: {field}")
+            
+            # Override title if provided
+            if course_title:
+                course_dict['course_title'] = course_title
+            
+            # Validate modules structure
+            if not isinstance(course_dict['modules'], list):
+                raise ValueError("Modules must be a list")
+            
+            for i, module in enumerate(course_dict['modules']):
+                if not isinstance(module, dict):
+                    raise ValueError(f"Module {i} must be a dictionary")
+                
+                # Ensure required module fields
+                if 'week' not in module:
+                    module['week'] = i + 1
+                if 'title' not in module:
+                    module['title'] = f"Module {i + 1}"
+                if 'sub_topics' not in module:
+                    module['sub_topics'] = []
+                
+                # Validate sub_topics
+                if not isinstance(module['sub_topics'], list):
+                    module['sub_topics'] = []
+                
+                for j, sub_topic in enumerate(module['sub_topics']):
+                    if not isinstance(sub_topic, dict):
+                        continue
+                    if 'title' not in sub_topic:
+                        sub_topic['title'] = f"Topic {j + 1}"
+                    if 'content' not in sub_topic:
+                        sub_topic['content'] = ""
+            
+            logging.info(f"Course validation successful: {course_dict['course_title']}")
+            logging.info(f"Course has {len(course_dict['modules'])} modules")
+            return course_dict
+            
+        except Exception as e:
+            logging.error(f"Course validation failed: {e}")
+            raise ValueError(f"Course validation failed: {e}")
+    
+    def _load_existing_courses(self):
+        """Load existing courses from file and return as list."""
+        existing_courses = []
+        
+        if os.path.exists(config.OUTPUT_JSON_PATH):
+            try:
+                with open(config.OUTPUT_JSON_PATH, 'r', encoding='utf-8') as f:
+                    existing_data = json.load(f)
+                
+                # Handle both single course and multi-course formats
+                if isinstance(existing_data, dict) and 'course_title' in existing_data:
+                    # Single course format - convert to list
+                    existing_courses = [existing_data]
+                    logging.info("Loaded single course format, converting to multi-course format")
+                elif isinstance(existing_data, list):
+                    # Multi-course format
+                    existing_courses = existing_data
+                    logging.info(f"Loaded {len(existing_courses)} existing courses")
+                else:
+                    logging.warning("Invalid course data format, starting fresh")
+                    existing_courses = []
+                    
+            except Exception as e:
+                logging.warning(f"Could not load existing courses: {e}")
+                existing_courses = []
+        else:
+            logging.info("No existing course file found, starting fresh")
+        
+        return existing_courses
+    
+    def _get_next_course_id(self, existing_courses):
+        """Get the next available course ID."""
+        if not existing_courses:
+            return 1
+        
+        # Find the maximum course ID
+        max_id = 0
+        for course in existing_courses:
+            course_id = course.get('course_id', 0)
+            if isinstance(course_id, int) and course_id > max_id:
+                max_id = course_id
+        
+        return max_id + 1
+    
+    def _ensure_unique_title(self, course_dict, existing_courses):
+        """Ensure the course title is unique by appending a number if necessary."""
+        original_title = course_dict['course_title']
+        title = original_title
+        counter = 1
+        
+        # Check if title already exists
+        existing_titles = [course.get('course_title', '') for course in existing_courses]
+        
+        while title in existing_titles:
+            counter += 1
+            title = f"{original_title} ({counter})"
+        
+        if title != original_title:
+            logging.info(f"Course title changed from '{original_title}' to '{title}' to ensure uniqueness")
+            course_dict['course_title'] = title
+        
+        return course_dict
+    
+    def _save_courses_to_file(self, courses):
+        """Save courses to file with proper formatting and validation."""
+        try:
+            # Validate that courses is a list
+            if not isinstance(courses, list):
+                raise ValueError("Courses must be a list")
+            
+            # Validate each course has required fields
+            for i, course in enumerate(courses):
+                if not isinstance(course, dict):
+                    raise ValueError(f"Course {i} must be a dictionary")
+                if 'course_id' not in course:
+                    raise ValueError(f"Course {i} missing course_id")
+                if 'course_title' not in course:
+                    raise ValueError(f"Course {i} missing course_title")
+                if 'modules' not in course:
+                    raise ValueError(f"Course {i} missing modules")
+            
+            # Always save as array format for consistency
+            with open(config.OUTPUT_JSON_PATH, 'w', encoding='utf-8') as f:
+                json.dump(courses, f, indent=4, ensure_ascii=False)
+            
+            logging.info(f"Successfully saved {len(courses)} courses to {config.OUTPUT_JSON_PATH}")
+            
+        except Exception as e:
+            logging.error(f"Failed to save courses: {e}")
+            raise ValueError(f"Failed to save courses: {e}")
+    
+    def _safe_cleanup_directory(self, directory_path: str, max_retries: int = 3):
+        """Safely clean up a directory with retries for Windows file locking issues."""
+        import time
+        
+        if not os.path.exists(directory_path):
+            return
+            
+        for attempt in range(max_retries):
+            try:
+                shutil.rmtree(directory_path)
+                logging.info(f"Successfully cleaned up directory: {directory_path}")
+                return
+            except PermissionError as e:
+                if attempt < max_retries - 1:
+                    logging.warning(f"Cleanup attempt {attempt + 1} failed, retrying in 1 second: {e}")
+                    time.sleep(1)
+                else:
+                    logging.error(f"Failed to cleanup directory after {max_retries} attempts: {e}")
+                    # Try to remove individual files if directory removal fails
+                    self._force_cleanup_directory(directory_path)
+            except Exception as e:
+                logging.error(f"Unexpected error during directory cleanup: {e}")
+                break
+    
+    def _force_cleanup_directory(self, directory_path: str):
+        """Force cleanup by removing individual files and subdirectories."""
+        try:
+            for root, dirs, files in os.walk(directory_path, topdown=False):
+                # Remove files
+                for file in files:
+                    file_path = os.path.join(root, file)
+                    try:
+                        os.chmod(file_path, 0o777)  # Change permissions
+                        os.remove(file_path)
+                    except Exception as e:
+                        logging.warning(f"Could not remove file {file_path}: {e}")
+                
+                # Remove directories
+                for dir in dirs:
+                    dir_path = os.path.join(root, dir)
+                    try:
+                        os.rmdir(dir_path)
+                    except Exception as e:
+                        logging.warning(f"Could not remove directory {dir_path}: {e}")
+            
+            # Finally try to remove the root directory
+            try:
+                os.rmdir(directory_path)
+                logging.info(f"Force cleanup successful for: {directory_path}")
+            except Exception as e:
+                logging.warning(f"Could not remove root directory {directory_path}: {e}")
+                
+        except Exception as e:
+            logging.error(f"Force cleanup failed: {e}")
+    
+    def _safe_cleanup_vectorstore(self):
+        """Safely cleanup vector store directories."""
+        # Clean up both FAISS and Chroma directories
+        self._safe_cleanup_directory(config.FAISS_DB_PATH)
+        self._safe_cleanup_directory(config.CHROMA_DB_PATH)
+        
+        # Recreate the directories
+        os.makedirs(config.FAISS_DB_PATH, exist_ok=True)
+        os.makedirs(config.CHROMA_DB_PATH, exist_ok=True)
+
+
+class DocumentProcessor:
+    """Helper class for document processing operations."""
+    
+    def __init__(self):
+        self.embeddings = OpenAIEmbeddings(
+            model=config.EMBEDDING_MODEL_NAME, 
+            openai_api_key=config.OPENAI_API_KEY,
+	    chunk_size=200
+        )
+    
+    def get_vectorstore(self, recreate: bool = False, documents: List[Document] = None):
+        """Get or create vectorstore using FAISS (more reliable on Windows)."""
+        from langchain_community.vectorstores import FAISS
+        
+        if recreate:
+            # Use FAISS instead of Chroma to avoid Windows file locking issues
+            if not documents:
+                raise ValueError("Documents must be provided when recreating vectorstore")
+            return FAISS.from_documents(
+                documents=documents,
+                embedding=self.embeddings
+            )
+        else:
+            # Try to load existing FAISS vectorstore
+            if os.path.exists(config.FAISS_DB_PATH):
+                try:
+                    return FAISS.load_local(
+                        config.FAISS_DB_PATH, 
+                        self.embeddings, 
+                        allow_dangerous_deserialization=True
+                    )
+                except Exception as e:
+                    logging.warning(f"Could not load existing vectorstore: {e}")
+                    return None
+            return None
+    
+    def create_vectorstore_from_documents(self, documents: List[Document]):
+        """Create a new vectorstore from documents using FAISS."""
+        from langchain_community.vectorstores import FAISS
+        return FAISS.from_documents(
+            documents=documents,
+            embedding=self.embeddings
+        )
+    
+    def split_documents(self, documents: List[Document]) -> List[Document]:
+        """Split documents into chunks."""
+        text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=config.MAX_CHUNK_SIZE,
+            chunk_overlap=config.CHUNK_OVERLAP,
+        )
+        return text_splitter.split_documents(documents)
+    
+    def load_course_content_as_documents(self, course_json_path: str) -> List[Document]:
+        """Load generated course content from JSON file and convert to Document objects."""
+        if not os.path.exists(course_json_path):
+            return []
+        
+        try:
+            with open(course_json_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            
+            all_documents = []
+            
+            # Handle both single course and multi-course formats
+            if isinstance(data, dict) and 'course_title' in data:
+                # Single course format
+                all_documents.extend(self.extract_course_documents(data))
+            elif isinstance(data, list):
+                # Multi-course format - process all courses
+                for course_data in data:
+                    if isinstance(course_data, dict):
+                        all_documents.extend(self.extract_course_documents(course_data))
+            else:
+                print("⚠️ Invalid course data format")
+                return []
+            
+            return all_documents            
+        except Exception as e:
+            print(f"Error loading course content: {e}")
+            return []
+    
+    def extract_course_documents(self, course_data: dict) -> List[Document]:
+        """Extract documents from course data."""
+        documents = []
+        
+        # Add course title and overview
+        if course_data.get("course_title"):
+            documents.append(Document(
+                page_content=f"Course Title: {course_data['course_title']}",
+                metadata={"source": "course_overview", "type": "title"}
+            ))
+        
+        # Add module and sub-topic content
+        for module in course_data.get("modules", []):
+            module_content = f"Week {module.get('week', 'N/A')}: {module.get('title', 'Untitled Module')}"
+            documents.append(Document(
+                page_content=module_content,
+                metadata={"source": "course_module", "week": module.get('week'), "type": "module"}
+            ))
+            
+            for sub_topic in module.get("sub_topics", []):
+                if sub_topic.get("content"):
+                    sub_topic_content = f"Topic: {sub_topic.get('title', 'Untitled Topic')}\n\n{sub_topic['content']}"
+                    documents.append(Document(
+                        page_content=sub_topic_content,
+                        metadata={
+                            "source": "course_content", 
+                            "week": module.get('week'),
+                            "topic": sub_topic.get('title'),
+                            "type": "content"
+                        }
+                    ))
+        
+        return documents
+
+=== ./services/rag_service.py ===
+"""
+RAG Service - Handles Retrieval-Augmented Generation
+"""
+
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain_community.vectorstores import Chroma
+from langchain_groq import ChatGroq
+from typing import List, Any
+import config
+
+class RAGService:
+    """Service for RAG-based question answering."""
+    
+    def __init__(self, vectorstore: Chroma = None):
+        from langchain_openai import OpenAIEmbeddings
+
+        if vectorstore is None:
+            if config.USE_CHROMA_CLOUD:
+                from core.cloud_vectorizer import CloudVectorizer
+                cloud_vectorizer = CloudVectorizer()
+                self.vectorstore = cloud_vectorizer.get_vector_store()
+            else:
+                from core.vectorizer import Vectorizer
+                embeddings = OpenAIEmbeddings(model=config.EMBEDDING_MODEL_NAME, openai_api_key=config.OPENAI_API_KEY,chunk_size=200)
+                self.vectorstore = Vectorizer.load_vector_store(config.FAISS_DB_PATH, embeddings)
+                if not self.vectorstore:
+                    # If loading fails, create an empty FAISS store to avoid crashing
+                    from langchain_community.vectorstores import FAISS
+                    import numpy as np
+                    # Create a dummy document and embedding to initialize an empty store
+                    dummy_doc = ["Initial empty document"]
+                    dummy_embeddings = OpenAIEmbeddings(model=config.EMBEDDING_MODEL_NAME, openai_api_key=config.OPENAI_API_KEY,chunk_size=200)
+                    self.vectorstore = FAISS.from_texts(dummy_doc, dummy_embeddings)
+        else:
+            self.vectorstore = vectorstore
+
+        self.llm = ChatGroq(
+            model="llama-3.1-8b-instant",
+            temperature=0,
+            groq_api_key=config.GROQ_API_KEY
+        )
+        self.prompt = ChatPromptTemplate.from_template(config.QA_PROMPT_TEMPLATE)
+        self.retriever = self.vectorstore.as_retriever(
+            search_type=config.RETRIEVAL_SEARCH_TYPE,
+            search_kwargs={"k": config.RETRIEVAL_K}
+        )
+        self._initialize_chain()
+    
+    def _initialize_chain(self):
+        """Initialize the RAG chain."""
+        def format_docs(docs: List[Any]) -> str:
+            return "\n\n".join(doc.page_content for doc in docs)
+
+        self.rag_chain = (
+            {
+                "context": lambda x: format_docs(self.retriever.invoke(x["question"])),
+                "question": lambda x: x["question"],
+                "response_language": lambda x: x["response_language"]
+            }
+            | self.prompt
+            | self.llm
+            | StrOutputParser()
+        )
+    
+    async def get_answer(self, question: str, response_language: str = "English") -> str:
+        """Get an answer using the RAG chain."""
+        try:
+            answer = await self.rag_chain.ainvoke({
+                "question": question,
+                "response_language": response_language
+            })
+            return answer
+        except Exception as e:
+            print(f"Error in RAG chain: {e}")
+            raise e
+    
+    def update_vectorstore(self, vectorstore: Chroma):
+        """Update the vectorstore and reinitialize the chain."""
+        self.vectorstore = vectorstore
+        self.retriever = vectorstore.as_retriever(
+            search_type=config.RETRIEVAL_SEARCH_TYPE,
+            search_kwargs={"k": config.RETRIEVAL_K}
+        )
+        self._initialize_chain()
+
+=== ./services/sarvam_service.py ===
+"""
+Sarvam Service - Handles Sarvam AI integrations for translation, STT, and TTS
+"""
+
+import io
+import asyncio
+import time
+import io
+import base64
+from typing import AsyncGenerator, Optional
+from sarvamai import AsyncSarvamAI, AudioOutput
+from typing import Optional
+import config
+
+class SarvamService:
+    """Service for Sarvam AI operations."""
+    
+    def __init__(self):
+        from concurrent.futures import ThreadPoolExecutor
+        from sarvamai import SarvamAI
+        self.executor = ThreadPoolExecutor(max_workers=6)  # Increased for parallel processing
+        self.sync_client = SarvamAI(api_subscription_key=config.SARVAM_API_KEY)
+        self.client = AsyncSarvamAI(api_subscription_key=config.SARVAM_API_KEY)  # Match Contelligence naming
+    
+    def _translate_sync(self, text: str, target_language_code: str, source_language_code: str) -> str:
+        """Synchronously translate text using Sarvam AI."""
+        try:
+            # Use specific model for Urdu
+            if "ur-IN" in [target_language_code, source_language_code]:
+                response = self.sync_client.text.translate(
+                    input=text,
+                    source_language_code=source_language_code,
+                    target_language_code=target_language_code,
+                    mode="classic-colloquial",
+                    model="sarvam-translate:v1"
+                )
+            else:
+                # Use default model for other languages
+                response = self.sync_client.text.translate(
+                    input=text,
+                    source_language_code=source_language_code,
+                    target_language_code=target_language_code,
+                    mode="classic-colloquial"
+                )
+            
+            return response.translated_text
+            
+        except Exception as e:
+            print(f"Error during Sarvam AI translation: {e}")
+            return text  # Return original text on failure
+    
+    async def translate_text(self, text: str, target_language_code: str, source_language_code: str) -> str:
+        """Asynchronously translate text."""
+        loop = asyncio.get_event_loop()
+        return await loop.run_in_executor(
+            self.executor, 
+            self._translate_sync, 
+            text, 
+            target_language_code, 
+            source_language_code
+        )
+    
+    def _transcribe_sync(self, audio_file_buffer: io.BytesIO, language_code: Optional[str]) -> str:
+        """Synchronously transcribe audio."""
+        try:
+            audio_file_buffer.seek(0)
+            response = self.sync_client.speech_to_text.transcribe(
+                file=audio_file_buffer, 
+                language_code=language_code
+            )
+            return response.transcript
+        except Exception as e:
+            print(f"Error during Sarvam AI transcription: {e}")
+            return ""
+    
+    async def transcribe_audio(self, audio_file_buffer: io.BytesIO, language_code: Optional[str] = None) -> str:
+        """Asynchronously transcribe audio."""
+        loop = asyncio.get_event_loop()
+        return await loop.run_in_executor(
+            self.executor, 
+            self._transcribe_sync, 
+            audio_file_buffer, 
+            language_code
+        )
+    
+    async def generate_audio(self, text: str, language_code: str, speaker: str) -> io.BytesIO:
+        """Generate audio from text with optimized parallel processing for low latency."""
+        try:
+            print(f"🔊 Fast audio generation for {len(text)} characters")
+            
+            # Aggressive text cleaning and optimization for speed
+            cleaned_text = self._clean_text_for_tts_fast(text)
+            print(f"   Optimized text: {len(cleaned_text)} chars")
+            
+            # Dynamic chunk sizing based on text length for optimal speed
+            if len(cleaned_text) <= 2500:
+                print("   Single chunk - ultra fast...")
+                return await self._generate_audio_single(cleaned_text, language_code, speaker)
+            elif len(cleaned_text) <= 6000:
+                print("   Small parallel batch...")
+                return await self._generate_audio_parallel_chunks(cleaned_text, language_code, speaker, 2000)
+            else:
+                print("   Large parallel processing...")
+                return await self._generate_audio_parallel_chunks(cleaned_text, language_code, speaker, 2500)
+                
+        except Exception as e:
+            print(f"❌ Error during fast TTS: {e}")
+            return io.BytesIO()
+    
+    async def generate_audio_ultra_fast(self, text: str, language_code: str, speaker: str) -> io.BytesIO:
+        """Ultra-fast audio generation with aggressive optimization for minimal latency."""
+        try:
+            print(f"⚡ Ultra-fast generation for {len(text)} chars")
+            
+            # EXTREME truncation for speed
+            if len(text) > 1000:
+                text = text[:900] + "."
+                print(f"   Truncated to 900 chars for MAXIMUM speed")
+            
+            # Minimal cleaning for maximum speed
+            import re
+            text = re.sub(r'[*#_`\[\]{}\\]', ' ', text)
+            text = re.sub(r'\s+', ' ', text).strip()
+            
+            # Use fastest possible generation with longer timeout
+            return await asyncio.wait_for(
+                self._generate_audio_single(text, language_code, speaker),
+                timeout=10.0  # 10 second max timeout for better reliability
+            )
+            
+        except asyncio.TimeoutError:
+            print(f"❌ Ultra-fast TTS timeout after 10s")
+            return io.BytesIO()
+        except Exception as e:
+            print(f"❌ Ultra-fast TTS error: {e}")
+            return io.BytesIO()
+    
+    async def stream_audio_generation(self, text: str, language_code: str, speaker: str, websocket=None):
+        """Direct Sarvam TTS streaming like Contelligence - ZERO buffering for maximum speed."""
+        try:
+            print(f"⚡ DIRECT Sarvam streaming for {len(text)} chars")
+            
+            # Use Sarvam's direct TTS streaming like Contelligence
+            async with self.client.text_to_speech_streaming.connect(model="bulbul:v2") as tts_ws:
+                print("   🔗 Connected to Sarvam TTS streaming")
+                
+                # Configure TTS stream
+                await tts_ws.configure(
+                    target_language_code=language_code,
+                    speaker=speaker,
+                    output_audio_codec="mp3"
+                )
+                
+                print("   🎯 Starting direct TTS conversion")
+                # Send text to TTS - this starts streaming immediately
+                await tts_ws.convert(text)
+                
+                chunk_count = 0
+                first_chunk_time = None
+                
+                # Forward TTS chunks directly to client (Contelligence pattern)
+                async for tts_resp in tts_ws:
+                    if hasattr(tts_resp, 'data') and hasattr(tts_resp.data, 'audio'):
+                        chunk_count += 1
+                        if first_chunk_time is None:
+                            first_chunk_time = time.time()
+                        
+                        audio_chunk_b64 = tts_resp.data.audio
+                        # Convert base64 to bytes for yielding
+                        import base64
+                        audio_bytes = base64.b64decode(audio_chunk_b64)
+                        
+                        print(f"   ⚡ Direct chunk {chunk_count}: {len(audio_bytes)} bytes")
+                        yield audio_bytes
+                
+                # Final flush like Contelligence - with exception handling
+                try:
+                    await tts_ws.flush()
+                    print(f"   ✅ Direct streaming complete: {chunk_count} chunks")
+                except Exception as flush_error:
+                    print(f"   ⚠️ Flush failed (continuing anyway): {flush_error}")
+                    print(f"   ✅ Direct streaming complete: {chunk_count} chunks (flush skipped)")
+                
+        except Exception as e:
+            print(f"❌ Direct streaming failed: {e}")
+            # Simple fallback without complex buffering
+            try:
+                print("   ⚡ Simple fallback generation")
+                audio_buffer = await self.generate_audio_ultra_fast(text, language_code, speaker)
+                if audio_buffer and audio_buffer.getbuffer().nbytes > 0:
+                    yield audio_buffer.getvalue()
+            except Exception as fallback_error:
+                print(f"   ❌ Fallback failed: {fallback_error}")
+                return
+    
+    async def _stream_audio_direct(self, text: str, language_code: str, speaker: str, websocket=None):
+        """Direct streaming from Sarvam with immediate chunk delivery and browser-compatible chunking."""
+        try:
+            print(f"   🎯 Direct streaming: {len(text)} chars")
+            
+            # Import AudioOutput here to avoid import issues
+            from sarvamai import AudioOutput
+            
+            async with self.client.text_to_speech_streaming.connect(model="bulbul:v2") as ws:
+                # Configure immediately
+                await ws.configure(target_language_code=language_code, speaker=speaker)
+                
+                # Start conversion immediately
+                await ws.convert(text)
+                
+                # Stream chunks with browser-compatible sizing
+                chunk_count = 0
+                audio_buffer = b''
+                max_chunk_size = 8192  # 8KB chunks for browser compatibility
+                
+                async for message in ws:
+                    if isinstance(message, AudioOutput) and message.data and message.data.audio:
+                        large_chunk = base64.b64decode(message.data.audio)
+                        if large_chunk and len(large_chunk) > 0:
+                            audio_buffer += large_chunk
+                            
+                            # Break large chunks into browser-compatible sizes
+                            while len(audio_buffer) >= max_chunk_size:
+                                chunk_count += 1
+                                small_chunk = audio_buffer[:max_chunk_size]
+                                audio_buffer = audio_buffer[max_chunk_size:]
+                                
+                                print(f"   ⚡ Chunk {chunk_count}: {len(small_chunk)} bytes (browser-optimized)")
+                                yield small_chunk
+                                
+                                # Minimal delay for maximum speed
+                                await asyncio.sleep(0.001)  # 1ms delay for ultra-fast streaming
+                
+                # Send remaining audio buffer
+                if audio_buffer:
+                    chunk_count += 1
+                    print(f"   ⚡ Final chunk {chunk_count}: {len(audio_buffer)} bytes")
+                    yield audio_buffer
+                
+                # Always flush to complete the streaming - with exception handling
+                try:
+                    await ws.flush()
+                    print(f"   ✅ Direct streaming complete: {chunk_count} browser-compatible chunks")
+                except Exception as flush_error:
+                    print(f"   ⚠️ Flush failed (continuing anyway): {flush_error}")
+                    print(f"   ✅ Direct streaming complete: {chunk_count} browser-compatible chunks (flush skipped)")
+                            
+        except Exception as e:
+            error_msg = str(e)
+            if self._is_normal_disconnection(error_msg):
+                print(f"   🔌 Client disconnected during streaming: {e}")
+                print(f"   ⚠️ Normal disconnection - continuing with fallback")
+                # Continue with fallback instead of stopping
+            else:
+                print(f"   ❌ Direct stream error: {e}")
+            
+            # Fast fallback with immediate small chunks
+            try:
+                print(f"   ⚡ ULTRA-FAST fallback generation")
+                audio_buffer = await self.generate_audio_ultra_fast(text, language_code, speaker)
+                if audio_buffer and audio_buffer.getbuffer().nbytes > 0:
+                    # Break into small chunks for immediate streaming
+                    audio_bytes = audio_buffer.getvalue()
+                    chunk_size = 4096  # 4KB chunks
+                    chunk_count = 0
+                    
+                    for i in range(0, len(audio_bytes), chunk_size):
+                        chunk_count += 1
+                        chunk = audio_bytes[i:i + chunk_size]
+                        print(f"   ⚡ Fallback chunk {chunk_count}: {len(chunk)} bytes")
+                        yield chunk
+                        await asyncio.sleep(0.01)  # 10ms delay between chunks
+            except Exception as fallback_error:
+                print(f"   ❌ Fallback failed: {fallback_error}")
+                return
+    
+    async def _stream_audio_immediate(self, text: str, language_code: str, speaker: str, chunk_size: int, websocket=None):
+        """Stream audio with immediate first chunk delivery - MAXIMUM SPEED."""
+        try:
+            # Allow streaming to continue - only stop on actual errors
+            
+            # Split into very small chunks for immediate delivery
+            chunks = self._split_text_for_immediate_streaming(text, chunk_size)
+            print(f"   ⚡ Immediate streaming: {len(chunks)} chunks")
+            
+            if not chunks:
+                return
+            
+            # FIRST CHUNK - IMMEDIATE DELIVERY
+            first_chunk = chunks[0]
+            print(f"   🎯 First chunk ({len(first_chunk)} chars) - IMMEDIATE")
+            
+            first_chunk_delivered = False
+            async for audio_chunk in self._stream_audio_direct(first_chunk, language_code, speaker, websocket):
+                if not first_chunk_delivered:
+                    print(f"   🚀 FIRST AUDIO DELIVERED!")
+                    first_chunk_delivered = True
+                yield audio_chunk
+            
+            # REMAINING CHUNKS - PARALLEL PROCESSING WITH ORDERED QUEUE
+            if len(chunks) > 1:
+
+                
+                print(f"   �  Processing {len(chunks)-1} remaining chunks sequentially")
+                
+                # Process remaining chunks sequentially to allow immediate stopping on disconnection
+                remaining_chunks = chunks[1:]
+                
+                for i, chunk in enumerate(remaining_chunks):
+                    chunk_index = i + 2  # Chunk numbering starts from 2
+                    
+
+                    
+                    print(f"   🔄 Processing chunk {chunk_index}/{len(chunks)}: {len(chunk)} chars")
+                    
+                    # Process chunk and yield results immediately
+                    async for audio_chunk in self._stream_audio_direct(chunk, language_code, speaker, websocket):
+
+                        if audio_chunk and len(audio_chunk) > 0:
+                            yield audio_chunk
+
+                        
+            print(f"   ✅ Immediate streaming complete")
+                            
+        except Exception as e:
+            error_msg = str(e)
+            if self._is_normal_disconnection(error_msg):
+                print(f"   🔌 Client disconnected during immediate streaming: {e}")
+                return
+            else:
+                print(f"   ❌ Immediate streaming error: {e}")
+                return
+    
+    async def _collect_audio_chunk(self, text: str, language_code: str, speaker: str, chunk_num: int) -> bytes:
+        """Collect audio from a single chunk for parallel processing."""
+        try:
+            audio_buffer = await self._generate_audio_single(text, language_code, speaker)
+            audio_bytes = audio_buffer.getvalue()
+            if audio_bytes:
+                print(f"   ✅ Chunk {chunk_num}: {len(audio_bytes)} bytes ready")
+            return audio_bytes
+        except Exception as e:
+            print(f"   ❌ Chunk {chunk_num} failed: {e}")
+            return b''
+    
+    def _split_text_for_streaming(self, text: str, max_chunk_size: int) -> list:
+        """Split text optimized for streaming - prioritize first chunk quality."""
+        chunks = []
+        
+        # Ensure first chunk is meaningful and complete
+        words = text.split()
+        if not words:
+            return []
+        
+        # Build first chunk with complete sentences when possible
+        first_chunk = ""
+        remaining_text = text
+        
+        # Try to get a complete sentence for first chunk
+        import re
+        sentences = re.split(r'([.!?]+)', text)
+        
+        if len(sentences) >= 2:
+            # Take first complete sentence(s) that fit
+            for i in range(0, len(sentences) - 1, 2):
+                sentence = sentences[i].strip()
+                if i + 1 < len(sentences):
+                    sentence += sentences[i + 1]
+                
+                if len(first_chunk + sentence) <= max_chunk_size:
+                    first_chunk += sentence + " "
+                else:
+                    break
+            
+            if first_chunk.strip():
+                chunks.append(first_chunk.strip())
+                # Remove first chunk from remaining text
+                remaining_text = text[len(first_chunk):].strip()
+        
+        # If no good first chunk found, use word-based splitting
+        if not chunks:
+            current_chunk = ""
+            for word in words:
+                if len(current_chunk + word) + 1 <= max_chunk_size:
+                    current_chunk += " " + word if current_chunk else word
+                else:
+                    if current_chunk:
+                        chunks.append(current_chunk.strip())
+                        remaining_text = text[len(current_chunk):].strip()
+                    break
+        
+        # Split remaining text into chunks
+        if remaining_text:
+            remaining_chunks = self._split_text_fast(remaining_text, max_chunk_size)
+            chunks.extend(remaining_chunks)
+        
+        return chunks
+    
+    def _clean_text_for_ultra_fast_streaming(self, text: str) -> str:
+        """ULTRA-FAST text cleaning for immediate streaming."""
+        import re
+        
+        # MINIMAL cleaning for maximum speed
+        text = re.sub(r'[*#_`\[\]{}\\]', ' ', text)    # Remove markdown
+        text = re.sub(r'\.{3,}', '.', text)            # Fix ellipsis
+        text = re.sub(r'[^\w\s.,!?;:\'-]', ' ', text)  # Keep essentials only
+        text = re.sub(r'\s+', ' ', text)               # Single spaces
+        
+        # AGGRESSIVE truncation for streaming speed
+        if len(text) > 5000:  # Much smaller limit for streaming
+            text = text[:4800] + "."
+            print(f"   ⚡ Truncated to 4800 chars for streaming speed")
+        
+        return text.strip()
+    
+    def _split_text_for_immediate_streaming(self, text: str, max_chunk_size: int) -> list:
+        """Split text for immediate first chunk delivery."""
+        chunks = []
+        
+        # PRIORITY: Get a meaningful first chunk FAST
+        words = text.split()
+        if not words:
+            return []
+        
+        # Build first chunk - prioritize speed over perfection
+        first_chunk = ""
+        word_count = 0
+        
+        for word in words:
+            if len(first_chunk + " " + word) <= max_chunk_size and word_count < 100:  # Max 100 words for first chunk
+                first_chunk += " " + word if first_chunk else word
+                word_count += 1
+            else:
+                break
+        
+        if first_chunk:
+            chunks.append(first_chunk.strip())
+            
+            # Split remaining text into chunks
+            remaining_text = text[len(first_chunk):].strip()
+            if remaining_text:
+                remaining_chunks = self._split_text_fast(remaining_text, max_chunk_size)
+                chunks.extend(remaining_chunks)
+        else:
+            # Fallback: just split by words
+            chunks = self._split_text_fast(text, max_chunk_size)
+        
+        return chunks
+    
+    async def _generate_chunk_with_streaming(self, text: str, language_code: str, speaker: str, chunk_num: int, websocket=None) -> list:
+        """Generate audio chunk with streaming and collect all pieces - CONTINUOUS STREAMING."""
+        try:
+            print(f"   🔄 Processing chunk {chunk_num}: {len(text)} chars")
+            audio_chunks = []
+            
+            # Collect all audio chunks from this text chunk - NO INTERRUPTION
+            async for audio_chunk in self._stream_audio_direct(text, language_code, speaker, websocket):
+                if audio_chunk and len(audio_chunk) > 0:
+                    audio_chunks.append(audio_chunk)
+            
+            total_bytes = sum(len(chunk) for chunk in audio_chunks)
+            if total_bytes > 0:
+                print(f"   ✅ Chunk {chunk_num}: {len(audio_chunks)} pieces, {total_bytes} bytes ready")
+            else:
+                print(f"   ⚠️ Chunk {chunk_num}: No audio generated")
+            return audio_chunks
+            
+        except Exception as e:
+            print(f"   ❌ Chunk {chunk_num} failed: {e}")
+            return []
+    
+    def _clean_text_for_tts_fast(self, text: str) -> str:
+        """Fast text cleaning optimized for speed and TTS quality."""
+        import re
+        
+        # Quick and aggressive cleaning for speed
+        text = re.sub(r'[*#_`\[\]{}\\]', ' ', text)    # Remove markdown chars
+        text = re.sub(r'\.{2,}', '.', text)            # Replace multiple dots
+        text = re.sub(r'--+', ' ', text)               # Replace dashes
+        text = re.sub(r'[^\w\s.,!?;:\'-]', ' ', text)  # Keep only essential chars
+        text = re.sub(r'\s+', ' ', text)               # Single spaces
+        
+        # Truncate aggressively if too long for speed
+        if len(text) > 8000:  # Hard limit for speed
+            text = text[:7500] + "."
+            print(f"   Truncated to 7500 chars for speed")
+        
+        return text.strip()
+    
+    def _clean_text_for_tts(self, text: str) -> str:
+        """Clean text to make it more suitable for TTS."""
+        import re
+        
+        # Remove markdown formatting
+        text = re.sub(r'\*\*(.*?)\*\*', r'\\1', text)  # Remove bold
+        text = re.sub(r'\*(.*?)\*', r'\\1', text)      # Remove italic
+        text = re.sub(r'#{1,6}\s*', '', text)          # Remove headers
+        
+        # Handle ellipsis and multiple dots properly for TTS
+        text = re.sub(r'\.{3,}', ' pause ', text)      # Replace ellipsis with pause
+        text = re.sub(r'\.{2}', ' pause ', text)       # Replace double dots with pause
+        
+        # Handle other punctuation that might be spoken literally
+        text = re.sub(r'--+', ' pause ', text)         # Replace dashes with pause
+        text = re.sub(r'_+', ' ', text)                # Replace underscores with space
+        text = re.sub(r'\*+', ' ', text)               # Remove remaining asterisks
+        
+        # Clean up special characters that cause TTS issues
+        text = re.sub(r'[^\w\s.,!?;:\'-]', ' ', text)  # Replace problematic chars with space
+        
+        # Replace multiple spaces with single space
+        text = re.sub(r'\s+', ' ', text)
+        
+        # Clean up multiple punctuation
+        text = re.sub(r'[.,!?;:]{2,}', '.', text)      # Replace multiple punctuation with period
+        
+        return text.strip()
+    
+    def _intelligent_truncate(self, text: str, max_length: int) -> str:
+        """Intelligently truncate text preserving key content and natural flow."""
+        if len(text) <= max_length:
+            return text
+        
+        import re
+        
+        # First, try to get the most important content from the beginning
+        # This preserves the main topic and context
+        target_length = max_length - 50  # Leave buffer for proper ending
+        
+        # Split into paragraphs first
+        paragraphs = [p.strip() for p in text.split('\n\n') if p.strip()]
+        
+        if paragraphs:
+            # Take complete paragraphs that fit
+            truncated = ""
+            for paragraph in paragraphs:
+                if len(truncated + paragraph) <= target_length:
+                    truncated += paragraph + "\n\n"
+                else:
+                    # If this paragraph doesn't fit, try to fit part of it
+                    remaining_space = target_length - len(truncated)
+                    if remaining_space > 100:  # Only if we have meaningful space
+                        partial = self._truncate_paragraph(paragraph, remaining_space)
+                        if partial:
+                            truncated += partial
+                    break
+        else:
+            # No paragraph breaks, work with sentences
+            sentences = re.split(r'([.!?]+)', text)
+            truncated = ""
+            
+            for i in range(0, len(sentences) - 1, 2):
+                sentence = sentences[i].strip()
+                if i + 1 < len(sentences):
+                    sentence += sentences[i + 1]
+                
+                if len(truncated + sentence) <= target_length:
+                    truncated += sentence + " "
+                else:
+                    break
+        
+        # Clean up and add proper ending
+        truncated = truncated.strip()
+        if not truncated:
+            # Fallback: just take first part at word boundary
+            words = text.split()
+            truncated = ""
+            for word in words:
+                if len(truncated + word) <= target_length:
+                    truncated += word + " "
+                else:
+                    break
+            truncated = truncated.strip()
+        
+        # Ensure proper ending
+        if truncated and not truncated.endswith(('.', '!', '?')):
+            # Remove incomplete sentence at the end
+            last_sentence_end = max(
+                truncated.rfind('.'),
+                truncated.rfind('!'),
+                truncated.rfind('?')
+            )
+            if last_sentence_end > len(truncated) * 0.7:  # Only if we don't lose too much
+                truncated = truncated[:last_sentence_end + 1]
+            else:
+                truncated += "."
+        
+        return truncated
+    
+    def _truncate_paragraph(self, paragraph: str, max_length: int) -> str:
+        """Truncate a single paragraph at sentence boundary."""
+        import re
+        sentences = re.split(r'([.!?]+)', paragraph)
+        
+        truncated = ""
+        for i in range(0, len(sentences) - 1, 2):
+            sentence = sentences[i].strip()
+            if i + 1 < len(sentences):
+                sentence += sentences[i + 1]
+            
+            if len(truncated + sentence) <= max_length - 10:
+                truncated += sentence + " "
+            else:
+                break
+        
+        return truncated.strip()
+    
+    async def _generate_audio_single(self, text: str, language_code: str, speaker: str) -> io.BytesIO:
+        """Generate audio for text with optimized streaming for speed."""
+        try:
+            # Reduced logging for speed
+            async with self.client.text_to_speech_streaming.connect(model="bulbul:v2") as ws:
+                await ws.configure(target_language_code=language_code, speaker=speaker)
+                await ws.convert(text)
+                await ws.flush()
+                
+                # Fast audio collection with minimal logging
+                full_audio_bytes = b''
+                async for message in ws:
+                    if isinstance(message, AudioOutput):
+                        audio_chunk = base64.b64decode(message.data.audio)
+                        full_audio_bytes += audio_chunk
+                
+                return io.BytesIO(full_audio_bytes)
+                
+        except Exception as e:
+            print(f"   ❌ TTS error: {e}")
+            return io.BytesIO()
+    
+    async def _generate_audio_parallel_chunks(self, text: str, language_code: str, speaker: str, chunk_size: int) -> io.BytesIO:
+        """Generate audio using parallel processing for maximum speed."""
+        try:
+            print(f"   Parallel processing with {chunk_size} char chunks")
+            
+            # Split into smaller chunks for faster parallel processing
+            chunks = self._split_text_fast(text, chunk_size)
+            print(f"   Processing {len(chunks)} chunks in parallel")
+            
+            # Limit concurrent connections to avoid overwhelming the API
+            max_concurrent = min(4, len(chunks))  # Max 4 parallel connections
+            
+            # Process chunks in parallel batches
+            all_audio_bytes = b''
+            
+            for i in range(0, len(chunks), max_concurrent):
+                batch = chunks[i:i + max_concurrent]
+                print(f"   Batch {i//max_concurrent + 1}: processing {len(batch)} chunks")
+                
+                # Create tasks for parallel processing
+                tasks = []
+                for j, chunk in enumerate(batch):
+                    task = asyncio.create_task(
+                        self._generate_audio_single(chunk, language_code, speaker)
+                    )
+                    tasks.append(task)
+                
+                # Wait for all tasks in this batch to complete
+                try:
+                    results = await asyncio.gather(*tasks, return_exceptions=True)
+                    
+                    # Combine results in order
+                    for j, result in enumerate(results):
+                        if isinstance(result, Exception):
+                            print(f"   ⚠️ Chunk {i+j+1} failed: {result}")
+                            continue
+                        
+                        if result and result.getbuffer().nbytes > 0:
+                            all_audio_bytes += result.getvalue()
+                            print(f"   ✅ Chunk {i+j+1}: {result.getbuffer().nbytes} bytes")
+                        else:
+                            print(f"   ⚠️ Chunk {i+j+1}: No audio generated")
+                
+                except Exception as e:
+                    print(f"   ❌ Batch {i//max_concurrent + 1} error: {e}")
+                    continue
+            
+            print(f"✅ Parallel TTS complete: {len(all_audio_bytes)} bytes")
+            return io.BytesIO(all_audio_bytes)
+            
+        except Exception as e:
+            print(f"❌ Error in parallel processing: {e}")
+            return io.BytesIO()
+    
+    def _split_text_fast(self, text: str, max_chunk_size: int) -> list:
+        """Fast text splitting optimized for speed over perfect boundaries."""
+        chunks = []
+        
+        # Simple splitting for speed - prioritize speed over perfect sentence boundaries
+        words = text.split()
+        current_chunk = ""
+        
+        for word in words:
+            if len(current_chunk) + len(word) + 1 <= max_chunk_size:
+                current_chunk += " " + word if current_chunk else word
+            else:
+                if current_chunk:
+                    chunks.append(current_chunk.strip())
+                current_chunk = word
+        
+        if current_chunk:
+            chunks.append(current_chunk.strip())
+        
+        return chunks
+    
+    def _split_text_into_smart_chunks(self, text: str, max_chunk_size: int) -> list:
+        """Split text into chunks that preserve sentence boundaries and context."""
+        import re
+        
+        # First split by paragraphs to maintain structure
+        paragraphs = [p.strip() for p in text.split('\n\n') if p.strip()]
+        
+        chunks = []
+        current_chunk = ""
+        
+        for paragraph in paragraphs:
+            # If paragraph is too long, split it by sentences
+            if len(paragraph) > max_chunk_size:
+                sentences = self._split_into_sentences(paragraph)
+                
+                for sentence in sentences:
+                    # If adding this sentence exceeds limit, start new chunk
+                    if current_chunk and len(current_chunk) + len(sentence) + 2 > max_chunk_size:
+                        if current_chunk.strip():
+                            chunks.append(current_chunk.strip())
+                        current_chunk = sentence
+                    else:
+                        if current_chunk:
+                            current_chunk += " " + sentence
+                        else:
+                            current_chunk = sentence
+            else:
+                # If adding this paragraph exceeds limit, start new chunk
+                if current_chunk and len(current_chunk) + len(paragraph) + 2 > max_chunk_size:
+                    if current_chunk.strip():
+                        chunks.append(current_chunk.strip())
+                    current_chunk = paragraph
+                else:
+                    if current_chunk:
+                        current_chunk += "\n\n" + paragraph
+                    else:
+                        current_chunk = paragraph
+        
+        # Add the last chunk if it has content
+        if current_chunk.strip():
+            chunks.append(current_chunk.strip())
+        
+        return chunks
+    
+    def _is_client_disconnected(self, websocket) -> bool:
+        """Check if WebSocket client is disconnected."""
+        try:
+            if not websocket:
+                return False
+            
+            # Check if WebSocket is closed or closing
+            if hasattr(websocket, 'closed') and websocket.closed:
+                return True
+            
+            if hasattr(websocket, 'state'):
+                # WebSocket states: CONNECTING=0, OPEN=1, CLOSING=2, CLOSED=3
+                return websocket.state in [2, 3]  # CLOSING or CLOSED
+            
+            return False
+        except Exception:
+            # If we can't check the state, assume disconnected for safety
+            return True
+    
+    def _is_normal_disconnection(self, error_msg: str) -> bool:
+        """Check if error message indicates a normal client disconnection."""
+        if not error_msg:
+            return False
+        
+        error_msg = str(error_msg).lower()
+        
+        # Check for normal WebSocket closure codes
+        normal_codes = ["1000", "1001"]  # OK, Going Away
+        for code in normal_codes:
+            if code in error_msg:
+                return True
+        
+        # Check for common disconnection phrases
+        disconnection_phrases = [
+            "connection closed",
+            "client disconnected",
+            "going away",
+            "connection lost"
+        ]
+        
+        for phrase in disconnection_phrases:
+            if phrase in error_msg:
+                return True
+        
+        return False
+
+    def _split_into_sentences(self, text: str) -> list:
+        """Split text into sentences preserving punctuation."""
+        import re
+        
+        # Split on sentence endings, keeping the punctuation
+        sentences = re.split(r'([.!?]+)', text)
+        
+        # Recombine sentences with their punctuation
+        result = []
+        for i in range(0, len(sentences) - 1, 2):
+            sentence = sentences[i].strip()
+            if i + 1 < len(sentences):
+                sentence += sentences[i + 1]
+            if sentence.strip():
+                result.append(sentence.strip())
+        
+        return result
+    
+
+=== ./services/teaching_service.py ===
+"""
+Teaching Service - Converts course content into proper teaching format with streaming support
+"""
+
+import logging
+import asyncio
+from typing import Dict, Any, Optional, AsyncGenerator
+from services.llm_service import LLMService
+
+class TeachingService:
+    """Service for converting course content into teaching-friendly format."""
+    
+    def __init__(self):
+        self.llm_service = LLMService()
+        
+    async def generate_teaching_content_stream(
+        self, 
+        module_title: str, 
+        sub_topic_title: str, 
+        raw_content: str,
+        language: str = "en-IN"
+    ) -> AsyncGenerator[str, None]:
+        """
+        Stream teaching content generation in real-time chunks.
+        
+        Args:
+            module_title: The module/week title
+            sub_topic_title: The specific sub-topic title
+            raw_content: Raw content from the course JSON
+            language: Language for the teaching content
+            
+        Yields:
+            Chunks of teaching content as they are generated
+        """
+        try:
+            # Create a comprehensive teaching prompt
+            teaching_prompt = self._create_teaching_prompt(
+                module_title, sub_topic_title, raw_content, language
+            )
+            
+            logging.info(f"Starting streaming content generation for: {sub_topic_title}")
+            
+            # Stream teaching content using LLM
+            async for chunk in self.llm_service.generate_response_stream(teaching_prompt):
+                if chunk.strip():  # Only yield non-empty chunks
+                    yield chunk
+            
+            logging.info(f"Completed streaming content generation for: {sub_topic_title}")
+            
+        except Exception as e:
+            logging.error(f"Error in streaming teaching content: {e}")
+            # Fallback to basic content if streaming fails
+            fallback_content = self._create_fallback_content(module_title, sub_topic_title, raw_content)
+            yield fallback_content
+
+    async def generate_teaching_content(
+        self, 
+        module_title: str, 
+        sub_topic_title: str, 
+        raw_content: str,
+        language: str = "en-IN"
+    ) -> str:
+        """
+        Convert raw course content into a proper teaching format with timeout handling.
+        
+        Args:
+            module_title: The module/week title
+            sub_topic_title: The specific sub-topic title
+            raw_content: Raw content from the course JSON
+            language: Language for the teaching content
+            
+        Returns:
+            Formatted teaching content ready for TTS
+        """
+        try:
+            # Truncate content if too long to avoid timeout
+            if len(raw_content) > 6000:
+                raw_content = raw_content[:5500] + "..."
+                logging.info(f"Truncated content to 5500 chars for faster processing")
+            
+            # Create a comprehensive teaching prompt
+            teaching_prompt = self._create_teaching_prompt(
+                module_title, sub_topic_title, raw_content, language
+            )
+            
+            # Generate teaching content using LLM with timeout
+            teaching_content = await asyncio.wait_for(
+                self.llm_service.generate_response(teaching_prompt, temperature=0.7),
+                timeout=5.0  # 5 second timeout for LLM generation
+            )
+            
+            # Post-process the content for better TTS delivery
+            formatted_content = self._format_for_tts(teaching_content)
+            
+            logging.info(f"Generated teaching content for: {sub_topic_title} ({len(formatted_content)} chars)")
+            return formatted_content
+            
+        except asyncio.TimeoutError:
+            logging.warning(f"Teaching content generation timeout for: {sub_topic_title}")
+            return self._create_fallback_content(module_title, sub_topic_title, raw_content)
+        except Exception as e:
+            logging.error(f"Error generating teaching content: {e}")
+            # Fallback to basic format if LLM fails
+            return self._create_fallback_content(module_title, sub_topic_title, raw_content)
+    
+    def _create_teaching_prompt(
+        self, 
+        module_title: str, 
+        sub_topic_title: str, 
+        raw_content: str,
+        language: str
+    ) -> str:
+        """Create a comprehensive prompt for teaching content generation."""
+        
+        language_instruction = self._get_language_instruction(language)
+        
+        prompt = f"""You are ProfessorAI, an expert educator. Your task is to transform the given course content into an engaging, comprehensive teaching lesson.
+
+CONTEXT:
+- Module: {module_title}
+- Topic: {sub_topic_title}
+- Language: {language_instruction}
+
+RAW CONTENT TO TEACH:
+{raw_content}
+
+INSTRUCTIONS:
+1. Create a complete teaching lesson that sounds natural when spoken aloud
+2. Start with a warm welcome and introduction to the topic
+3. Explain concepts clearly with examples and analogies
+4. Break down complex ideas into digestible parts
+5. Include real-world applications and relevance
+6. Use a conversational, engaging teaching tone
+7. Add natural pauses and transitions between concepts
+8. End with a summary and key takeaways
+9. Make it sound like a real professor teaching in a classroom
+
+TEACHING STYLE:
+- Conversational and engaging
+- Clear explanations with examples
+- Logical flow from basic to advanced concepts
+- Include rhetorical questions to engage students
+- Use analogies and real-world connections
+- Maintain enthusiasm and clarity
+
+RESPONSE FORMAT:
+Provide only the teaching content, ready to be converted to speech. Do not include any meta-commentary or instructions.
+
+{language_instruction}
+
+Begin the lesson:"""
+
+        return prompt
+    
+    def _get_language_instruction(self, language: str) -> str:
+        """Get language-specific instruction for the prompt."""
+        language_map = {
+            "en-IN": "Respond in clear, natural English suitable for Indian students.",
+            "hi-IN": "हिंदी में स्पष्ट और प्राकृतिक भाषा में उत्तर दें।",
+            "ta-IN": "தெளivமான மற்றும் இயல்பான தமிழில் பதிலளிக்கவும்।",
+            "te-IN": "స్పష్టమైన మరియు సహజమైన తెలుగులో సమాధానం ఇవ్వండి।",
+            "kn-IN": "ಸ್ಪಷ್ಟ ಮತ್ತು ನೈಸರ್ಗಿಕ ಕನ್ನಡದಲ್ಲಿ ಉತ್ತರಿಸಿ।",
+            "ml-IN": "വ്യക്തവും സ്വാഭാവികവുമായ മലയാളത്തിൽ ഉത്തരം നൽകുക।",
+            "gu-IN": "સ્પષ્ટ અને કુદરતી ગુજરાતીમાં જવાબ આપો।",
+            "mr-IN": "स्पष्ट आणि नैसर्गिक मराठीत उत्तर द्या।",
+            "bn-IN": "স্পষ্ট এবং প্রাকৃতিক বাংলায় উত্তর দিন।",
+            "pa-IN": "ਸਪੱਸ਼ਟ ਅਤੇ ਕੁਦਰਤੀ ਪੰਜਾਬੀ ਵਿੱਚ ਜਵਾਬ ਦਿਓ।",
+            "ur-IN": "واضح اور فطری اردو میں جواب دیں۔"
+        }
+        return language_map.get(language, "Respond in clear, natural English.")
+    
+    def _format_for_tts(self, content: str) -> str:
+        """Format the content for better TTS delivery."""
+        # Add natural pauses
+        content = content.replace(". ", ". ... ")
+        content = content.replace("? ", "? ... ")
+        content = content.replace("! ", "! ... ")
+        
+        # Add longer pauses for paragraph breaks
+        content = content.replace("\n\n", " ... ... ")
+        
+        # Ensure proper sentence endings
+        if not content.endswith(('.', '!', '?')):
+            content += "."
+        
+        # Add a natural ending
+        content += " ... Thank you for your attention. Feel free to ask any questions about this topic."
+        
+        return content
+    
+    def _create_fallback_content(
+        self, 
+        module_title: str, 
+        sub_topic_title: str, 
+        raw_content: str
+    ) -> str:
+        """Create basic teaching content if LLM fails."""
+        # Extract first meaningful paragraph or sentences
+        import re
+        
+        # Clean the raw content
+        cleaned_content = re.sub(r'#+ ', '', raw_content)  # Remove markdown headers
+        cleaned_content = re.sub(r'\n+', ' ', cleaned_content)  # Replace newlines with spaces
+        cleaned_content = re.sub(r'\s+', ' ', cleaned_content)  # Normalize spaces
+        
+        # Take first 800 characters for a reasonable explanation
+        if len(cleaned_content) > 800:
+            # Try to end at a sentence boundary
+            truncated = cleaned_content[:800]
+            last_period = truncated.rfind('.')
+            if last_period > 600:  # Only if we don't lose too much
+                cleaned_content = truncated[:last_period + 1]
+            else:
+                cleaned_content = truncated + "."
+        
+        return f"""Welcome to today's lesson on {sub_topic_title} from the module {module_title}. 
+
+Let me explain this important topic to you.
+
+{cleaned_content}
+
+This covers the key concepts you need to understand about {sub_topic_title}. I hope this explanation helps you grasp the important points. 
+
+Please feel free to ask if you have any questions about this topic. Thank you for your attention."""
+
+    async def generate_lesson_outline(
+        self, 
+        module_title: str, 
+        sub_topics: list,
+        language: str = "en-IN"
+    ) -> str:
+        """Generate a lesson outline for an entire module."""
+        try:
+            outline_prompt = f"""Create a comprehensive lesson outline for the module: {module_title}
+
+Sub-topics to cover:
+{chr(10).join([f"- {topic.get('title', 'Unknown topic')}" for topic in sub_topics])}
+
+Create an engaging introduction that:
+1. Welcomes students to the module
+2. Explains what they will learn
+3. Shows the relevance and importance
+4. Outlines the learning journey
+
+Language: {self._get_language_instruction(language)}
+
+Provide only the introduction content, ready for speech synthesis."""
+
+            outline = await self.llm_service.generate_response(outline_prompt)
+            return self._format_for_tts(outline)
+            
+        except Exception as e:
+            logging.error(f"Error generating lesson outline: {e}")
+            return f"Welcome to {module_title}. In this module, we will explore several important topics that will enhance your understanding of the subject."
+=== ./services/chat_service.py ===
+"""
+Chat Service - Handles RAG-based conversations and multilingual support
+"""
+
+import time
+import logging
+from typing import Dict, Any
+import config
+from services.document_service import DocumentProcessor
+from services.rag_service import RAGService
+from services.llm_service import LLMService
+from services.sarvam_service import SarvamService
+
+class ChatService:
+    """Main chat service that coordinates RAG, translation, and LLM services."""
+    
+    def __init__(self):
+        self.llm_service = LLMService()
+        self.sarvam_service = SarvamService()
+        self.document_processor = DocumentProcessor()
+        self.vector_store = self._initialize_vector_store()
+        
+        if self.vector_store:
+            self.rag_service = RAGService(self.vector_store)
+            self.is_rag_active = True
+            logging.info("✅ Vectorstore loaded and RAG chain initialized")
+        else:
+            self.rag_service = None
+            self.is_rag_active = False
+            logging.warning("❗ No vectorstore found. Operating in general knowledge mode")
+
+    def _initialize_vector_store(self):
+        """Initializes the vector store from ChromaDB Cloud or local FAISS."""
+        try:
+            if config.USE_CHROMA_CLOUD:
+                from core.cloud_vectorizer import CloudVectorizer
+                logging.info("Attempting to load vector store from ChromaDB Cloud...")
+                cloud_vectorizer = CloudVectorizer()
+                return cloud_vectorizer.get_vector_store()
+            else:
+                logging.info("Attempting to load vector store from local FAISS...")
+                return self.document_processor.get_vectorstore()
+        except Exception as e:
+            logging.error(f"Failed to initialize vector store: {e}")
+            return None
+
+    async def ask_question(self, query: str, query_language_code: str = "en-IN") -> Dict[str, Any]:
+        """Answer a question using RAG with multilingual support."""
+        
+        response_lang_name = next(
+            (lang["name"] for lang in config.SUPPORTED_LANGUAGES if lang["code"] == query_language_code), 
+            "English"
+        )
+
+        if self.is_rag_active:
+            # Translate query to English if needed
+            start_time = time.time()
+            english_query = query
+            if query_language_code != "en-IN":
+                logging.info("[TASK] Translating query to English using Sarvam AI...")
+                english_query = await self.sarvam_service.translate_text(
+                    text=query,
+                    source_language_code=query_language_code,
+                    target_language_code="en-IN"
+                )
+                end_time = time.time()
+                logging.info(f"  > Translation complete in {end_time - start_time:.2f}s. (Query: '{english_query}')")
+            
+            try:
+                # Execute RAG chain
+                logging.info("[TASK] Executing RAG chain...")
+                start_time = time.time()
+                answer = await self.rag_service.get_answer(english_query, response_lang_name)
+                end_time = time.time()
+                logging.info(f"  > RAG chain complete in {end_time - start_time:.2f}s.")
+                
+                # Check if RAG found an answer
+                if "I cannot find the answer" in answer:
+                    logging.info("  > RAG chain failed. Falling back to general LLM...")
+                    start_time = time.time()
+                    answer = await self.llm_service.get_general_response(query, response_lang_name)
+                    end_time = time.time()
+                    logging.info(f"  > Fallback complete in {end_time - start_time:.2f}s.")
+                    return {"answer": answer, "sources": ["General Knowledge Fallback"]}
+
+                return {"answer": answer, "sources": ["Course Content"]}
+
+            except Exception as e:
+                logging.error(f"  > Error during RAG chain invocation: {e}. Falling back...")
+        
+        # Fallback to general knowledge
+        logging.info("[TASK] Using general knowledge fallback...")
+        start_time = time.time()
+        answer = await self.llm_service.get_general_response(query, response_lang_name)
+        end_time = time.time()
+        logging.info(f"  > General knowledge fallback complete in {end_time - start_time:.2f}s.")
+        return {"answer": answer, "sources": ["General Knowledge"]}
+    
+    def update_with_course_content(self, course_data: dict):
+        """Update the RAG system with new course content."""
+        try:
+            # Extract course documents
+            course_documents = self.document_processor.extract_course_documents(course_data)
+            
+            if course_documents:
+                # Split documents
+                split_course_docs = self.document_processor.split_documents(course_documents)
+                
+                # Add to vectorstore
+                if self.vector_store:
+                    self.vector_store.add_documents(split_course_docs)
+                else:
+                    # This case is unlikely if initialization is correct, but handled for safety
+                    self.vector_store = self._initialize_vector_store()
+                    if self.vector_store:
+                        self.vector_store.add_documents(split_course_docs)
+                        self.rag_service = RAGService(self.vector_store)
+                        self.is_rag_active = True
+                
+                logging.info(f"✅ Added {len(split_course_docs)} course content chunks to RAG system")
+                
+        except Exception as e:
+            logging.error(f"⚠️ Error updating RAG with course content: {e}")
+            raise e
+=== ./services/audio_service.py ===
+"""
+Audio Service - Handles audio transcription and generation
+"""
+
+import io
+from typing import Optional
+import config
+from services.sarvam_service import SarvamService
+from utils.connection_monitor import is_client_connected, is_normal_closure
+
+class AudioService:
+    """Service for audio processing operations."""
+    
+    def __init__(self):
+        self.sarvam_service = SarvamService()
+    
+    async def transcribe_audio(self, audio_file_buffer: io.BytesIO, language: Optional[str] = None) -> str:
+        """Transcribe audio to text."""
+        effective_language = language or config.SUPPORTED_LANGUAGES[0]['code']
+        return await self.sarvam_service.transcribe_audio(audio_file_buffer, effective_language)
+    
+    async def generate_audio_from_text(self, text: str, language: Optional[str] = None, ultra_fast: bool = False) -> io.BytesIO:
+        """Generate audio from text with speed options."""
+        effective_language = language or config.SUPPORTED_LANGUAGES[0]['code']
+        
+        if ultra_fast:
+            return await self.sarvam_service.generate_audio_ultra_fast(
+                text, 
+                effective_language, 
+                config.SARVAM_TTS_SPEAKER
+            )
+        else:
+            return await self.sarvam_service.generate_audio(
+                text, 
+                effective_language, 
+                config.SARVAM_TTS_SPEAKER
+            )
+    
+    async def stream_audio_from_text(self, text: str, language: Optional[str] = None, websocket=None):
+        """Stream audio chunks as they're generated for real-time playback."""
+        effective_language = language or config.SUPPORTED_LANGUAGES[0]['code']
+        
+        try:
+            async for audio_chunk in self.sarvam_service.stream_audio_generation(
+                text, 
+                effective_language, 
+                config.SARVAM_TTS_SPEAKER,
+                websocket
+            ):
+                if audio_chunk and len(audio_chunk) > 0:
+                    yield audio_chunk
+        except Exception as e:
+            error_msg = str(e)
+            # Check if this is a normal disconnection
+            if self._is_normal_disconnection(error_msg):
+                print(f"🔌 Client disconnected during audio streaming: {e}")
+                print(f"⚠️ Stopping audio streaming - client no longer connected")
+                return
+            else:
+                print(f"❌ Error in audio streaming: {e}")
+                # Only fallback for actual errors, not disconnections
+                if not websocket or not self._is_client_disconnected(websocket):
+                    try:
+                        audio_buffer = await self.generate_audio_from_text(text, language, ultra_fast=True)
+                        if audio_buffer and audio_buffer.getbuffer().nbytes > 0:
+                            # Yield the entire audio as a single chunk
+                            yield audio_buffer.getvalue()
+                    except Exception as fallback_error:
+                        print(f"Fallback audio generation also failed: {fallback_error}")
+                        # Return empty generator
+                        return
+    
+    def _is_client_disconnected(self, websocket) -> bool:
+        """Check if WebSocket client is disconnected."""
+        try:
+            if not websocket:
+                return False
+            
+            # Check if WebSocket is closed or closing
+            if hasattr(websocket, 'closed') and websocket.closed:
+                return True
+            
+            if hasattr(websocket, 'state'):
+                # WebSocket states: CONNECTING=0, OPEN=1, CLOSING=2, CLOSED=3
+                return websocket.state in [2, 3]  # CLOSING or CLOSED
+            
+            return False
+        except Exception:
+            # If we can't check the state, assume disconnected for safety
+            return True
+    
+    def _is_normal_disconnection(self, error_msg: str) -> bool:
+        """Check if error message indicates a normal client disconnection."""
+        if not error_msg:
+            return False
+        
+        error_msg = str(error_msg).lower()
+        
+        # Check for normal WebSocket closure codes
+        normal_codes = ["1000", "1001"]  # OK, Going Away
+        for code in normal_codes:
+            if code in error_msg:
+                return True
+        
+        # Check for common disconnection phrases
+        disconnection_phrases = [
+            "connection closed",
+            "client disconnected", 
+            "going away",
+            "connection lost"
+        ]
+        
+        for phrase in disconnection_phrases:
+            if phrase in error_msg:
+                return True
+        
+        return False
+=== ./services/quiz_service.py ===
+"""
+Quiz Service - Handles MCQ quiz generation and evaluation for ProfAI
+"""
+
+import json
+import os
+import uuid
+import logging
+from datetime import datetime
+from typing import List, Dict, Optional
+from services.llm_service import LLMService
+from models.schemas import Quiz, QuizQuestion, QuizSubmission, QuizResult, QuizDisplay, QuizQuestionDisplay
+import config
+
+class QuizService:
+    """Service for generating and evaluating MCQ quizzes."""
+    
+    def __init__(self):
+        self.llm_service = LLMService()
+        self.quiz_storage_dir = os.path.join(os.path.dirname(__file__), "..", "data", "quizzes")
+        self.answers_storage_dir = os.path.join(os.path.dirname(__file__), "..", "data", "quiz_answers")
+        
+        # Ensure storage directories exist
+        os.makedirs(self.quiz_storage_dir, exist_ok=True)
+        os.makedirs(self.answers_storage_dir, exist_ok=True)
+        
+        logging.info("QuizService initialized")
+    
+    async def generate_module_quiz(self, module_week: int, course_content: dict) -> Quiz:
+        """Generate a 20-question MCQ quiz for a specific module."""
+        try:
+            # Find the specific module
+            module = None
+            for mod in course_content.get("modules", []):
+                if mod.get("week") == module_week:
+                    module = mod
+                    break
+            
+            if not module:
+                raise ValueError(f"Module week {module_week} not found in course content")
+            
+            # Extract content for the module
+            module_content = self._extract_module_content(module)
+            
+            # Generate quiz using LLM
+            quiz_id = f"module_{module_week}_{uuid.uuid4().hex[:8]}"
+            
+            logging.info(f"Generating 20-question quiz for module week {module_week}")
+            
+            quiz_prompt = self._create_module_quiz_prompt(module, module_content)
+            quiz_response = await self.llm_service.generate_response(quiz_prompt, temperature=0.7)
+            
+            # Parse the LLM response into structured quiz
+            questions = self._parse_quiz_response(quiz_response, quiz_id)
+            
+            # Ensure we have exactly 20 questions
+            if len(questions) < 20:
+                # Generate additional questions if needed
+                additional_prompt = self._create_additional_questions_prompt(module_content, 20 - len(questions))
+                additional_response = await self.llm_service.generate_response(additional_prompt, temperature=0.7)
+                additional_questions = self._parse_quiz_response(additional_response, quiz_id, start_id=len(questions))
+                questions.extend(additional_questions)
+            
+            # Take only first 20 questions
+            questions = questions[:20]
+            
+            quiz = Quiz(
+                quiz_id=quiz_id,
+                title=f"Module {module_week} Quiz: {module.get('title', 'Module Quiz')}",
+                description=f"20-question MCQ quiz covering content from Week {module_week}",
+                questions=questions,
+                total_questions=len(questions),
+                quiz_type="module",
+                module_week=module_week
+            )
+            
+            # Store quiz and answers with course_id
+            self._store_quiz(quiz, course_content.get('course_id'))
+            
+            logging.info(f"Generated module quiz with {len(questions)} questions")
+            return quiz
+            
+        except Exception as e:
+            logging.error(f"Error generating module quiz: {e}")
+            raise e
+    
+    async def generate_course_quiz(self, course_content: dict) -> Quiz:
+        """Generate a 40-question MCQ quiz covering the entire course."""
+        try:
+            # Extract content from all modules
+            all_content = self._extract_all_course_content(course_content)
+            
+            quiz_id = f"course_{uuid.uuid4().hex[:8]}"
+            
+            logging.info("Generating 40-question course quiz")
+            
+            # Generate quiz using LLM in chunks (20 questions at a time for better results)
+            quiz_prompt_1 = self._create_course_quiz_prompt(all_content, part=1)
+            quiz_response_1 = await self.llm_service.generate_response(quiz_prompt_1, temperature=0.7)
+            questions_1 = self._parse_quiz_response(quiz_response_1, quiz_id, start_id=0)
+            
+            quiz_prompt_2 = self._create_course_quiz_prompt(all_content, part=2)
+            quiz_response_2 = await self.llm_service.generate_response(quiz_prompt_2, temperature=0.7)
+            questions_2 = self._parse_quiz_response(quiz_response_2, quiz_id, start_id=20)
+            
+            # Combine all questions
+            all_questions = questions_1 + questions_2
+            
+            # Take exactly 40 questions
+            all_questions = all_questions[:40]
+            
+            quiz = Quiz(
+                quiz_id=quiz_id,
+                title=f"Final Course Quiz: {course_content.get('course_title', 'Course Quiz')}",
+                description="40-question comprehensive MCQ quiz covering the entire course content",
+                questions=all_questions,
+                total_questions=len(all_questions),
+                quiz_type="course",
+                module_week=None
+            )
+            
+            # Store quiz and answers with course_id
+            self._store_quiz(quiz, course_content.get('course_id'))
+            
+            logging.info(f"Generated course quiz with {len(all_questions)} questions")
+            return quiz
+            
+        except Exception as e:
+            logging.error(f"Error generating course quiz: {e}")
+            raise e
+    
+    def evaluate_quiz(self, submission: QuizSubmission) -> QuizResult:
+        """Evaluate a quiz submission and return results."""
+        try:
+            # Load quiz and answers
+            quiz_data = self._load_quiz_answers(submission.quiz_id)
+            if not quiz_data:
+                raise ValueError(f"Quiz {submission.quiz_id} not found")
+            
+            correct_answers = quiz_data["answers"]
+            quiz_info = quiz_data["quiz"]
+            
+            # Calculate score
+            score = 0
+            detailed_results = []
+            
+            for question_id, user_answer in submission.answers.items():
+                is_correct = user_answer.upper() == correct_answers.get(question_id, "").upper()
+                if is_correct:
+                    score += 1
+                
+                detailed_results.append({
+                    "question_id": question_id,
+                    "user_answer": user_answer.upper(),
+                    "correct_answer": correct_answers.get(question_id, ""),
+                    "is_correct": is_correct
+                })
+            
+            total_questions = len(correct_answers)
+            percentage = (score / total_questions) * 100 if total_questions > 0 else 0
+            passed = percentage >= 60.0
+            
+            result = QuizResult(
+                quiz_id=submission.quiz_id,
+                user_id=submission.user_id,
+                score=score,
+                total_questions=total_questions,
+                percentage=round(percentage, 2),
+                passed=passed,
+                detailed_results=detailed_results
+            )
+            
+            # Store submission result
+            self._store_submission_result(submission, result)
+            
+            logging.info(f"Evaluated quiz {submission.quiz_id}: {score}/{total_questions} ({percentage:.1f}%)")
+            return result
+            
+        except Exception as e:
+            logging.error(f"Error evaluating quiz: {e}")
+            raise e
+    
+    def get_quiz_without_answers(self, quiz_id: str) -> Optional[QuizDisplay]:
+        """Get quiz for display (without correct answers)."""
+        try:
+            quiz_file = os.path.join(self.quiz_storage_dir, f"{quiz_id}.json")
+            if not os.path.exists(quiz_file):
+                return None
+            
+            with open(quiz_file, 'r', encoding='utf-8') as f:
+                quiz_data = json.load(f)
+            
+            # Create display questions without correct answers
+            display_questions = []
+            for question in quiz_data["questions"]:
+                display_question = QuizQuestionDisplay(
+                    question_id=question["question_id"],
+                    question_text=question["question_text"],
+                    options=question["options"],
+                    topic=question.get("topic", "")
+                )
+                display_questions.append(display_question)
+            
+            # Create display quiz
+            display_quiz = QuizDisplay(
+                quiz_id=quiz_data["quiz_id"],
+                title=quiz_data["title"],
+                description=quiz_data["description"],
+                questions=display_questions,
+                total_questions=quiz_data["total_questions"],
+                quiz_type=quiz_data["quiz_type"],
+                module_week=quiz_data.get("module_week"),
+                course_id=quiz_data.get("course_id")
+            )
+            
+            return display_quiz
+            
+        except Exception as e:
+            logging.error(f"Error loading quiz {quiz_id}: {e}")
+            return None
+    
+    def _extract_module_content(self, module: dict) -> str:
+        """Extract text content from a module."""
+        content_parts = [f"Module Week {module.get('week')}: {module.get('title', '')}"]
+        
+        for sub_topic in module.get("sub_topics", []):
+            content_parts.append(f"\n--- {sub_topic.get('title', '')} ---")
+            content_parts.append(sub_topic.get('content', ''))
+        
+        return "\n".join(content_parts)
+    
+    def _extract_all_course_content(self, course_content: dict) -> str:
+        """Extract text content from entire course."""
+        content_parts = [f"Course: {course_content.get('course_title', '')}"]
+        
+        for module in course_content.get("modules", []):
+            content_parts.append(self._extract_module_content(module))
+        
+        return "\n".join(content_parts)
+    
+    def _create_module_quiz_prompt(self, module: dict, content: str) -> str:
+        """Create prompt for module quiz generation."""
+        return f"""Generate a 20-question multiple choice quiz based on the following module content.
+
+MODULE INFORMATION:
+Week: {module.get('week')}
+Title: {module.get('title', '')}
+
+CONTENT:
+{content}
+
+REQUIREMENTS:
+1. Generate exactly 20 multiple choice questions
+2. Each question should have 4 options (A, B, C, D)
+3. Questions should cover different aspects of the module content
+4. Mix difficulty levels: 40% easy, 40% medium, 20% hard
+5. Include practical application questions
+6. Ensure questions test understanding, not just memorization
+
+FORMAT YOUR RESPONSE AS:
+Q1. [Question text]
+A) [Option A]
+B) [Option B] 
+C) [Option C]
+D) [Option D]
+ANSWER: [A/B/C/D]
+EXPLANATION: [Brief explanation]
+
+Q2. [Next question...]
+
+Continue this format for all 20 questions."""
+    
+    def _create_course_quiz_prompt(self, content: str, part: int) -> str:
+        """Create prompt for course quiz generation."""
+        question_range = f"questions {1 + (part-1)*20} to {part*20}" if part == 1 else f"questions 21 to 40"
+        
+        return f"""Generate {question_range} of a comprehensive multiple choice quiz based on the entire course content below.
+
+COURSE CONTENT:
+{content[:8000]}  # Limit content to avoid token limits
+
+REQUIREMENTS:
+1. Generate exactly 20 multiple choice questions for this part
+2. Each question should have 4 options (A, B, C, D)
+3. Cover content from all modules proportionally
+4. Mix difficulty levels: 30% easy, 50% medium, 20% hard
+5. Include synthesis questions that connect concepts across modules
+6. Test both theoretical understanding and practical application
+
+FORMAT YOUR RESPONSE AS:
+Q{1 + (part-1)*20}. [Question text]
+A) [Option A]
+B) [Option B]
+C) [Option C] 
+D) [Option D]
+ANSWER: [A/B/C/D]
+EXPLANATION: [Brief explanation]
+
+Continue this format for all 20 questions in this part."""
+    
+    def _create_additional_questions_prompt(self, content: str, num_questions: int) -> str:
+        """Create prompt for generating additional questions."""
+        return f"""Generate {num_questions} additional multiple choice questions based on the following content:
+
+{content}
+
+REQUIREMENTS:
+1. Generate exactly {num_questions} questions
+2. Each question should have 4 options (A, B, C, D)
+3. Focus on different aspects not covered in previous questions
+4. Maintain good difficulty distribution
+
+FORMAT YOUR RESPONSE AS:
+Q. [Question text]
+A) [Option A]
+B) [Option B]
+C) [Option C]
+D) [Option D]
+ANSWER: [A/B/C/D]
+EXPLANATION: [Brief explanation]"""
+    
+    def _parse_quiz_response(self, response: str, quiz_id: str, start_id: int = 0) -> List[QuizQuestion]:
+        """Parse LLM response into structured quiz questions."""
+        questions = []
+        lines = response.split('\n')
+        
+        current_question = {}
+        question_count = start_id
+        
+        for line in lines:
+            line = line.strip()
+            
+            # Question line
+            if line.startswith('Q') and ('.' in line or ')' in line):
+                if current_question and 'question_text' in current_question:
+                    # Save previous question
+                    questions.append(self._create_question_object(current_question, quiz_id, question_count))
+                    question_count += 1
+                
+                # Start new question
+                current_question = {}
+                # Extract question text after Q1., Q2., etc.
+                question_text = line.split('.', 1)[-1].strip() if '.' in line else line.split(')', 1)[-1].strip()
+                current_question['question_text'] = question_text
+                current_question['options'] = []
+            
+            # Option lines
+            elif line.startswith(('A)', 'B)', 'C)', 'D)')):
+                if 'options' in current_question:
+                    option_text = line[2:].strip()  # Remove "A)" prefix
+                    current_question['options'].append(option_text)
+            
+            # Answer line
+            elif line.startswith('ANSWER:'):
+                answer = line.replace('ANSWER:', '').strip().upper()
+                current_question['correct_answer'] = answer
+            
+            # Explanation line
+            elif line.startswith('EXPLANATION:'):
+                explanation = line.replace('EXPLANATION:', '').strip()
+                current_question['explanation'] = explanation
+        
+        # Don't forget the last question
+        if current_question and 'question_text' in current_question:
+            questions.append(self._create_question_object(current_question, quiz_id, question_count))
+        
+        return questions
+    
+    def _create_question_object(self, question_data: dict, quiz_id: str, question_num: int) -> QuizQuestion:
+        """Create a QuizQuestion object from parsed data."""
+        return QuizQuestion(
+            question_id=f"{quiz_id}_q{question_num + 1}",
+            question_text=question_data.get('question_text', ''),
+            options=question_data.get('options', [])[:4],  # Ensure max 4 options
+            correct_answer=question_data.get('correct_answer', 'A'),
+            explanation=question_data.get('explanation', ''),
+            topic=question_data.get('topic', '')
+        )
+    
+    def _store_quiz(self, quiz: Quiz, course_id: str = None):
+        """Store quiz and answers separately."""
+        try:
+            # Store full quiz data with course_id
+            quiz_data = quiz.dict()
+            if course_id:
+                quiz_data['course_id'] = str(course_id)
+            
+            quiz_file = os.path.join(self.quiz_storage_dir, f"{quiz.quiz_id}.json")
+            with open(quiz_file, 'w', encoding='utf-8') as f:
+                json.dump(quiz_data, f, indent=2, ensure_ascii=False)
+            
+            # Store answers separately for evaluation
+            answers = {}
+            for question in quiz.questions:
+                answers[question.question_id] = question.correct_answer
+            
+            answer_data = {
+                "quiz_id": quiz.quiz_id,
+                "answers": answers,
+                "quiz": {
+                    "title": quiz.title,
+                    "total_questions": quiz.total_questions,
+                    "quiz_type": quiz.quiz_type,
+                    "created_at": datetime.utcnow().isoformat()
+                }
+            }
+            
+            answer_file = os.path.join(self.answers_storage_dir, f"{quiz.quiz_id}_answers.json")
+            with open(answer_file, 'w', encoding='utf-8') as f:
+                json.dump(answer_data, f, indent=2, ensure_ascii=False)
+            
+            logging.info(f"Stored quiz {quiz.quiz_id} and answers")
+            
+        except Exception as e:
+            logging.error(f"Error storing quiz: {e}")
+            raise e
+    
+    def _load_quiz_answers(self, quiz_id: str) -> Optional[dict]:
+        """Load quiz answers for evaluation."""
+        try:
+            answer_file = os.path.join(self.answers_storage_dir, f"{quiz_id}_answers.json")
+            if not os.path.exists(answer_file):
+                return None
+            
+            with open(answer_file, 'r', encoding='utf-8') as f:
+                return json.load(f)
+                
+        except Exception as e:
+            logging.error(f"Error loading quiz answers: {e}")
+            return None
+    
+    def _store_submission_result(self, submission: QuizSubmission, result: QuizResult):
+        """Store quiz submission and result."""
+        try:
+            submission_data = {
+                "submission": submission.dict(),
+                "result": result.dict(),
+                "submitted_at": datetime.utcnow().isoformat()
+            }
+            
+            submission_file = os.path.join(
+                self.answers_storage_dir, 
+                f"{submission.quiz_id}_{submission.user_id}_submission.json"
+            )
+            
+            with open(submission_file, 'w', encoding='utf-8') as f:
+                json.dump(submission_data, f, indent=2, ensure_ascii=False)
+            
+            logging.info(f"Stored submission result for user {submission.user_id}")
+            
+        except Exception as e:
+            logging.error(f"Error storing submission result: {e}")
+

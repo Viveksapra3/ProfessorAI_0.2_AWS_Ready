@@ -1,0 +1,271 @@
+{
+  "quiz_id": "module_1_db9ba7a7",
+  "title": "Module 1 Quiz: Introduction to Artificial Intelligence",
+  "description": "20-question MCQ quiz covering content from Week 1",
+  "questions": [
+    {
+      "question_id": "module_1_db9ba7a7_q1",
+      "question_text": "What does Artificial Intelligence (AI) primarily combine to enable machines to perform tasks requiring human intelligence?",
+      "options": [
+        "Computer science and mathematics",
+        "Computer science and extensive datasets",
+        "Mathematics and psychology",
+        "Philosophy and computer science"
+      ],
+      "correct_answer": "B",
+      "explanation": "AI combines computer science with extensive datasets to perform tasks typically requiring human intelligence.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_db9ba7a7_q2",
+      "question_text": "Which of the following is NOT a key feature of AI?",
+      "options": [
+        "Understanding language",
+        "Learning from examples",
+        "Emotional intelligence",
+        "Autonomy in task execution"
+      ],
+      "correct_answer": "C",
+      "explanation": "While AI can simulate certain aspects of emotional intelligence, it does not possess genuine emotional understanding.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_db9ba7a7_q3",
+      "question_text": "What is Narrow AI also known as?",
+      "options": [
+        "Strong AI",
+        "General AI",
+        "Weak AI",
+        "Superintelligent AI"
+      ],
+      "correct_answer": "C",
+      "explanation": "Narrow AI is also referred to as Weak AI, as it is designed to perform specific tasks without general cognitive abilities.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_db9ba7a7_q4",
+      "question_text": "Which AI capability allows machines to interpret and respond to human language?",
+      "options": [
+        "Machine Learning",
+        "Natural Language Processing",
+        "Deep Learning",
+        "Computer Vision"
+      ],
+      "correct_answer": "B",
+      "explanation": "Natural Language Processing (NLP) enables machines to understand and respond to human language.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_db9ba7a7_q5",
+      "question_text": "What is a significant advantage of AI in healthcare?",
+      "options": [
+        "It eliminates the need for human doctors.",
+        "It can completely replace traditional methods.",
+        "It enhances diagnostic accuracy.",
+        "It reduces the cost of healthcare services."
+      ],
+      "correct_answer": "C",
+      "explanation": "AI enhances diagnostic accuracy through technologies such as machine learning and deep learning.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_db9ba7a7_q6",
+      "question_text": "Which type of AI aspires to perform any intellectual task that a human can?",
+      "options": [
+        "Narrow AI",
+        "General AI",
+        "Artificial Superintelligence",
+        "Reactive Machines"
+      ],
+      "correct_answer": "B",
+      "explanation": "General AI aims to exhibit human-like cognitive abilities across a wide range of tasks.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_db9ba7a7_q7",
+      "question_text": "What is a potential limitation of AI regarding job displacement?",
+      "options": [
+        "AI creates new job opportunities.",
+        "AI can only perform repetitive tasks.",
+        "Automation may eliminate certain roles.",
+        "AI cannot enhance productivity."
+      ],
+      "correct_answer": "C",
+      "explanation": "AI can lead to job displacement as it automates roles that involve repetitive tasks.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_db9ba7a7_q8",
+      "question_text": "Which of the following is an example of a benefit of AI in business?",
+      "options": [
+        "Reduced need for data analysis",
+        "Improved decision-making through data insights",
+        "Increased reliance on human judgment",
+        "Elimination of customer service representatives"
+      ],
+      "correct_answer": "B",
+      "explanation": "AI enhances decision-making by processing large amounts of data and identifying patterns.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_db9ba7a7_q9",
+      "question_text": "What is a key characteristic of Deep Learning within AI?",
+      "options": [
+        "It uses linear regression models.",
+        "It employs neural networks with multiple layers.",
+        "It focuses solely on text data.",
+        "It requires no training data."
+      ],
+      "correct_answer": "B",
+      "explanation": "Deep Learning uses neural networks with multiple layers to analyze complex data.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_db9ba7a7_q10",
+      "question_text": "Which of the following domains of AI focuses on visual information processing?",
+      "options": [
+        "Natural Language Processing",
+        "Robotics",
+        "Machine Learning",
+        "Computer Vision"
+      ],
+      "correct_answer": "D",
+      "explanation": "Computer Vision is the domain that enables machines to interpret and understand visual data.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_db9ba7a7_q11",
+      "question_text": "Why is data quality crucial for AI systems?",
+      "options": [
+        "AI systems can function without data.",
+        "Poor or biased data can lead to inaccurate outcomes.",
+        "AI systems do not learn from data.",
+        "Data quality is irrelevant to AI performance."
+      ],
+      "correct_answer": "B",
+      "explanation": "High-quality data is essential for AI systems to function effectively and avoid biased outcomes.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_db9ba7a7_q12",
+      "question_text": "What ethical concern is associated with AI algorithms?",
+      "options": [
+        "They are always transparent.",
+        "They can inherit biases from training data.",
+        "They ensure fairness in decision-making.",
+        "They require no human oversight."
+      ],
+      "correct_answer": "B",
+      "explanation": "AI algorithms can inherit biases from their training data, leading to potentially unfair outcomes.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_db9ba7a7_q13",
+      "question_text": "How does AI contribute to personalized medicine?",
+      "options": [
+        "By creating generic treatment plans for all",
+        "By analyzing patient data to tailor treatments",
+        "By eliminating the need for diagnostics",
+        "By standardizing healthcare protocols"
+      ],
+      "correct_answer": "B",
+      "explanation": "AI analyzes individual patient data to create customized treatment plans, enhancing effectiveness.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_db9ba7a7_q14",
+      "question_text": "In which scenario would a self-driving car utilize AI?",
+      "options": [
+        "Following a predetermined route with no input",
+        "Navigating roads and making real-time decisions",
+        "Relying solely on driver instructions",
+        "Operating without sensor data"
+      ],
+      "correct_answer": "B",
+      "explanation": "Self-driving cars use AI to navigate and make decisions based on real-time data.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_db9ba7a7_q15",
+      "question_text": "Which of the following is an application of Natural Language Processing (NLP)?",
+      "options": [
+        "Image recognition",
+        "Speech-to-text conversion",
+        "Autonomous robotics",
+        "Predictive analytics"
+      ],
+      "correct_answer": "B",
+      "explanation": "Speech-to-text conversion is a common application of Natural Language Processing (NLP).",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_db9ba7a7_q16",
+      "question_text": "What is a significant challenge in AI development related to costs?",
+      "options": [
+        "AI systems require no maintenance.",
+        "High costs of data acquisition and computing power.",
+        "AI systems are inexpensive to develop.",
+        "AI development is straightforward and easy."
+      ],
+      "correct_answer": "B",
+      "explanation": "Developing AI systems can be resource-intensive, requiring significant investment in data and computing resources.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_db9ba7a7_q17",
+      "question_text": "Which type of AI is theoretical and refers to intelligence surpassing human capabilities?",
+      "options": [
+        "Narrow AI",
+        "General AI",
+        "Artificial Superintelligence",
+        "Weak AI"
+      ],
+      "correct_answer": "C",
+      "explanation": "Artificial Superintelligence (ASI) refers to AI that would surpass human intelligence across all domains.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_db9ba7a7_q18",
+      "question_text": "In which area can AI enhance decision-making?",
+      "options": [
+        "By eliminating the need for data",
+        "By processing data at unprecedented speeds",
+        "By reducing data analysis to simple tasks",
+        "By relying solely on human intuition"
+      ],
+      "correct_answer": "B",
+      "explanation": "AI can analyze data at unprecedented speeds, allowing for improved decision-making based on insights.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_db9ba7a7_q19",
+      "question_text": "What is a potential risk of AI in terms of privacy?",
+      "options": [
+        "AI does not collect personal data.",
+        "AI can manipulate individuals through data analysis.",
+        "AI systems are always transparent in their processes.",
+        "AI can enhance privacy protections."
+      ],
+      "correct_answer": "B",
+      "explanation": "AI's reliance on personal data raises ethical concerns regarding privacy and the potential for manipulation.",
+      "topic": ""
+    },
+    {
+      "question_id": "module_1_db9ba7a7_q20",
+      "question_text": "Which of the following best describes the relationship between AI and human decision-making?",
+      "options": [
+        "AI completely replaces human judgment.",
+        "AI enhances human judgment and capabilities.",
+        "AI has no impact on decision-making.",
+        "AI is only useful in non-decision-making tasks."
+      ],
+      "correct_answer": "B",
+      "explanation": "AI serves as a tool that enhances human judgment and decision-making capabilities rather than replacing them.",
+      "topic": ""
+    }
+  ],
+  "total_questions": 20,
+  "quiz_type": "module",
+  "module_week": 1,
+  "course_id": "2"
+}

@@ -1,0 +1,31 @@
+{
+  "quiz_id": "module_1_db9ba7a7",
+  "answers": {
+    "module_1_db9ba7a7_q1": "B",
+    "module_1_db9ba7a7_q2": "C",
+    "module_1_db9ba7a7_q3": "C",
+    "module_1_db9ba7a7_q4": "B",
+    "module_1_db9ba7a7_q5": "C",
+    "module_1_db9ba7a7_q6": "B",
+    "module_1_db9ba7a7_q7": "C",
+    "module_1_db9ba7a7_q8": "B",
+    "module_1_db9ba7a7_q9": "B",
+    "module_1_db9ba7a7_q10": "D",
+    "module_1_db9ba7a7_q11": "B",
+    "module_1_db9ba7a7_q12": "B",
+    "module_1_db9ba7a7_q13": "B",
+    "module_1_db9ba7a7_q14": "B",
+    "module_1_db9ba7a7_q15": "B",
+    "module_1_db9ba7a7_q16": "B",
+    "module_1_db9ba7a7_q17": "C",
+    "module_1_db9ba7a7_q18": "B",
+    "module_1_db9ba7a7_q19": "B",
+    "module_1_db9ba7a7_q20": "B"
+  },
+  "quiz": {
+    "title": "Module 1 Quiz: Introduction to Artificial Intelligence",
+    "total_questions": 20,
+    "quiz_type": "module",
+    "created_at": "2025-09-29T13:58:20.503772"
+  }
+}

@@ -25,17 +25,22 @@ for mod in modules_to_clear:
 def start_fastapi_server(host, port):
     """Start FastAPI server in a separate thread with proper async handling."""
     try:
-        import uvicorn
-        from app import app
-        
-        print(f"🚀 Starting FastAPI server on http://{host}:{port}")
-        # Create completely isolated event loop for FastAPI thread
-        import asyncio
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        
-        # Run without loop parameter to avoid ProactorEventLoop error
-        uvicorn.run(app, host=host, port=port, log_level="warning")
+        import subprocess
+        import sys
+
+        print(f"🚀 Starting FastAPI server with Gunicorn using config file...")
+
+        # Command to run Gunicorn with a configuration file
+        # This is the standard production approach.
+        command = [
+            "gunicorn",
+            "-c", "gunicorn_config.py", # Use the configuration file
+            "app:app"
+        ]
+
+        # Start the Gunicorn process
+        process = subprocess.Popen(command, stdout=sys.stdout, stderr=sys.stderr)
+        process.wait()  # Wait for the process to complete
     except Exception as e:
         print(f"❌ FastAPI startup error: {e}")
         import traceback

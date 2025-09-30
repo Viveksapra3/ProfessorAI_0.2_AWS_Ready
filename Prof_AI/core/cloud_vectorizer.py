@@ -24,7 +24,8 @@ class CloudVectorizer:
         )
         self.embeddings = OpenAIEmbeddings(
             model=config.EMBEDDING_MODEL_NAME, 
-            openai_api_key=config.OPENAI_API_KEY
+            openai_api_key=config.OPENAI_API_KEY,
+            chunk_size=200
         )
         logging.info("ChromaDB Cloud client initialized.")
 
@@ -58,12 +59,27 @@ class CloudVectorizer:
         
         try:
             logging.info(f"Creating/updating ChromaDB Cloud collection '{config.CHROMA_COLLECTION_NAME}' with {len(documents)} documents.")
-            vector_store = Chroma.from_documents(
-                client=self.client,
-                documents=documents,
-                embedding=self.embeddings,
-                collection_name=config.CHROMA_COLLECTION_NAME,
-            )
+            
+            # Manual batching to respect ChromaDB Cloud's 300 record limit per upsert
+            batch_size = 200
+            vector_store = None
+            
+            for i in range(0, len(documents), batch_size):
+                batch = documents[i:i + batch_size]
+                logging.info(f"Processing batch {i//batch_size + 1}: {len(batch)} documents")
+                
+                if vector_store is None:
+                    # Create the initial vector store with the first batch
+                    vector_store = Chroma.from_documents(
+                        client=self.client,
+                        documents=batch,
+                        embedding=self.embeddings,
+                        collection_name=config.CHROMA_COLLECTION_NAME,
+                    )
+                else:
+                    # Add subsequent batches to the existing vector store
+                    vector_store.add_documents(batch)
+            
             logging.info("ChromaDB Cloud collection created/updated successfully.")
             return vector_store
         except Exception as e:

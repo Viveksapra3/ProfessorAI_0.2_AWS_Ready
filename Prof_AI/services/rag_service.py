@@ -22,7 +22,7 @@ class RAGService:
                 self.vectorstore = cloud_vectorizer.get_vector_store()
             else:
                 from core.vectorizer import Vectorizer
-                embeddings = OpenAIEmbeddings(model=config.EMBEDDING_MODEL_NAME, openai_api_key=config.OPENAI_API_KEY)
+                embeddings = OpenAIEmbeddings(model=config.EMBEDDING_MODEL_NAME, openai_api_key=config.OPENAI_API_KEY,chunk_size=200)
                 self.vectorstore = Vectorizer.load_vector_store(config.FAISS_DB_PATH, embeddings)
                 if not self.vectorstore:
                     # If loading fails, create an empty FAISS store to avoid crashing
@@ -30,7 +30,7 @@ class RAGService:
                     import numpy as np
                     # Create a dummy document and embedding to initialize an empty store
                     dummy_doc = ["Initial empty document"]
-                    dummy_embeddings = OpenAIEmbeddings(model=config.EMBEDDING_MODEL_NAME, openai_api_key=config.OPENAI_API_KEY)
+                    dummy_embeddings = OpenAIEmbeddings(model=config.EMBEDDING_MODEL_NAME, openai_api_key=config.OPENAI_API_KEY,chunk_size=200)
                     self.vectorstore = FAISS.from_texts(dummy_doc, dummy_embeddings)
         else:
             self.vectorstore = vectorstore
