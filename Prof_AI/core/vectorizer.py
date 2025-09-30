@@ -13,7 +13,7 @@ class Vectorizer:
     """Handles the creation, saving, and loading of vector embeddings and the vector store."""
 
     def __init__(self, embedding_model: str, api_key: str):
-        self.embeddings = OpenAIEmbeddings(model=embedding_model, openai_api_key=api_key)
+        self.embeddings = OpenAIEmbeddings(model=embedding_model, openai_api_key=api_key, chunk_size=200)
 
     def create_vector_store(self, chunks: List[Document]):
         """Creates a FAISS vector store from a list of document chunks."""

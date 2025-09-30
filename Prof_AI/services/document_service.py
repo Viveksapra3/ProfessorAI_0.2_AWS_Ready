@@ -338,7 +338,8 @@ class DocumentProcessor:
     def __init__(self):
         self.embeddings = OpenAIEmbeddings(
             model=config.EMBEDDING_MODEL_NAME, 
-            openai_api_key=config.OPENAI_API_KEY
+            openai_api_key=config.OPENAI_API_KEY,
+            chunk_size=200   # Process documents in batches of 200 to satisfy ChromaDB Cloud's limit of 300 per upsert
         )
     
     def get_vectorstore(self, recreate: bool = False, documents: List[Document] = None):
