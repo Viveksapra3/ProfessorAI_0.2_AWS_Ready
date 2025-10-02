@@ -31,7 +31,7 @@ CHROMA_CLOUD_TENANT = os.getenv("CHROMA_CLOUD_TENANT")
 CHROMA_CLOUD_DATABASE = os.getenv("CHROMA_CLOUD_DATABASE")
 
 # --- LLM & RAG Settings ---
-LLM_MODEL_NAME = "gpt-4o"  # Keep for regular chat
+LLM_MODEL_NAME = "gpt-5-mini"  # Keep for regular chat
 EMBEDDING_MODEL_NAME = "text-embedding-3-large"
 CURRICULUM_GENERATION_MODEL = "gpt-5"  # High TPM for course generation
 CONTENT_GENERATION_MODEL = "gpt-5"     # High TPM for content generation
