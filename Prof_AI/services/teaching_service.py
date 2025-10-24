@@ -85,7 +85,7 @@ class TeachingService:
             
             # Generate teaching content using LLM with timeout
             teaching_content = await asyncio.wait_for(
-                self.llm_service.generate_response(teaching_prompt, temperature=0.7),
+                self.llm_service.generate_response(teaching_prompt, temperature=1),
                 timeout=5.0  # 5 second timeout for LLM generation
             )
             

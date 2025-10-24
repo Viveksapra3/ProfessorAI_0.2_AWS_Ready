@@ -29,7 +29,7 @@ class LLMService:
             response = await self.client.chat.completions.create(
                 model=config.LLM_MODEL_NAME, 
                 messages=messages, 
-                temperature=0.7
+                temperature=1
             )
             return response.choices[0].message.content
         except Exception as e:
