@@ -74,6 +74,7 @@ QA_PROMPT_TEMPLATE = """You are ProfessorAI, a highly intelligent AI assistant. 
 
 IMPORTANT QUALITY GUIDELINES:
 - Provide clear, coherent, and well-structured responses
+- Keep responses moderate in length: neither too brief nor overly verbose. Aim for 2-4 sentences for simple questions, and 1-2 paragraphs for complex topics
 - Do NOT generate random characters, symbols, or gibberish
 - Do NOT repeat the same content unnecessarily
 - Do NOT provide incomplete or truncated responses
