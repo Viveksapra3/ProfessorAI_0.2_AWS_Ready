@@ -10,6 +10,7 @@ from services.document_service import DocumentProcessor
 from services.rag_service import RAGService
 from services.llm_service import LLMService
 from services.sarvam_service import SarvamService
+from utils.response_validator import ResponseValidator
 
 class ChatService:
     """Main chat service that coordinates RAG, translation, and LLM services."""
@@ -18,6 +19,7 @@ class ChatService:
         self.llm_service = LLMService()
         self.sarvam_service = SarvamService()
         self.document_processor = DocumentProcessor()
+        self.validator = ResponseValidator()
         self.vector_store = self._initialize_vector_store()
         
         if self.vector_store:
@@ -74,11 +76,18 @@ class ChatService:
                 end_time = time.time()
                 logging.info(f"  > RAG chain complete in {end_time - start_time:.2f}s.")
                 
+                # Validate and sanitize the response
+                answer = self.validator.validate_and_sanitize(
+                    answer,
+                    fallback_message="I apologize, but I encountered an issue generating a proper response. Please try asking your question again."
+                )
+                
                 # Check if RAG found an answer
                 if "I cannot find the answer" in answer:
                     logging.info("  > RAG chain failed. Falling back to general LLM...")
                     start_time = time.time()
                     answer = await self.llm_service.get_general_response(query, response_lang_name)
+                    answer = self.validator.validate_and_sanitize(answer)
                     end_time = time.time()
                     logging.info(f"  > Fallback complete in {end_time - start_time:.2f}s.")
                     return {"answer": answer, "sources": ["General Knowledge Fallback"]}
@@ -92,6 +101,7 @@ class ChatService:
         logging.info("[TASK] Using general knowledge fallback...")
         start_time = time.time()
         answer = await self.llm_service.get_general_response(query, response_lang_name)
+        answer = self.validator.validate_and_sanitize(answer)
         end_time = time.time()
         logging.info(f"  > General knowledge fallback complete in {end_time - start_time:.2f}s.")
         return {"answer": answer, "sources": ["General Knowledge"]}

@@ -20,7 +20,16 @@ class LLMService:
         messages = [
             {
                 "role": "system", 
-                "content": f"You are a helpful AI assistant. Answer the user's question concisely and in {target_language}."
+                "content": f"""You are a helpful AI assistant. Answer the user's question concisely and in {target_language}.
+                
+IMPORTANT QUALITY GUIDELINES:
+- Provide clear, coherent, and well-structured responses
+- Do NOT generate random characters, symbols, or gibberish
+- Do NOT repeat the same content unnecessarily
+- Do NOT provide incomplete or truncated responses
+- Always respond in proper, grammatically correct {target_language}
+- Ensure your response is relevant and directly addresses the question
+- Be helpful, informative, and professional"""
             },
             {"role": "user", "content": query}
         ]
@@ -44,7 +53,13 @@ class LLMService:
         messages = [
             {
                 "role": "system", 
-                "content": f"You are an expert translation assistant. Translate the following text into {target_language}. Respond with only the translated text."
+                "content": f"""You are an expert translation assistant. Translate the following text into {target_language}. Respond with only the translated text.
+                
+QUALITY REQUIREMENTS:
+- Provide accurate, natural-sounding translation
+- Do NOT add random characters or symbols
+- Maintain the original meaning and tone
+- Use proper grammar and syntax in {target_language}"""
             },
             {"role": "user", "content": text}
         ]
@@ -63,6 +78,16 @@ class LLMService:
     async def generate_response(self, prompt: str, temperature: float = 0.7) -> str:
         """Generate a response from the LLM."""
         messages = [
+            {
+                "role": "system",
+                "content": """You are a helpful AI assistant.
+                
+QUALITY REQUIREMENTS:
+- Provide clear, coherent responses
+- Do NOT generate random characters or gibberish
+- Ensure responses are complete and well-formed
+- Use proper grammar and formatting"""
+            },
             {"role": "user", "content": prompt}
         ]
         
@@ -80,6 +105,16 @@ class LLMService:
     async def generate_response_stream(self, prompt: str, temperature: float = 0.7) -> AsyncGenerator[str, None]:
         """Stream response generation from the LLM."""
         messages = [
+            {
+                "role": "system",
+                "content": """You are a helpful AI assistant.
+                
+QUALITY REQUIREMENTS:
+- Provide clear, coherent responses
+- Do NOT generate random characters or gibberish
+- Ensure responses are complete and well-formed
+- Use proper grammar and formatting"""
+            },
             {"role": "user", "content": prompt}
         ]
         
